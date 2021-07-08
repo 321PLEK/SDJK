@@ -79,12 +79,47 @@ namespace SDJK.MainMenu
             UpScrollText = _UpScrollText;
             LangReload();
 
-            MapSelect.SetActive(true);
-            EditorSelect.SetActive(false);
-            LangSetting.SetActive(false);
-            ResourcePackSetting.SetActive(false);
-            Setting.SetActive(false);
-            
+            if (ButtonSelect.Equals(0) || ButtonSelect.Equals(1))
+            {
+                MapSelect.SetActive(true);
+                EditorSelect.SetActive(false);
+                LangSetting.SetActive(false);
+                ResourcePackSetting.SetActive(false);
+                Setting.SetActive(false);
+            }
+            else if (ButtonSelect.Equals(2))
+            {
+                MapSelect.SetActive(false);
+                EditorSelect.SetActive(true);
+                LangSetting.SetActive(false);
+                ResourcePackSetting.SetActive(false);
+                Setting.SetActive(false);
+            }
+            else if (ButtonSelect.Equals(3))
+            {
+                MapSelect.SetActive(false);
+                EditorSelect.SetActive(false);
+                LangSetting.SetActive(true);
+                ResourcePackSetting.SetActive(false);
+                Setting.SetActive(false);
+            }
+            else if (ButtonSelect.Equals(4))
+            {
+                MapSelect.SetActive(false);
+                EditorSelect.SetActive(false);
+                LangSetting.SetActive(false);
+                ResourcePackSetting.SetActive(true);
+                Setting.SetActive(false);
+            }
+            else if (ButtonSelect.Equals(5))
+            {
+                MapSelect.SetActive(false);
+                EditorSelect.SetActive(false);
+                LangSetting.SetActive(false);
+                ResourcePackSetting.SetActive(false);
+                Setting.SetActive(true);
+            }
+
             if (!GameManager.Ratio_9_16)
                 CanvasScaler.referenceResolution = new Vector2(1280, 720);
             else
