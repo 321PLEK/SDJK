@@ -1358,7 +1358,7 @@ namespace SDJK.Effect
     public class HPAddValueEffect
     {
         public double Beat = 0;
-        public double Value = 1;
+        public double Value = 0.5;
         public double Lerp = 1;
     }
 
@@ -1371,7 +1371,7 @@ namespace SDJK.Effect
     public class HPRemoveValueEffect
     {
         public double Beat = 0;
-        public double Value = 0.5f;
+        public double Value = 0.5;
         public double Lerp = 1;
     }
 
