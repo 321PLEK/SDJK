@@ -39,10 +39,8 @@
 	
 	"editMode.fnf_camera_zoom": "프나펑 카메라 줌",
 	"editMode.fnf_camera_zoom warning": "프나펑 카메라 줌 애니메이션을 구현합니다\n(카메라 줌 이펙트가 삭제되며, 다시 생성됩니다)\n계속 하시갰습니까?",
-	"editMode.fnf_camera_zoom 500": "줌 이펙트를 500개를 생성할까요? (아니요를 누르면 1000개로 넘어감)",
-	"editMode.fnf_camera_zoom 1000": "줌 이펙트를 1000개를 생성할까요? (아니요를 누르면 5000개로 넘어감)",
-	"editMode.fnf_camera_zoom 5000": "줌 이펙트를 5000개를 생성할까요? (아니요를 누르면 10000개로 넘어감)",
-	"editMode.fnf_camera_zoom 10000": "줌 이펙트를 10000개를 생성할까요? (아니요를 누르면 취소됨)",
+	"editMode.fnf_camera_zoom count": "줌 이펙트를 %number개를 생성할까요? (아니요를 누르면 %number2개로 넘어감)",
+	"editMode.fnf_camera_zoom delay": "줌 딜레이를 %number 비트로 설정할까요? (아니요를 누르면 %number2 비트로 넘어감)",
 	
 	"editMode.hit_sound_reset": "히트 사운드 재설정",
 	"editMode.hit_sound_reset warning": "AllBeat 리스트를 리셋시키고 새로 만듭니다\n문제가 있을때만 사용해주세요\n계속 하시갰습니까?",

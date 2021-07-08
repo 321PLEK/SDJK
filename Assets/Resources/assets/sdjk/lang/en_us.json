@@ -39,10 +39,8 @@
 	
 	"editMode.fnf_camera_zoom": "FNF Camera Zoom",
 	"editMode.fnf_camera_zoom warning": "Implement the FNF camera zoom animation\n(The camera zoom effect is deleted and recreated)\nContinue?",
-	"editMode.fnf_camera_zoom 500": "Shall we create 500 zoom effects? (If you click No, it goes over to 1000)",
-	"editMode.fnf_camera_zoom 1000": "Shall we create 1000 zoom effects? (If you click No, it goes over to 5000)",
-	"editMode.fnf_camera_zoom 5000": "Shall we create 5000 zoom effects? (If you click No, it goes over to 10000)",
-	"editMode.fnf_camera_zoom 10000": "Shall we create 10000 zoom effects? (If you click No, it will be canceled)",
+	"editMode.fnf_camera_zoom count": "Shall we create %number zoom effects? (If you press No, it goes over to %number2)",
+	"editMode.fnf_camera_zoom delay": "Set the zoom delay to %number bits? (If you press No, it goes over to %number2)",
 	
 	"editMode.hit_sound_reset": "Hit Sound Reset",
 	"editMode.hit_sound_reset warning": "Reset the AllBeat list and create a new one\nUse only when there is a problem\nContinue?",

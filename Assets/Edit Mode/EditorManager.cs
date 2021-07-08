@@ -608,35 +608,63 @@ namespace SDJK.EditMode
             DialogResult dialogResult = MessageBox.Show(LangManager.LangLoad(LangManager.Lang, "editMode.fnf_camera_zoom warning"), LangManager.LangLoad(LangManager.Lang, "editMode.fnf_camera_zoom"), MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (dialogResult == DialogResult.Yes)
             {
-                int loop = 0;
-                dialogResult = MessageBox.Show(LangManager.LangLoad(LangManager.Lang, "editMode.fnf_camera_zoom 500"), LangManager.LangLoad(LangManager.Lang, "editMode.fnf_camera_zoom"), MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                int count = 0;
+                dialogResult = MessageBox.Show(LangManager.LangLoad(LangManager.Lang, "editMode.fnf_camera_zoom count").Replace("%number2", "1000").Replace("%number", "500"), LangManager.LangLoad(LangManager.Lang, "editMode.fnf_camera_zoom"), MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                 if (dialogResult == DialogResult.Yes)
-                    loop = 500;
+                    count = 500;
                 else
                 {
-                    dialogResult = MessageBox.Show(LangManager.LangLoad(LangManager.Lang, "editMode.fnf_camera_zoom 1000"), LangManager.LangLoad(LangManager.Lang, "editMode.fnf_camera_zoom"), MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    dialogResult = MessageBox.Show(LangManager.LangLoad(LangManager.Lang, "editMode.fnf_camera_zoom count").Replace("%number2", "5000").Replace("%number", "1000"), LangManager.LangLoad(LangManager.Lang, "editMode.fnf_camera_zoom"), MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                     if (dialogResult == DialogResult.Yes)
-                        loop = 1000;
+                        count = 1000;
                     else
                     {
-                        dialogResult = MessageBox.Show(LangManager.LangLoad(LangManager.Lang, "editMode.fnf_camera_zoom 5000"), LangManager.LangLoad(LangManager.Lang, "editMode.fnf_camera_zoom"), MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                        dialogResult = MessageBox.Show(LangManager.LangLoad(LangManager.Lang, "editMode.fnf_camera_zoom count").Replace("%number2", "10000").Replace("%number", "5000"), LangManager.LangLoad(LangManager.Lang, "editMode.fnf_camera_zoom"), MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                         if (dialogResult == DialogResult.Yes)
-                            loop = 5000;
+                            count = 5000;
                         else
                         {
-                            dialogResult = MessageBox.Show(LangManager.LangLoad(LangManager.Lang, "editMode.fnf_camera_zoom 10000"), LangManager.LangLoad(LangManager.Lang, "editMode.fnf_camera_zoom"), MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                            dialogResult = MessageBox.Show(LangManager.LangLoad(LangManager.Lang, "editMode.fnf_camera_zoom count").Replace("%number2", "0").Replace("%number", "10000"), LangManager.LangLoad(LangManager.Lang, "editMode.fnf_camera_zoom"), MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                             if (dialogResult == DialogResult.Yes)
-                                loop = 10000;
+                                count = 10000;
                         }
                     }
                 }
 
-
-                PlayerManager.mapData.Effect.Camera.CameraZoomEffect.Clear();
-                for (int i = 0; i < loop; i++)
+                if (count != 0)
                 {
-                    PlayerManager.mapData.Effect.Camera.CameraZoomEffect.Add(new CameraZoomEffect { Beat = 4 * i + 5, Value = 0.95, Lerp = 1 });
-                    PlayerManager.mapData.Effect.Camera.CameraZoomEffect.Add(new CameraZoomEffect { Beat = 4 * i + 5, Value = 1, Lerp = 0.0625 });
+                    int delay = 0;
+                    dialogResult = MessageBox.Show(LangManager.LangLoad(LangManager.Lang, "editMode.fnf_camera_zoom delay").Replace("%number2", "2").Replace("%number", "1"), LangManager.LangLoad(LangManager.Lang, "editMode.fnf_camera_zoom"), MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    if (dialogResult == DialogResult.Yes)
+                        delay = 1;
+                    else
+                    {
+                        dialogResult = MessageBox.Show(LangManager.LangLoad(LangManager.Lang, "editMode.fnf_camera_zoom delay").Replace("%number2", "4").Replace("%number", "2"), LangManager.LangLoad(LangManager.Lang, "editMode.fnf_camera_zoom"), MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                        if (dialogResult == DialogResult.Yes)
+                            delay = 2;
+                        else
+                        {
+                            dialogResult = MessageBox.Show(LangManager.LangLoad(LangManager.Lang, "editMode.fnf_camera_zoom delay").Replace("%number2", "8").Replace("%number", "4"), LangManager.LangLoad(LangManager.Lang, "editMode.fnf_camera_zoom"), MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                            if (dialogResult == DialogResult.Yes)
+                                delay = 4;
+                            else
+                            {
+                                dialogResult = MessageBox.Show(LangManager.LangLoad(LangManager.Lang, "editMode.fnf_camera_zoom delay").Replace("%number2", "0").Replace("%number", "8"), LangManager.LangLoad(LangManager.Lang, "editMode.fnf_camera_zoom"), MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                                if (dialogResult == DialogResult.Yes)
+                                    delay = 8;
+                            }
+                        }
+                    }
+
+                    if (delay != 0)
+                    {
+                        PlayerManager.mapData.Effect.Camera.CameraZoomEffect.Clear();
+                        for (int i = 0; i < count; i++)
+                        {
+                            PlayerManager.mapData.Effect.Camera.CameraZoomEffect.Add(new CameraZoomEffect { Beat = delay * i + delay + 1, Value = 0.95, Lerp = 1 });
+                            PlayerManager.mapData.Effect.Camera.CameraZoomEffect.Add(new CameraZoomEffect { Beat = delay * i + delay + 1, Value = 1, Lerp = 0.0625 });
+                        }
+                    }
                 }
             }
 
