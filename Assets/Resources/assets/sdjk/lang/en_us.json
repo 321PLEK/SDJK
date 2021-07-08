@@ -1,0 +1,57 @@
+{
+	"language.name": "English",
+	"language.region": "United States",
+	"main_menu.version": "Version ",
+	
+	"main_menu.level_select screen key_info": "Press Enter to play\nSelect a map with the up and down keys",
+	"main_menu.level_select.difficulty": "Difficulty",
+	"main_menu.level_select.difficulty.very_easy": "Very Easy",
+	"main_menu.level_select.difficulty.easy": "Easy",
+	"main_menu.level_select.difficulty.normal": "Normal",
+	"main_menu.level_select.difficulty.hard": "Hard",
+	"main_menu.level_select.difficulty.very_hard": "Very Hard",
+	
+	"main_menu.editor_select key_info": "Press Enter to launch the editor",
+	"main_menu.setting_screen key_info": "Manipulate it with the mouse\nScroll the by dragging",
+	"setting.on": "On",
+	"setting.off": "Off",
+	"setting.enter_text": "Enter Text...",
+	"setting.volume": "Volume",
+	"setting.optimization": "Optimization",
+	"setting.offset": "Offset (ms)",
+	"setting.note_interpolation": "Note Interpolation",
+	"setting.editor_optimization": "Editor Optimization",
+	"setting.osu_hit_sound": "OSU Hit Sound",
+	"setting.up_scroll": "Up Scroll",
+	"setting.fps_limit": "FPS Limit",
+	
+	"resourcePack.basicResource": "Basic Resource Pack",
+	"resourcePack.customLang": "Languages managed by the resource pack",
+	"resourcePack.resourcePack_folderOpen": "Open the resource pack folder",
+
+	"editMode.currentBeat": "Current Beat: ",
+	"editMode.time": "Time: ",
+	"editMode.mouse_y_beat": "Mouse Beat: ",
+	
+	"editMode.map_save": "Save As",
+	"editMode.map_load": "Load",
+	"editMode.sdjk_map": "SDJK Map",
+	
+	"editMode.fnf_camera_zoom": "FNF Camera Zoom",
+	"editMode.fnf_camera_zoom warning": "Implement the FNF camera zoom animation\n(The camera zoom effect is deleted and recreated)\nContinue?",
+	"editMode.fnf_camera_zoom 500": "Shall we create 500 zoom effects? (If you click No, it goes over to 1000)",
+	"editMode.fnf_camera_zoom 1000": "Shall we create 1000 zoom effects? (If you click No, it goes over to 5000)",
+	"editMode.fnf_camera_zoom 5000": "Shall we create 5000 zoom effects? (If you click No, it goes over to 10000)",
+	"editMode.fnf_camera_zoom 10000": "Shall we create 10000 zoom effects? (If you click No, it will be canceled)",
+	
+	"editMode.hit_sound_reset": "Hit Sound Reset",
+	"editMode.hit_sound_reset warning": "Reset the AllBeat list and create a new one\nUse only when there is a problem\nContinue?",
+	
+	"editMode.note_reset": "Reset all notes",
+	"editMode.note_reset warning": "Resets all notes\n(automatically saved, can't go back)\nContinue?",
+	"editMode.note_reset warning2": "Resets all notes\n(automatically saved, can't go back)\nAre you sure you want to continue?",
+	"editMode.note_reset warning3": "Resets all notes\n(automatically saved, can't go back)\nThis is the last Are you sure you want to continue?",
+	
+	"setting.resource_pack version down": "The resource pack version is low!",
+	"setting.resource_pack version up": "The resource pack version is high!"
+}
