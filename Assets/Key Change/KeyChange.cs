@@ -34,6 +34,8 @@ namespace SDJK.MainMenu
         public Text K;
         public Text L;
 
+        public Image image;
+
         void Awake()
         {
             string key = GameManager.A.ToString();
@@ -118,7 +120,15 @@ namespace SDJK.MainMenu
             }
         }
 
-        IEnumerator Start()
+        IEnumerator HitSoundCoroutine;
+
+        void Start()
+        {
+            HitSoundCoroutine = HitSound();
+            StartCoroutine(HitSoundCoroutine);
+        }
+
+        IEnumerator HitSound()
         {
             //리소스팩 히트 사운드
             AudioClip hitSound = ResourcesManager.Search<AudioClip>("sdjk", ResourcesManager.SoundPath + "play mode/hit sound");
@@ -186,6 +196,7 @@ namespace SDJK.MainMenu
             if (Input.GetKeyDown(KeyCode.Escape))
             {
                 enabled = false;
+                StopCoroutine(HitSoundCoroutine);
                 SoundManager.StopAll(SoundType.BGM, false);
                 SceneManager.SceneLoading("Main Menu");
                 return;

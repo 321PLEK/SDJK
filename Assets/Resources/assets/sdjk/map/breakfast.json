@@ -946,9 +946,9 @@
   "Background": "",
   "VideoBackground": "",
   "VideoOffset": 0.0,
-  "Artist": "none",
-  "BGMName": "none",
+  "Artist": "Kawai Sprite",
+  "BGMName": "breakfast",
   "Offset": -0.06,
   "Difficulty": "very_easy",
-  "Cover": "Squaredance"
+  "Cover": ""
 }
