@@ -2,6 +2,7 @@
 	"language.name": "한국어",
 	"language.region": "대한민국",
 	"main_menu.version": "버전 ",
+	"main_menu.playing": "플레이 중: ",
 	
 	"main_menu.level_select screen key_info": "방향키 키로 맵 선택\n엔터키를 눌러서 플레이",
 	"main_menu.level_select.difficulty": "난이도",
@@ -24,6 +25,7 @@
 	"setting.osu_hit_sound": "오스 히트 사운드",
 	"setting.up_scroll": "업 스크롤",
 	"setting.fps_limit": "FPS 제한",
+	"setting.key_change": "키 바꾸기",
 	
 	"resourcePack.basicResource": "기본 리소스팩",
 	"resourcePack.customLang": "리소스 팩이 관리하는 언어",
@@ -51,5 +53,8 @@
 	"editMode.note_reset warning3": "모든 노트를 리셋합니다\n(자동으로 저장되며, 되돌아갈수 없습니다)\n마지막 입니다 정말 계속 하시갰습니까?",
 	
 	"setting.resource_pack version down": "리소스팩 버전이 낮습니다!",
-	"setting.resource_pack version up": "리소스팩 버전이 높습니다!"
+	"setting.resource_pack version up": "리소스팩 버전이 높습니다!",
+	
+	"setting.key_change select_key": "선택한 키: ",
+	"none": "없음"
 }

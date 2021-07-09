@@ -37,58 +37,110 @@ namespace SDJK.PlayMode
 
         bool RedColor = false;
 
+        public string ObjectName = "";
+
         void Start()
         {
+            ObjectName = name;
+
             //숨기기
-            if (keyCode == KeyCode.A && !PlayerManager.AUse)
+            if (ObjectName.Equals("A") && !PlayerManager.AUse)
                 gameObject.SetActive(false);
-            if (keyCode == KeyCode.S && !PlayerManager.SUse)
+            if (ObjectName.Equals("S") && !PlayerManager.SUse)
                 gameObject.SetActive(false);
-            if (keyCode == KeyCode.D && !PlayerManager.DUse)
+            if (ObjectName.Equals("D") && !PlayerManager.DUse)
                 gameObject.SetActive(false);
-            if (keyCode == KeyCode.J && !PlayerManager.JUse)
+            if (ObjectName.Equals("J") && !PlayerManager.JUse)
                 gameObject.SetActive(false);
-            if (keyCode == KeyCode.K && !PlayerManager.KUse)
+            if (ObjectName.Equals("K") && !PlayerManager.KUse)
                 gameObject.SetActive(false);
-            if (keyCode == KeyCode.L && !PlayerManager.LUse)
+            if (ObjectName.Equals("L") && !PlayerManager.LUse)
                 gameObject.SetActive(false);
 
             if (Background)
             {
-                GetComponent<InputSystem>().enabled = false;
+                enabled = false;
                 return;
             }
 
             //딜레이 설정
-            if (keyCode == KeyCode.A)
+            if (ObjectName.Equals("A"))
             {
                 Delay = PlayerManager.mapData.A;
                 HoldDelay = PlayerManager.mapData.HoldA;
+
+                keyCode = GameManager.A;
+
+                string key = GameManager.A.ToString();
+                text.text = "";
+                text.text += key[0];
+                if (key.Length > 1)
+                    text.text += key[1];
             }
-            else if (keyCode == KeyCode.S)
+            else if (ObjectName.Equals("S"))
             {
                 Delay = PlayerManager.mapData.S;
                 HoldDelay = PlayerManager.mapData.HoldS;
+
+                keyCode = GameManager.S;
+
+                string key = GameManager.S.ToString();
+                text.text = "";
+                text.text += key[0];
+                if (key.Length > 1)
+                    text.text += key[1];
             }
-            else if (keyCode == KeyCode.D)
+            else if (ObjectName.Equals("D"))
             {
                 Delay = PlayerManager.mapData.D;
                 HoldDelay = PlayerManager.mapData.HoldD;
+
+                keyCode = GameManager.D;
+
+                string key = GameManager.D.ToString();
+                text.text = "";
+                text.text += key[0];
+                if (key.Length > 1)
+                    text.text += key[1];
             }
-            else if (keyCode == KeyCode.J)
+            else if (ObjectName.Equals("J"))
             {
                 Delay = PlayerManager.mapData.J;
                 HoldDelay = PlayerManager.mapData.HoldJ;
+
+                keyCode = GameManager.J;
+
+                string key = GameManager.J.ToString();
+                text.text = "";
+                text.text += key[0];
+                if (key.Length > 1)
+                    text.text += key[1];
             }
-            else if (keyCode == KeyCode.K)
+            else if (ObjectName.Equals("K"))
             {
                 Delay = PlayerManager.mapData.K;
                 HoldDelay = PlayerManager.mapData.HoldK;
+
+                keyCode = GameManager.K;
+
+                string key = GameManager.K.ToString();
+                text.text = "";
+                text.text += key[0];
+                if (key.Length > 1)
+                    text.text += key[1];
             }
-            else if (keyCode == KeyCode.L)
+            else if (ObjectName.Equals("L"))
             {
                 Delay = PlayerManager.mapData.L;
                 HoldDelay = PlayerManager.mapData.HoldL;
+
+                keyCode = GameManager.L;
+
+                string key = GameManager.L.ToString();
+                text.text = "";
+                text.text += key[0];
+                if (key.Length > 1)
+                    text.text += key[1];
             }
 
             if (GameManager.UpScroll)
@@ -136,32 +188,32 @@ namespace SDJK.PlayMode
                 if (PlayerManager.Editor)
                 {
                     //에디터는 노트가 수시로 변하기 때문에, 리스트 계속 체크
-                    if (keyCode == KeyCode.A)
+                    if (ObjectName.Equals("A"))
                     {
                         Delay = PlayerManager.mapData.A;
                         HoldDelay = PlayerManager.mapData.HoldA;
                     }
-                    else if (keyCode == KeyCode.S)
+                    else if (ObjectName.Equals("S"))
                     {
                         Delay = PlayerManager.mapData.S;
                         HoldDelay = PlayerManager.mapData.HoldS;
                     }
-                    else if (keyCode == KeyCode.D)
+                    else if (ObjectName.Equals("D"))
                     {
                         Delay = PlayerManager.mapData.D;
                         HoldDelay = PlayerManager.mapData.HoldD;
                     }
-                    else if (keyCode == KeyCode.J)
+                    else if (ObjectName.Equals("J"))
                     {
                         Delay = PlayerManager.mapData.J;
                         HoldDelay = PlayerManager.mapData.HoldJ;
                     }
-                    else if (keyCode == KeyCode.K)
+                    else if (ObjectName.Equals("K"))
                     {
                         Delay = PlayerManager.mapData.K;
                         HoldDelay = PlayerManager.mapData.HoldK;
                     }
-                    else if (keyCode == KeyCode.L)
+                    else if (ObjectName.Equals("L"))
                     {
                         Delay = PlayerManager.mapData.L;
                         HoldDelay = PlayerManager.mapData.HoldL;
@@ -419,17 +471,17 @@ namespace SDJK.PlayMode
             //타일 숨기기
             if (!PlayerManager.Editor)
             {
-                if (keyCode == KeyCode.A && i < A.Count)
+                if (ObjectName.Equals("A") && i < A.Count)
                     A[i].spriteRenderer.color = color;
-                if (keyCode == KeyCode.S && i < S.Count)
+                if (ObjectName.Equals("S") && i < S.Count)
                     S[i].spriteRenderer.color = color;
-                if (keyCode == KeyCode.D && i < D.Count)
+                if (ObjectName.Equals("D") && i < D.Count)
                     D[i].spriteRenderer.color = color;
-                if (keyCode == KeyCode.J && i < J.Count)
+                if (ObjectName.Equals("J") && i < J.Count)
                     J[i].spriteRenderer.color = color;
-                if (keyCode == KeyCode.K && i < K.Count)
+                if (ObjectName.Equals("K") && i < K.Count)
                     K[i].spriteRenderer.color = color;
-                if (keyCode == KeyCode.L && i < L.Count)
+                if (ObjectName.Equals("L") && i < L.Count)
                     L[i].spriteRenderer.color = color;
             }
         }

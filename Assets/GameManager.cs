@@ -60,6 +60,13 @@ namespace SDJK
         
         [SerializeField] Font[] fonts;
 
+        public static KeyCode A = KeyCode.A;
+        public static KeyCode S = KeyCode.S;
+        public static KeyCode D = KeyCode.D;
+        public static KeyCode J = KeyCode.J;
+        public static KeyCode K = KeyCode.K;
+        public static KeyCode L = KeyCode.L;
+
         void Awake()
         {
             QualitySettings.vSyncCount = 0;

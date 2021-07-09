@@ -2,6 +2,7 @@
 	"language.name": "English",
 	"language.region": "United States",
 	"main_menu.version": "Version ",
+	"main_menu.playing": "Playing: ",
 	
 	"main_menu.level_select screen key_info": "Press Enter to play\nSelect a map with the up and down keys",
 	"main_menu.level_select.difficulty": "Difficulty",
@@ -24,6 +25,7 @@
 	"setting.osu_hit_sound": "OSU Hit Sound",
 	"setting.up_scroll": "Up Scroll",
 	"setting.fps_limit": "FPS Limit",
+	"setting.key_change": "Key Change",
 	
 	"resourcePack.basicResource": "Basic Resource Pack",
 	"resourcePack.customLang": "Languages managed by the resource pack",
@@ -51,5 +53,8 @@
 	"editMode.note_reset warning3": "Resets all notes\n(automatically saved, can't go back)\nThis is the last Are you sure you want to continue?",
 	
 	"setting.resource_pack version down": "The resource pack version is low!",
-	"setting.resource_pack version up": "The resource pack version is high!"
+	"setting.resource_pack version up": "The resource pack version is high!",
+	
+	"setting.key_change select_key": "Selected Key: ",
+	"none": "none"
 }

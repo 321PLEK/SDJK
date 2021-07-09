@@ -280,7 +280,7 @@ namespace SDJK.EditMode
                     {
                         if (PlayerManager.mapData.A.Contains(MouseYBeat))
                         {
-                            PlayerManager.BarRemove(KeyCode.A, MouseYBeat);
+                            PlayerManager.NoteRemove(GameManager.A, MouseYBeat);
                             PlayerManager.mapData.A.Remove(MouseYBeat);
 
                             NoteManager.ListRefresh();
@@ -311,7 +311,7 @@ namespace SDJK.EditMode
                     {
                         if (PlayerManager.mapData.S.Contains(MouseYBeat))
                         {
-                            PlayerManager.BarRemove(KeyCode.S, MouseYBeat);
+                            PlayerManager.NoteRemove(GameManager.S, MouseYBeat);
                             PlayerManager.mapData.S.Remove(MouseYBeat);
 
                             NoteManager.ListRefresh();
@@ -342,7 +342,7 @@ namespace SDJK.EditMode
                     {
                         if (PlayerManager.mapData.D.Contains(MouseYBeat))
                         {
-                            PlayerManager.BarRemove(KeyCode.D, MouseYBeat);
+                            PlayerManager.NoteRemove(GameManager.D, MouseYBeat);
                             PlayerManager.mapData.D.Remove(MouseYBeat);
 
                             NoteManager.ListRefresh();
@@ -373,7 +373,7 @@ namespace SDJK.EditMode
                     {
                         if (PlayerManager.mapData.J.Contains(MouseYBeat))
                         {
-                            PlayerManager.BarRemove(KeyCode.J, MouseYBeat);
+                            PlayerManager.NoteRemove(GameManager.J, MouseYBeat);
                             PlayerManager.mapData.J.Remove(MouseYBeat);
 
                             NoteManager.ListRefresh();
@@ -404,7 +404,7 @@ namespace SDJK.EditMode
                     {
                         if (PlayerManager.mapData.K.Contains(MouseYBeat))
                         {
-                            PlayerManager.BarRemove(KeyCode.K, MouseYBeat);
+                            PlayerManager.NoteRemove(GameManager.K, MouseYBeat);
                             PlayerManager.mapData.K.Remove(MouseYBeat);
 
                             NoteManager.ListRefresh();
@@ -435,7 +435,7 @@ namespace SDJK.EditMode
                     {
                         if (PlayerManager.mapData.L.Contains(MouseYBeat))
                         {
-                            PlayerManager.BarRemove(KeyCode.L, MouseYBeat);
+                            PlayerManager.NoteRemove(GameManager.L, MouseYBeat);
                             PlayerManager.mapData.L.Remove(MouseYBeat);
 
                             NoteManager.ListRefresh();
@@ -507,37 +507,37 @@ namespace SDJK.EditMode
                         PlayerManager.mapData.AllBeat.Sort();
                     }
 
-                    if (selectNote.keyCode == KeyCode.A)
+                    if (selectNote.keyCode == GameManager.A)
                     {
                         PlayerManager.mapData.HoldA.Clear();
                         for (int i = 0; i < InputSystem.A.Count; i++)
                             PlayerManager.mapData.HoldA.Add(InputSystem.A[i].HoldBeat);
                     }
-                    else if (selectNote.keyCode == KeyCode.S)
+                    else if (selectNote.keyCode == GameManager.S)
                     {
                         PlayerManager.mapData.HoldS.Clear();
                         for (int i = 0; i < InputSystem.S.Count; i++)
                             PlayerManager.mapData.HoldS.Add(InputSystem.S[i].HoldBeat);
                     }
-                    else if (selectNote.keyCode == KeyCode.D)
+                    else if (selectNote.keyCode == GameManager.D)
                     {
                         PlayerManager.mapData.HoldD.Clear();
                         for (int i = 0; i < InputSystem.D.Count; i++)
                             PlayerManager.mapData.HoldD.Add(InputSystem.D[i].HoldBeat);
                     }
-                    else if (selectNote.keyCode == KeyCode.J)
+                    else if (selectNote.keyCode == GameManager.J)
                     {
                         PlayerManager.mapData.HoldJ.Clear();
                         for (int i = 0; i < InputSystem.J.Count; i++)
                             PlayerManager.mapData.HoldJ.Add(InputSystem.J[i].HoldBeat);
                     }
-                    else if (selectNote.keyCode == KeyCode.K)
+                    else if (selectNote.keyCode == GameManager.K)
                     {
                         PlayerManager.mapData.HoldK.Clear();
                         for (int i = 0; i < InputSystem.K.Count; i++)
                             PlayerManager.mapData.HoldK.Add(InputSystem.K[i].HoldBeat);
                     }
-                    else if (selectNote.keyCode == KeyCode.L)
+                    else if (selectNote.keyCode == GameManager.L)
                     {
                         PlayerManager.mapData.HoldL.Clear();
                         for (int i = 0; i < InputSystem.L.Count; i++)

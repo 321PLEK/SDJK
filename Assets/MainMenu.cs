@@ -42,9 +42,8 @@ namespace SDJK.MainMenu
         public List<Image> MainMenuButton = new List<Image>();
         public int ButtonWidth = 0;
         public static int ButtonSelect = 0;
-        int tempButtonSelect = 0;
 
-        bool b = false;
+        bool LogoAniEnd = false;
 
         public List<string> LevelList = new List<string>();
         public List<string> ExtraLevelList = new List<string>();
@@ -53,6 +52,8 @@ namespace SDJK.MainMenu
 
         public GameObject PhoneControll;
 
+        public Text PlayingText;
+
         void Start()
         {
             mainMenu = this;
@@ -60,6 +61,25 @@ namespace SDJK.MainMenu
             GameObject = gameObject;
 
             string json = ResourcesManager.Search<string>(ResourcesManager.GetStringNameSpace(GameManager.Level, out string Name), ResourcesManager.MapPath + Name);
+
+            MapData mapData = JsonConvert.DeserializeObject<MapData>(json);
+
+            LevelCover.sprite = ResourcesManager.Search<Sprite>(ResourcesManager.GetStringNameSpace("cover/" + mapData.Cover, out string temp), ResourcesManager.GuiTexturePath + temp);
+            LevelInfo.text = mapData.Artist + " - " + mapData.BGMName;
+            LevelInfo.text += "\n" + LangManager.LangLoad(LangManager.Lang, "main_menu.level_select.difficulty") + " - " + LangManager.LangLoad(LangManager.Lang, "main_menu.level_select.difficulty." + mapData.Difficulty);
+            LevelInfo.text += "\nBPM - " + mapData.Effect.BPM;
+
+            GameManager.BPM = (float)mapData.Effect.BPM;
+            GameManager.StartDelay = (float)mapData.Offset;
+
+            SoundManager.StopAll(SoundType.BGM, false);
+            SoundManager.PlayBGM(mapData.BGM, true, (float)mapData.Effect.Volume, 1, true, false);
+
+            GameManager.BeatTimer = 0;
+            GameManager.CurrentBeat = -1;
+            NextBeat = 0;
+
+            /*string json = ResourcesManager.Search<string>(ResourcesManager.GetStringNameSpace(GameManager.Level, out string Name), ResourcesManager.MapPath + Name);
             MapData mapData = JsonConvert.DeserializeObject<MapData>(json);
 
             GameManager.BPM = 180;
@@ -73,8 +93,7 @@ namespace SDJK.MainMenu
             SoundManager.PlayBGM("Main Menu", true, 0.3f, 1, true, false);
             GameManager.CurrentBeat = -1;
             GameManager.BeatTimer = 0;
-
-            NextBeat = 0;
+            NextBeat = 0;*/
 
             OptimizationButtonText = _OptimizationButtonText;
             NoteInterpolationButtonText = _NoteInterpolationButtonText;
@@ -82,6 +101,8 @@ namespace SDJK.MainMenu
             OsuHitSoundButtonText = _OsuHitSoundButtonText;
             UpScrollText = _UpScrollText;
             LangReload();
+
+            PlayingText.text = Playing + mapData.Artist + " - " + mapData.BGMName;
 
             if (ButtonSelect.Equals(0) || ButtonSelect.Equals(1))
             {
@@ -167,14 +188,16 @@ namespace SDJK.MainMenu
             if (Input.GetKeyDown(KeyCode.Return))
                 GameManager.EnterKey = true;
             
-            if (GameManager.CurrentBeat < 0 && !b)
+            if (GameManager.CurrentBeat < 0 && !LogoAniEnd)
                 Logo.anchoredPosition = Vector2.Lerp(Logo.anchoredPosition, new Vector2(CanvasScaler.referenceResolution.x * 0.5f, -CanvasScaler.referenceResolution.y * 0.5f), 0.1f * GameManager.FpsDeltaTime);
             else
             {
+                LogoAniEnd = true;
+
                 if (!PhoneControll.activeSelf && Application.platform == RuntimePlatform.Android)
                     PhoneControll.SetActive(true);
                 
-                if (!b)
+                /*if (!b)
                 {
                     string json = ResourcesManager.Search<string>(ResourcesManager.GetStringNameSpace(GameManager.Level.ToString(), out string Name), ResourcesManager.MapPath + Name);
                     MapData mapData = JsonConvert.DeserializeObject<MapData>(json);
@@ -188,9 +211,7 @@ namespace SDJK.MainMenu
                     GameManager.BeatTimer = 0;
                     GameManager.CurrentBeat = -1;
                     NextBeat = 0;
-                }
-
-                b = true;
+                }*/
 
                 if (GameManager.Ratio_9_16)
                     Logo.anchoredPosition = Vector2.Lerp(Logo.anchoredPosition, new Vector2(358, -167), 0.15f * GameManager.FpsDeltaTime);
@@ -198,8 +219,9 @@ namespace SDJK.MainMenu
                     Logo.anchoredPosition = Vector2.Lerp(Logo.anchoredPosition, new Vector2(300, -190), 0.15f * GameManager.FpsDeltaTime);
 
                 Logo.localScale = Vector2.Lerp(Logo.localScale, new Vector2(0.9f, 0.9f), 0.15f * GameManager.FpsDeltaTime);
-                SelectUI.anchoredPosition = Vector2.Lerp(SelectUI.anchoredPosition, new Vector2(0, 0), 0.1f * GameManager.FpsDeltaTime);
-                SelectUI.anchoredPosition = Vector2.Lerp(SelectUI.anchoredPosition, new Vector2(0, 0), 0.1f * GameManager.FpsDeltaTime);
+                SelectUI.anchoredPosition = Vector2.Lerp(SelectUI.anchoredPosition, new Vector2(0, 0), 0.15f * GameManager.FpsDeltaTime);
+                SelectUI.anchoredPosition = Vector2.Lerp(SelectUI.anchoredPosition, new Vector2(0, 0), 0.15f * GameManager.FpsDeltaTime);
+                PlayingText.rectTransform.anchoredPosition = Vector2.Lerp(PlayingText.rectTransform.anchoredPosition, new Vector2(10, 10), 0.15f * GameManager.FpsDeltaTime);
 
                 if (!GameManager.Ratio_9_16)
                 {
@@ -348,28 +370,31 @@ namespace SDJK.MainMenu
 
 
                 //BGM Change
-                if (GameManager.LeftKey || GameManager.RightKey || ((GameManager.UpKey || GameManager.DownKey) && (ButtonSelect.Equals(0) || ButtonSelect.Equals(1))))
+                if ((GameManager.LeftKey || GameManager.RightKey || GameManager.UpKey || GameManager.DownKey) && (ButtonSelect.Equals(0) || ButtonSelect.Equals(1)))
                 {
-                    if (ButtonSelect.Equals(0) || ButtonSelect.Equals(1))
+                    string json = ResourcesManager.Search<string>(ResourcesManager.GetStringNameSpace(GameManager.Level, out string Name), ResourcesManager.MapPath + Name);
+
+                    MapData mapData = JsonConvert.DeserializeObject<MapData>(json);
+
+                    LevelCover.sprite = ResourcesManager.Search<Sprite>(ResourcesManager.GetStringNameSpace("cover/" + mapData.Cover, out string temp), ResourcesManager.GuiTexturePath + temp);
+                    LevelInfo.text = mapData.Artist + " - " + mapData.BGMName;
+                    LevelInfo.text += "\n" + LangManager.LangLoad(LangManager.Lang, "main_menu.level_select.difficulty") + " - " + LangManager.LangLoad(LangManager.Lang, "main_menu.level_select.difficulty." + mapData.Difficulty);
+                    LevelInfo.text += "\nBPM - " + mapData.Effect.BPM;
+                    PlayingText.text = Playing + mapData.Artist + " - " + mapData.BGMName;
+
+                    GameManager.BPM = (float)mapData.Effect.BPM;
+                    GameManager.StartDelay = (float)mapData.Offset;
+
+                    SoundManager.StopAll(SoundType.BGM, false);
+                    SoundManager.PlayBGM(mapData.BGM, true, (float)mapData.Effect.Volume, 1, true, false);
+
+                    GameManager.BeatTimer = 0;
+                    GameManager.CurrentBeat = -1;
+                    NextBeat = 0;
+
+                    /*if (ButtonSelect.Equals(0) || ButtonSelect.Equals(1))
                     {
-                        string json = ResourcesManager.Search<string>(ResourcesManager.GetStringNameSpace(GameManager.Level, out string Name), ResourcesManager.MapPath + Name);
-
-                        MapData mapData = JsonConvert.DeserializeObject<MapData>(json);
-
-                        GameManager.BPM = (float) mapData.Effect.BPM;
-                        GameManager.StartDelay = (float) mapData.Offset;
-
-                        LevelCover.sprite = ResourcesManager.Search<Sprite>(ResourcesManager.GetStringNameSpace("cover/" + mapData.Cover, out string temp), ResourcesManager.GuiTexturePath + temp);
-                        LevelInfo.text = mapData.Artist + " - " + mapData.BGMName;
-                        LevelInfo.text += "\n" + LangManager.LangLoad(LangManager.Lang, "main_menu.level_select.difficulty") + " - " + LangManager.LangLoad(LangManager.Lang, "main_menu.level_select.difficulty." + mapData.Difficulty);
-                        LevelInfo.text += "\nBPM - " + mapData.Effect.BPM;
-
-                        SoundManager.StopAll(SoundType.BGM, false);
-                        SoundManager.PlayBGM(mapData.BGM, true, (float)mapData.Effect.Volume, 1, true, false);
-
-                        GameManager.BeatTimer = 0;
-                        GameManager.CurrentBeat = -1;
-                        NextBeat = 0;
+                        
                     }
                     else
                     {
@@ -382,9 +407,8 @@ namespace SDJK.MainMenu
                         GameManager.BeatTimer = 0;
                         GameManager.CurrentBeat = -1;
                         NextBeat = 0;
-                    }
+                    }*/
                 }
-                tempButtonSelect = ButtonSelect;
 
                 if (NextBeat <= GameManager.CurrentBeat)
                 {
@@ -478,6 +502,7 @@ namespace SDJK.MainMenu
         public static string EditorOptimization = "Editor Optimization";
         public static string OsuHitSound = "Osu Hit Sound";
         public static string UpScroll = "Up Scroll";
+        public static string Playing = "Playing: ";
 
         public static void AllRerender()
         {
@@ -518,6 +543,7 @@ namespace SDJK.MainMenu
             EditorOptimization = LangManager.LangLoad(LangManager.Lang, "setting.editor_optimization");
             OsuHitSound = LangManager.LangLoad(LangManager.Lang, "setting.osu_hit_sound");
             UpScroll = LangManager.LangLoad(LangManager.Lang, "setting.up_scroll");
+            Playing = LangManager.LangLoad(LangManager.Lang, "main_menu.playing");
 
             if (GameManager.Optimization)
                 OptimizationButtonText.text = Optimization + ": " + On;
@@ -636,6 +662,13 @@ namespace SDJK.MainMenu
                 FPSLimitInputField.text = "0";
 
             GameManager.FPSLimit = i;
+        }
+
+        public void KeyChange()
+        {
+            enabled = false;
+            SoundManager.StopAll(SoundType.BGM, false);
+            SceneManager.SceneLoading("Key Change");
         }
 
         public void UpKey()

@@ -904,36 +904,48 @@ namespace SDJK.PlayMode
 
         public static Note NoteAdd(KeyCode keyCode, double Beat, int index)
         {
-            Note note = Instantiate(playerManager.prefab, PlayerManager.bar.transform).GetComponent<Note>();
+            Note note = Instantiate(playerManager.prefab, bar.transform).GetComponent<Note>();
             note.Beat = Beat;
+
             note.keyCode = keyCode;
 
             //노트가 없을땐, Input 바를 숨기기 위해서 있는 변수
             if (keyCode == KeyCode.A)
+            {
                 AUse = true;
-            else if (keyCode == KeyCode.S)
-                SUse = true;
-            else if (keyCode == KeyCode.D)
-                DUse = true;
-            else if (keyCode == KeyCode.J)
-                JUse = true;
-            else if (keyCode == KeyCode.K)
-                KUse = true;
-            else if (keyCode == KeyCode.L)
-                LUse = true;
-            
-            if (keyCode == KeyCode.A)
                 InputSystem.A.Add(note);
+                note.keyCode = GameManager.A;
+            }
             else if (keyCode == KeyCode.S)
+            {
+                SUse = true;
                 InputSystem.S.Add(note);
+                note.keyCode = GameManager.S;
+            }
             else if (keyCode == KeyCode.D)
+            {
+                DUse = true;
                 InputSystem.D.Add(note);
+                note.keyCode = GameManager.D;
+            }
             else if (keyCode == KeyCode.J)
+            {
+                JUse = true;
                 InputSystem.J.Add(note);
+                note.keyCode = GameManager.J;
+            }
             else if (keyCode == KeyCode.K)
+            {
+                KUse = true;
                 InputSystem.K.Add(note);
+                note.keyCode = GameManager.K;
+            }
             else if (keyCode == KeyCode.L)
+            {
+                LUse = true;
                 InputSystem.L.Add(note);
+                note.keyCode = GameManager.L;
+            }
 
             //최대 스코어 설정
             ScoreManager.MaxScore += 100;
@@ -1051,7 +1063,7 @@ namespace SDJK.PlayMode
             return note;
         }
 
-        public static void BarRemove(KeyCode keyCode, double Beat)
+        public static void NoteRemove(KeyCode keyCode, double Beat)
         {
             //에디터 전용
             for (int i = 0; i < NoteManager.notes.Count; i++)
@@ -1059,17 +1071,17 @@ namespace SDJK.PlayMode
                 Note item = NoteManager.notes[i];
                 if (item.Beat == Beat && item.keyCode == keyCode)
                 {
-                    if (keyCode == KeyCode.A)
+                    if (keyCode == GameManager.A)
                         InputSystem.A.Remove(item);
-                    else if (keyCode == KeyCode.S)
+                    else if (keyCode == GameManager.S)
                         InputSystem.S.Remove(item);
-                    else if (keyCode == KeyCode.D)
+                    else if (keyCode == GameManager.D)
                         InputSystem.D.Remove(item);
-                    else if (keyCode == KeyCode.J)
+                    else if (keyCode == GameManager.J)
                         InputSystem.J.Remove(item);
-                    else if (keyCode == KeyCode.K)
+                    else if (keyCode == GameManager.K)
                         InputSystem.K.Remove(item);
-                    else if (keyCode == KeyCode.L)
+                    else if (keyCode == GameManager.L)
                         InputSystem.L.Remove(item);
                     
                     if (item.HoldBeat > 0 && item.HoldBeat < -1)
@@ -1279,7 +1291,7 @@ namespace SDJK.PlayMode
         public double Offset;
         public string Difficulty = "";
 
-        public string Cover = "Squaredance";
+        public string Cover = "";
     }
 
     public class Effect

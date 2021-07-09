@@ -15,6 +15,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Editor Mode.unity
     guid: 89d78bc0462279b438ef0c3259726f88
   - enabled: 1
+    path: Assets/Scenes/Key Change.unity
+    guid: 2895589787cf1f5419989d112a0ecf38
+  - enabled: 1
     path: Assets/Scenes/Don't open me and play.unity
     guid: a5e00200b839e48cc8511992c1fc3a74
   m_configObjects: {}

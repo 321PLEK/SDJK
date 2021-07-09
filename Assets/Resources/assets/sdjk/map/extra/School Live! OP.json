@@ -1110,13 +1110,13 @@
       0.0
     ]
   },
-  "BGM": "School Live!",
+  "BGM": "School Live! OP",
   "Background": "",
-  "VideoBackground": "School Live!",
+  "VideoBackground": "School Live! OP",
   "VideoOffset": 0.0,
   "Artist": "",
-  "BGMName": "School Live!",
+  "BGMName": "School Live! OP",
   "Offset": 4.0,
-  "Difficulty": "",
-  "Cover": "Squaredance"
+  "Difficulty": "easy",
+  "Cover": ""
 }

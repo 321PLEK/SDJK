@@ -93,6 +93,13 @@ namespace SDJK.SaveLoad
             settingData.UpScroll = GameManager.UpScroll;
             settingData.FPSLimit = GameManager.FPSLimit;
 
+            settingData.A = GameManager.A;
+            settingData.S = GameManager.S;
+            settingData.D = GameManager.D;
+            settingData.J = GameManager.J;
+            settingData.K = GameManager.K;
+            settingData.L = GameManager.L;
+
             saveData();
         }
 
@@ -110,6 +117,13 @@ namespace SDJK.SaveLoad
             GameManager.OsuHitSound = settingData.OsuHitSound;
             GameManager.UpScroll = settingData.UpScroll;
             GameManager.FPSLimit = settingData.FPSLimit;
+
+            GameManager.A = settingData.A;
+            GameManager.S = settingData.S;
+            GameManager.D = settingData.D;
+            GameManager.J = settingData.J;
+            GameManager.K = settingData.K;
+            GameManager.L = settingData.L;
         }
 
         void OnApplicationQuit() => SaveData();
@@ -134,6 +148,13 @@ namespace SDJK.SaveLoad
         public bool OsuHitSound = false;
         public bool UpScroll = false;
         public int FPSLimit = 120;
+
+        public KeyCode A = KeyCode.A;
+        public KeyCode S = KeyCode.S;
+        public KeyCode D = KeyCode.D;
+        public KeyCode J = KeyCode.J;
+        public KeyCode K = KeyCode.K;
+        public KeyCode L = KeyCode.L;
     }
 
     [System.Serializable]
