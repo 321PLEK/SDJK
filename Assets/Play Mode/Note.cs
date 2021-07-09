@@ -22,17 +22,17 @@ namespace SDJK.PlayMode
 
         void Start()
         {
-            if (keyCode == KeyCode.A)
+            if (keyCode == GameManager.A)
                 transform.localPosition = new Vector2(-5.535f, transform.localPosition.y);
-            else if (keyCode == KeyCode.S)
+            else if (keyCode == GameManager.S)
                 transform.localPosition = new Vector2(-3.321f, transform.localPosition.y);
-            else if (keyCode == KeyCode.D)
+            else if (keyCode == GameManager.D)
                 transform.localPosition = new Vector2(-1.107f, transform.localPosition.y);
-            else if (keyCode == KeyCode.J)
+            else if (keyCode == GameManager.J)
                 transform.localPosition = new Vector2(1.107f, transform.localPosition.y);
-            else if (keyCode == KeyCode.K)
+            else if (keyCode == GameManager.K)
                 transform.localPosition = new Vector2(3.321f, transform.localPosition.y);
-            else if (keyCode == KeyCode.L)
+            else if (keyCode == GameManager.L)
                 transform.localPosition = new Vector2(5.535f, transform.localPosition.y);
 
             if (GameManager.Optimization && !PlayerManager.Editor)
