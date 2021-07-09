@@ -23,7 +23,7 @@ public class DontOpenMe : MonoBehaviour
         if (Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.C) && Input.GetKey(KeyCode.L) && Input.GetKey(KeyCode.V) && Input.GetKey(KeyCode.Alpha1) && Input.GetKey(KeyCode.P) && Input.GetKeyDown(KeyCode.Return))
         {
             SceneManager.SceneLoading("Play Mode");
-            GameManager.Level = "extra/School Live!";
+            GameManager.Level = "extra/School Live! OP";
             MainMenu.mainMenu.enabled = false;
         }
     }
