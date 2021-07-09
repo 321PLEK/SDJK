@@ -77,6 +77,7 @@ namespace SDJK.MainMenu
             if (keyCodes == null)
                 keyCodes = Enum.GetValues(typeof(KeyCode)) as KeyCode[];
 
+            GameManager.Level = "breakfast";
             string json = ResourcesManager.Search<string>("sdjk", ResourcesManager.MapPath + "breakfast");
             PlayerManager.mapData = JsonConvert.DeserializeObject<MapData>(json);
 
