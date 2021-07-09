@@ -15,6 +15,8 @@ namespace SDJK.MainMenu
 {
     public class MainMenu : MonoBehaviour
     {
+        public static MainMenu mainMenu;
+
         public RectTransform Logo;
 
         public CanvasScaler CanvasScaler;
@@ -53,6 +55,8 @@ namespace SDJK.MainMenu
 
         void Start()
         {
+            mainMenu = this;
+
             GameObject = gameObject;
 
             string json = ResourcesManager.Search<string>(ResourcesManager.GetStringNameSpace(GameManager.Level, out string Name), ResourcesManager.MapPath + Name);
@@ -277,7 +281,7 @@ namespace SDJK.MainMenu
                 if (ButtonSelect.Equals(0) && GameManager.EnterKey)
                 {
                     SceneManager.SceneLoading("Play Mode");
-                    GetComponent<MainMenu>().enabled = false;
+                    enabled = false;
                     
                     PlayerManager.AutoMode = false;
                     PlayerManager.PracticeMode = false;
@@ -292,7 +296,7 @@ namespace SDJK.MainMenu
                 if (ButtonSelect.Equals(1) && GameManager.EnterKey)
                 {
                     SceneManager.SceneLoading("Play Mode");
-                    GetComponent<MainMenu>().enabled = false;
+                    enabled = false;
 
                     PlayerManager.AutoMode = false;
                     PlayerManager.PracticeMode = false;
@@ -307,7 +311,7 @@ namespace SDJK.MainMenu
                 if (ButtonSelect.Equals(2) && GameManager.EnterKey)
                 {
                     SceneManager.SceneLoading("Editor Mode");
-                    GetComponent<MainMenu>().enabled = false;
+                    enabled = false;
                 }
 
                 //Level Mix Max
