@@ -28,6 +28,7 @@ namespace SDJK
         public static float MainVolume = 1;
 
         public static string Level = "Rainbow Tylenol";
+        public static int AllLevelIndex = 0;
         public static int LevelIndex = 0;
         public static int ExtraLevelIndex = 0;
 
@@ -66,6 +67,10 @@ namespace SDJK
         public static KeyCode J = KeyCode.J;
         public static KeyCode K = KeyCode.K;
         public static KeyCode L = KeyCode.L;
+
+        public static Vector2 ComboPos = Vector2.zero;
+
+        public static bool AllowIndirectMiss = false;
 
         void Awake()
         {
@@ -106,16 +111,31 @@ namespace SDJK
             FpsDeltaTime = 60 * DeltaTime;
             FpsUnscaledDeltaTime = 60 * UnscaledDeltaTime;
 
-            BeatTimer += DeltaTime;
+            BeatTimer += DeltaTime * Pitch;
             CurrentBeat = (BeatTimer - StartDelay - InputOffset) * (BPM / 60);
 
             Time.timeScale = (float)Abs(GameSpeed);
             _GameSpeed = GameSpeed;
 
-            if (FPSLimit > 0)
-                Application.targetFrameRate = FPSLimit;
+            if (Application.isFocused)
+            {
+                if (!MainMenu.MainMenu.Esc)
+                {
+                    if (FPSLimit > 0)
+                        Application.targetFrameRate = FPSLimit;
+                    else
+                        Application.targetFrameRate = -1;
+                }
+                else
+                {
+                    if (MainMenu.MainMenu.AFKTimer < 60)
+                        Application.targetFrameRate = 70;
+                    else
+                        Application.targetFrameRate = 30;
+                }
+            }
             else
-                Application.targetFrameRate = -1;
+                Application.targetFrameRate = 20;
 
             foreach (Font font in fonts)
             {
@@ -340,8 +360,49 @@ namespace SDJK
             z = v.z;
         }
 
+        public JVector3(float x, float y, float z)
+        {
+            this.x = x;
+            this.y = y;
+            this.z = z;
+        }
+
         public JVector3(float f) => x = y = z = f;
 
         public static Vector3 JVector3ToVector3(JVector3 jVector3) => new Vector3(jVector3.x, jVector3.y, jVector3.z);
+    }
+
+    public class JColor32
+    {
+        [JsonProperty("r")]
+        public byte r;
+        [JsonProperty("g")]
+        public byte g;
+        [JsonProperty("b")]
+        public byte b;
+        [JsonProperty("a")]
+        public byte a;
+
+        public JColor32() => r = g = b = a = 0;
+
+        public JColor32(Color32 v)
+        {
+            r = v.r;
+            g = v.g;
+            b = v.b;
+            a = v.a;
+        }
+
+        public JColor32(byte r, byte g, byte b, byte a)
+        {
+            this.r = r;
+            this.g = g;
+            this.b = b;
+            this.a = a;
+        }
+
+        public JColor32(byte f) => r = g = b = a = f;
+
+        public static Color JColorToColor(JColor32 jColor32) => new Color32(jColor32.r, jColor32.g, jColor32.b, jColor32.a);
     }
 }

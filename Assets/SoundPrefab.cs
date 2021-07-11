@@ -28,6 +28,8 @@ namespace SDJK.Sound
 
         IEnumerator restart;
 
+        public bool Stop = false;
+
         void Start() => Reload();
 
         public void Reload()
@@ -173,17 +175,34 @@ namespace SDJK.Sound
                 else if (BGM)
                     audioSource.Pause();
 
-                if (BGM && !audioSource.isPlaying && Loop && !GameManager.Pause)
+                if (BGM && !audioSource.isPlaying && Loop && !GameManager.Pause && !Stop)
                 {
                     audioSource.enabled = true;
                     audioSource.Play();
                     GameManager.BeatTimer = 0;
                     GameManager.CurrentBeat = 0;
                     MainMenu.MainMenu.NextBeat = 0;
+
+                    if (MainMenu.MainMenu.Esc)
+                    {
+                        GameManager.AllLevelIndex = Random.Range(0, MainMenu.MainMenu.mainMenu.AllLevelList.Count);
+                        GameManager.Level = MainMenu.MainMenu.mainMenu.AllLevelList[GameManager.AllLevelIndex];
+                        MainMenu.MainMenu.LevelRefresh();
+                    }
                 }
 
                 if (!audioSource.isPlaying && !GameManager.Pause)
                     Destroy(gameObject);
+
+                if (MainMenu.MainMenu.Esc)
+                {
+                    if (Input.GetKey(KeyCode.UpArrow))
+                        GameManager.Pitch = 0.666f;
+                    else if (Input.GetKey(KeyCode.DownArrow))
+                        GameManager.Pitch = 1.5f;
+                    else
+                        GameManager.Pitch = 1;
+                }
 
                 yield return null;
             }

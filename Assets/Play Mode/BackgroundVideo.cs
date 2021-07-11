@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using SDJK.Camera;
 using SDJK.EditMode;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -13,13 +14,15 @@ namespace SDJK.PlayMode.UI.Background
     public class BackgroundVideo : MonoBehaviour
     {
         public VideoPlayer videoPlayer;
+        public bool MainMenu = false;
 
         void Start()
         {
-            if (GameManager.EditorOptimization && PlayerManager.Editor)
+            if (GameManager.EditorOptimization && PlayerManager.Editor && !MainMenu)
                 videoPlayer.gameObject.SetActive(false);
                 
-            Rerender();
+            if (!MainMenu)
+                StartCoroutine(Rerender());
         }
 
         public IEnumerator Rerender()
@@ -29,7 +32,12 @@ namespace SDJK.PlayMode.UI.Background
             videoPlayer.Stop();
             videoPlayer.clip = null;
             
-            videoPlayer.targetTexture.Release();
+            if (!MainMenu)
+                videoPlayer.targetTexture.Release();
+
+            if (MainMenu && videoPlayer.targetCamera == null)
+                videoPlayer.targetCamera = MainCamera.Camera;
+
 
             string NameSpace = ResourcesManager.GetStringNameSpace(PlayerManager.mapData.VideoBackground, out string ResourceName);
             string MapPathResourceName = ResourceName;
@@ -77,7 +85,7 @@ namespace SDJK.PlayMode.UI.Background
 
             if (!temp)
                 videoPlayer.enabled = false;
-            else
+            else if (!MainMenu)
             {
                 videoPlayer.Stop();
 
@@ -92,31 +100,58 @@ namespace SDJK.PlayMode.UI.Background
 
         void Update()
         {
+            float time;
+
+            if (!MainMenu)
+                time = PlayerManager.playerManager.audioSource.time;
+            else
+                time = GameManager.BeatTimer;
+
             if (videoPlayer.enabled)
             {
-                videoPlayer.playbackSpeed = PlayerManager.playerManager.audioSource.pitch;
+                float Pitch;
+                if (!MainMenu)
+                    Pitch = PlayerManager.playerManager.audioSource.pitch;
+                else
+                    Pitch = GameManager.Pitch;
 
-                if (videoPlayer.time < PlayerManager.playerManager.audioSource.time + PlayerManager.mapData.VideoOffset - GameManager.InputOffset - 0.041f)
-                        videoPlayer.playbackSpeed = PlayerManager.playerManager.audioSource.pitch * 2;
-                
-                if (videoPlayer.time > PlayerManager.playerManager.audioSource.time + PlayerManager.mapData.VideoOffset - GameManager.InputOffset - 0.039f)
-                    videoPlayer.playbackSpeed = PlayerManager.playerManager.audioSource.pitch * 0;
+                videoPlayer.playbackSpeed = Pitch;
 
-                if (PlayerManager.Editor)
+                if (GameManager.FPS >= 100)
                 {
-                    if (!Input.GetKey(KeyCode.UpArrow) && !EditorManager.AutoScroll || Input.GetKey(KeyCode.DownArrow))
+                    if (videoPlayer.time < time + PlayerManager.mapData.VideoOffset - GameManager.InputOffset - 0.041f)
+                        videoPlayer.playbackSpeed = Pitch * 2;
+
+                    if (videoPlayer.time > time + PlayerManager.mapData.VideoOffset - GameManager.InputOffset - 0.039f)
+                        videoPlayer.playbackSpeed = Pitch * 0;
+                }
+                else
+                {
+                    if (videoPlayer.time < time + PlayerManager.mapData.VideoOffset - GameManager.InputOffset - 0.041f)
+                        videoPlayer.playbackSpeed = Pitch * 2;
+
+                    if (videoPlayer.time > time + PlayerManager.mapData.VideoOffset - GameManager.InputOffset - 0.019f)
+                        videoPlayer.playbackSpeed = Pitch * 0;
+                }
+
+                if (PlayerManager.Editor || MainMenu)
+                {
+                    if (!MainMenu)
                     {
-                        videoPlayer.playbackSpeed = 0;
-                        videoPlayer.time = PlayerManager.playerManager.audioSource.time + PlayerManager.mapData.VideoOffset - GameManager.InputOffset;
+                        if (!Input.GetKey(KeyCode.UpArrow) && !EditorManager.AutoScroll || Input.GetKey(KeyCode.DownArrow))
+                        {
+                            videoPlayer.playbackSpeed = 0;
+                            videoPlayer.time = time + PlayerManager.mapData.VideoOffset - GameManager.InputOffset;
+                        }
                     }
 
                     if (!videoPlayer.isPlaying)
                     {
                         videoPlayer.Play();
-                        videoPlayer.time = PlayerManager.playerManager.audioSource.time + PlayerManager.mapData.VideoOffset - GameManager.InputOffset;
+                        videoPlayer.time = time + PlayerManager.mapData.VideoOffset - GameManager.InputOffset;
                     }
 
-                    if (PlayerManager.playerManager.audioSource.time >= videoPlayer.length)
+                    if (time >= videoPlayer.length)
                         videoPlayer.Pause();
                 }
             }

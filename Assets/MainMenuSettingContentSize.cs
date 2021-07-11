@@ -7,6 +7,7 @@ namespace SDJK.MainMenu
     public class MainMenuSettingContentSize : MonoBehaviour
     {
         public RectTransform rectTransform;
+        public float Height = 52;
 
         void Update()
         {
@@ -14,7 +15,7 @@ namespace SDJK.MainMenu
             foreach (Transform child in transform)
                 i++;
 
-            rectTransform.sizeDelta = new Vector2(rectTransform.sizeDelta.x, 52 * i + 7);
+            rectTransform.sizeDelta = new Vector2(rectTransform.sizeDelta.x, Height * i + 7);
         }
     }
 }

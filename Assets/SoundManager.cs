@@ -85,15 +85,21 @@ namespace SDJK.Sound
         {
             BGMCount -= 1;
 
-            Transform[] allChildren = BGM.GetComponentsInChildren<Transform>();
+            SoundPrefab[] allChildren = BGM.GetComponentsInChildren<SoundPrefab>();
 
-            for (int i = 1; i < allChildren.Length; i++)
+            for (int i = 0; i < allChildren.Length; i++)
                 if (allChildren[i].name == "BGM." + SoundBGM.Replace(".", "/"))
                 {
                     if (!Pade)
+                    {
+                        allChildren[i].Stop = true;
                         Destroy(allChildren[i].gameObject);
+                    }
                     else
-                        allChildren[i].GetComponent<SoundPrefab>().PadeOut = true;
+                    {
+                        allChildren[i].Stop = true;
+                        allChildren[i].PadeOut = true;
+                    }
                 }
         }
 
@@ -144,35 +150,47 @@ namespace SDJK.Sound
         {
             if (soundType == SoundType.All)
             {
-                Transform[] allChildren = soundManager.GetComponentsInChildren<Transform>();
+                SoundPrefab[] allChildren = soundManager.GetComponentsInChildren<SoundPrefab>();
 
-                for (int i = 1; i < allChildren.Length; i++)
-                    if (soundManager != allChildren[i] && allChildren[i].GetComponent<SoundPrefab>() != null)
+                for (int i = 0; i < allChildren.Length; i++)
+                    if (soundManager != allChildren[i] && allChildren[i] != null)
                     {
-                        if (!BGMPade || !allChildren[i].GetComponent<SoundPrefab>().BGM)
+                        if (!BGMPade || !allChildren[i].BGM)
+                        {
                             Destroy(allChildren[i].gameObject);
+                            allChildren[i].Stop = true;
+                        }
                         else
-                            allChildren[i].GetComponent<SoundPrefab>().PadeOut = true;
+                        {
+                            allChildren[i].PadeOut = true;
+                            allChildren[i].Stop = true;
+                        }
                     }
             }
             else if (soundType == SoundType.BGM)
             {
-                Transform[] allChildren = BGM.GetComponentsInChildren<Transform>();
+                SoundPrefab[] allChildren = BGM.GetComponentsInChildren<SoundPrefab>();
 
-                for (int i = 1; i < allChildren.Length; i++)
+                for (int i = 0; i < allChildren.Length; i++)
                     if (soundManager != allChildren[i])
                     {
                         if (!BGMPade)
+                        {
                             Destroy(allChildren[i].gameObject);
+                            allChildren[i].Stop = true;
+                        }
                         else
-                            allChildren[i].GetComponent<SoundPrefab>().PadeOut = true;
+                        {
+                            allChildren[i].PadeOut = true;
+                            allChildren[i].Stop = true;
+                        }
                     }
             }
             else if (soundType == SoundType.Sound)
             {
                 Transform[] allChildren = Sound.GetComponentsInChildren<Transform>();
 
-                for (int i = 1; i < allChildren.Length; i++)
+                for (int i = 0; i < allChildren.Length; i++)
                     if (soundManager != allChildren[i])
                         Destroy(allChildren[i].gameObject);
             }

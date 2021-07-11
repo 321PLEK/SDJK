@@ -97,6 +97,8 @@ namespace SDJK.PlayMode
 
         public static bool UIHide = false;
 
+        public RectTransform ComboPos;
+
         //public MidiPlayer MidiPlayer;
 
         //스크립트를 뜯을때, 주석도 좋지만 함수 이름이나 변수 이름이나 스크립트 또는 클래스의 이름을 보면 도움이 됩니다
@@ -137,8 +139,11 @@ namespace SDJK.PlayMode
                 ComboText.rectTransform.anchorMin = new Vector2(0.5f, 1);
                 ComboText.rectTransform.anchorMax = new Vector2(0.5f, 1);
                 ComboText.rectTransform.anchoredPosition = new Vector2(ComboText.rectTransform.anchoredPosition.x, -ComboText.rectTransform.anchoredPosition.y);
+                ComboPos.anchoredPosition = new Vector2(GameManager.ComboPos.x, -GameManager.ComboPos.y);
                 HPImage.fillOrigin = 1;
             }
+            else
+                ComboPos.anchoredPosition = GameManager.ComboPos;
         }
 
         IEnumerator ComboColorAni()
@@ -1163,9 +1168,12 @@ namespace SDJK.PlayMode
             }
             else if (Delay < -0.75 * effect.JudgmentSize)
             {
-                JudgmentResult("Miss", -5, false, Delay, NoteHide, Score);
-                ScoreManager.AllPerfect = false;
-                ScoreManager.AllSick = false;
+                if (!GameManager.AllowIndirectMiss)
+                {
+                    JudgmentResult("Miss", -5, false, Delay, NoteHide, Score);
+                    ScoreManager.AllPerfect = false;
+                    ScoreManager.AllSick = false;
+                }
                 return true;
             }
 
@@ -1358,6 +1366,9 @@ namespace SDJK.Effect
         public double JudgmentSize = 1;
         public List<JudgmentSizeEffect> JudgmentSizeEffect = new List<JudgmentSizeEffect>();
 
+        public bool AudioSpectrumUse = false;
+        public JColor32 AudioSpectrumColor = new JColor32(255);
+
         public List<double> AllBeat = new List<double>();
     }
 
@@ -1418,12 +1429,12 @@ namespace SDJK.Effect
     public class CameraEffect
     {
         public double CameraZoom = 1;
-        public JVector3 CameraPos = new JVector3(new Vector3(0, 0, -14));
+        public JVector3 CameraPos = new JVector3(0, 0, -14);
         public List<CameraZoomEffect> CameraZoomEffect = new List<CameraZoomEffect>();
         public List<CameraPosEffect> CameraPosEffect = new List<CameraPosEffect>();
 
         public double UiZoom = 1;
-        public JVector3 UiPos = new JVector3(Vector3.zero);
+        public JVector3 UiPos = new JVector3();
         public List<UiZoomEffect> UiZoomEffect = new List<UiZoomEffect>();
         public List<UiPosEffect> UiPosEffect = new List<UiPosEffect>();
     }
@@ -1438,7 +1449,7 @@ namespace SDJK.Effect
     public class CameraPosEffect
     {
         public double Beat = 0;
-        public JVector3 Value = new JVector3(new Vector3(0, 0, -14));
+        public JVector3 Value = new JVector3(0, 0, -14);
         public double Lerp = 1;
     }
     public class UiZoomEffect

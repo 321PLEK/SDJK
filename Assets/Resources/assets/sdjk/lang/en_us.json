@@ -3,6 +3,7 @@
 	"language.region": "United States",
 	"main_menu.version": "Version ",
 	"main_menu.playing": "Playing: ",
+	"main_menu.game_start": "Press the space bar to start the game",
 	
 	"main_menu.level_select screen key_info": "Press Enter to play\nSelect a map with the up and down keys",
 	"main_menu.level_select.difficulty": "Difficulty",
@@ -25,10 +26,11 @@
 	"setting.osu_hit_sound": "OSU Hit Sound",
 	"setting.up_scroll": "Up Scroll",
 	"setting.fps_limit": "FPS Limit",
-	"setting.key_change": "Key Change",
+	"setting.key_change": "key Bindings",
+	"setting.ui_pos_change": "UI Pos Change",
+	"setting.allow_indirect_miss": "Allow Indirect Miss",
 	
 	"resourcePack.basicResource": "Basic Resource Pack",
-	"resourcePack.customLang": "Languages managed by the resource pack",
 	"resourcePack.resourcePack_folderOpen": "Open the resource pack folder",
 
 	"editMode.currentBeat": "Current Beat: ",

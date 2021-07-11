@@ -100,6 +100,10 @@ namespace SDJK.SaveLoad
             settingData.K = GameManager.K;
             settingData.L = GameManager.L;
 
+            settingData.ComboPos = GameManager.ComboPos;
+
+            settingData.AllowIndirectMiss = GameManager.AllowIndirectMiss;
+
             saveData();
         }
 
@@ -124,6 +128,10 @@ namespace SDJK.SaveLoad
             GameManager.J = settingData.J;
             GameManager.K = settingData.K;
             GameManager.L = settingData.L;
+
+            GameManager.ComboPos = settingData.ComboPos;
+
+            GameManager.AllowIndirectMiss = settingData.AllowIndirectMiss;
         }
 
         void OnApplicationQuit() => SaveData();
@@ -148,6 +156,7 @@ namespace SDJK.SaveLoad
         public bool OsuHitSound = false;
         public bool UpScroll = false;
         public int FPSLimit = 120;
+        public bool AllowIndirectMiss = false;
 
         public KeyCode A = KeyCode.A;
         public KeyCode S = KeyCode.S;
@@ -155,6 +164,8 @@ namespace SDJK.SaveLoad
         public KeyCode J = KeyCode.J;
         public KeyCode K = KeyCode.K;
         public KeyCode L = KeyCode.L;
+
+        public Vector2 ComboPos = Vector2.zero;
     }
 
     [System.Serializable]

@@ -316,7 +316,10 @@ namespace SDJK
                             temp = temp.Substring(iiii, temp.LastIndexOf(".") - iiii);
 
                             if (!resourcesManager.mainMenu.LevelList.Contains(temp))
+                            {
                                 resourcesManager.mainMenu.LevelList.Add(temp);
+                                resourcesManager.mainMenu.AllLevelList.Add(temp);
+                            }
                         }
                     }
                 }
@@ -345,7 +348,10 @@ namespace SDJK
                             temp = temp.Substring(iiii, temp.LastIndexOf(".") - iiii);
 
                             if (!resourcesManager.mainMenu.ExtraLevelList.Contains("extra/" + temp))
+                            {
                                 resourcesManager.mainMenu.ExtraLevelList.Add("extra/" + temp);
+                                resourcesManager.mainMenu.AllLevelList.Add("extra/" + temp);
+                            }
                         }
                     }
                 }

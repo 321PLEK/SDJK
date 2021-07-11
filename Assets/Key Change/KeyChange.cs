@@ -79,13 +79,13 @@ namespace SDJK.MainMenu
             if (keyCodes == null)
                 keyCodes = Enum.GetValues(typeof(KeyCode)) as KeyCode[];
 
+            GameManager.BPM = 0;
+            GameManager.CurrentBeat = 0;
+            GameManager.BeatTimer = 0;
             GameManager.Level = "breakfast";
             string json = ResourcesManager.Search<string>("sdjk", ResourcesManager.MapPath + "breakfast");
             PlayerManager.mapData = JsonConvert.DeserializeObject<MapData>(json);
 
-            SoundManager.PlayBGM(PlayerManager.mapData.BGM, true, (float)PlayerManager.mapData.Effect.Volume, 1, true, false);
-            GameManager.BPM = (float)PlayerManager.mapData.Effect.BPM;
-            GameManager.StartDelay = (float)PlayerManager.mapData.Offset + GameManager.InputOffset;
             PlayerManager.effect.BeatYPos = PlayerManager.mapData.Effect.BeatYPos;
 
             for (int i = 0; i < PlayerManager.mapData.A.Count; i++)
@@ -118,6 +118,21 @@ namespace SDJK.MainMenu
                 if (PlayerManager.mapData.L[i] != PlayerManager.mapData.AllBeat[PlayerManager.mapData.AllBeat.Count - 1])
                     NoteAdd(KeyCode.L, PlayerManager.mapData.L[i]);
             }
+
+            StartCoroutine(KeyChangeAwake());
+        }
+
+        IEnumerator KeyChangeAwake()
+        {
+            yield return new WaitForSeconds(0.5f);
+
+            SoundManager.PlayBGM(PlayerManager.mapData.BGM, true, (float)PlayerManager.mapData.Effect.Volume, 1, true, false);
+            GameManager.BPM = (float)PlayerManager.mapData.Effect.BPM;
+            GameManager.StartDelay = (float)PlayerManager.mapData.Offset + GameManager.InputOffset;
+
+            NextBeat = 0;
+            HitSoundIndex = 0;
+            HitSoundNextBeat = 0;
         }
 
         IEnumerator HitSoundCoroutine;

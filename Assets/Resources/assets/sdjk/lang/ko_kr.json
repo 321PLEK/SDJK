@@ -3,6 +3,7 @@
 	"language.region": "대한민국",
 	"main_menu.version": "버전 ",
 	"main_menu.playing": "플레이 중: ",
+	"main_menu.game_start": "스페이스 바를 눌러 게임을 시작하세요",
 	
 	"main_menu.level_select screen key_info": "방향키 키로 맵 선택\n엔터키를 눌러서 플레이",
 	"main_menu.level_select.difficulty": "난이도",
@@ -25,10 +26,11 @@
 	"setting.osu_hit_sound": "오스 히트 사운드",
 	"setting.up_scroll": "업 스크롤",
 	"setting.fps_limit": "FPS 제한",
-	"setting.key_change": "키 바꾸기",
+	"setting.key_change": "키 바인딩",
+	"setting.ui_pos_change": "UI 위치 변경",
+	"setting.allow_indirect_miss": "간접 미스 허용",
 	
 	"resourcePack.basicResource": "기본 리소스팩",
-	"resourcePack.customLang": "리소스 팩이 관리하는 언어",
 	"resourcePack.resourcePack_folderOpen": "리소스팩 폴더 열기",
 
 	"editMode.currentBeat": "현재 비트: ",
