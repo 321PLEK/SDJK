@@ -555,9 +555,11 @@ namespace SDJK.PlayMode
                         if (!AutoMode && !PracticeMode)
                         {
                             if (!GameManager.mapRecord.ContainsKey(GameManager.Level))
-                                GameManager.mapRecord.Add(GameManager.Level, time / audioSource.clip.length * 100.0);
-                            else
-                                GameManager.mapRecord[GameManager.Level] = time / audioSource.clip.length * 100.0;
+                                GameManager.mapRecord.Add(GameManager.Level, audioSource.time / audioSource.clip.length * 100);
+                            {
+                                if (GameManager.mapRecord[GameManager.Level] < audioSource.time / audioSource.clip.length * 100)
+                                    GameManager.mapRecord[GameManager.Level] = audioSource.time / audioSource.clip.length * 100;
+                            }
                         }
 
                         Quit();
@@ -650,9 +652,11 @@ namespace SDJK.PlayMode
                     if (!isEditorMapPlay && !AutoMode && !PracticeMode)
                     {
                         if (!GameManager.mapRecord.ContainsKey(GameManager.Level))
-                            GameManager.mapRecord.Add(GameManager.Level, time / audioSource.clip.length * 100.0);
-                        else
-                            GameManager.mapRecord[GameManager.Level] = time / audioSource.clip.length * 100.0;
+                            GameManager.mapRecord.Add(GameManager.Level, audioSource.time / audioSource.clip.length * 100);
+                        {
+                            if (GameManager.mapRecord[GameManager.Level] < audioSource.time / audioSource.clip.length * 100)
+                                GameManager.mapRecord[GameManager.Level] = audioSource.time / audioSource.clip.length * 100;
+                        }
                     }
 
                     HP = 0;
@@ -669,7 +673,8 @@ namespace SDJK.PlayMode
                             if (!GameManager.mapRecord.ContainsKey(GameManager.Level))
                                 GameManager.mapRecord.Add(GameManager.Level, 100);
                             else
-                                GameManager.mapRecord[GameManager.Level] = audioSource.time / audioSource.clip.length * 100;
+                                GameManager.mapRecord[GameManager.Level] = 100;
+
                             if (!GameManager.mapAccuracy.ContainsKey(GameManager.Level))
                                 GameManager.mapAccuracy.Add(GameManager.Level, ScoreManager.Accuracy);
                             else

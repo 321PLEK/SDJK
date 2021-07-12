@@ -45,12 +45,12 @@ namespace SDJK.SystemUI
 
         void Update()
         {
-            if (MainMenu.MainMenu.Esc || Input.mousePosition.y >= Screen.height)
+            if (MainMenu.MainMenu.Esc || Input.mousePosition.y >= Screen.height - 1)
                 TopUI.anchoredPosition = Vector2.Lerp(TopUI.anchoredPosition, Vector2.zero, 0.15f * GameManager.FpsDeltaTime);
             else
                 TopUI.anchoredPosition = Vector2.Lerp(TopUI.anchoredPosition, new Vector2(0, TopUI.sizeDelta.y), 0.15f * GameManager.FpsDeltaTime);
 
-            if (VolumeTimer > 0 || Input.mousePosition.x >= Screen.width)
+            if (VolumeTimer > 0 || Input.mousePosition.x >= Screen.width - 1)
                 RightUI.anchoredPosition = Vector2.Lerp(RightUI.anchoredPosition, Vector2.zero, 0.15f * GameManager.FpsDeltaTime);
             else
                 RightUI.anchoredPosition = Vector2.Lerp(RightUI.anchoredPosition, new Vector2(RightUI.sizeDelta.x, 0), 0.15f * GameManager.FpsDeltaTime);
