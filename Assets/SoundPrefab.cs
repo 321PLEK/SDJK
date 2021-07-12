@@ -196,9 +196,9 @@ namespace SDJK.Sound
 
                 if (MainMenu.MainMenu.Esc)
                 {
-                    if (Input.GetKey(KeyCode.UpArrow))
+                    if (GameManager.UpKey)
                         GameManager.Pitch = 0.666f;
-                    else if (Input.GetKey(KeyCode.DownArrow))
+                    else if (GameManager.DownKey)
                         GameManager.Pitch = 1.5f;
                     else
                         GameManager.Pitch = 1;

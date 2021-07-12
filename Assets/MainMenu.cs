@@ -200,7 +200,7 @@ namespace SDJK.MainMenu
                 Logo.anchoredPosition = Vector2.Lerp(Logo.anchoredPosition, new Vector2(CanvasScaler.referenceResolution.x * 0.5f, -mainMenuRectTransform.sizeDelta.y * 0.5f), 0.15f * GameManager.FpsDeltaTime);
                 Logo.localScale = Vector2.Lerp(Logo.localScale, Vector2.one, 0.15f * GameManager.FpsDeltaTime);
                 SelectUI.anchoredPosition = Vector2.Lerp(SelectUI.anchoredPosition, new Vector2(664, 0), 0.15f * GameManager.FpsDeltaTime);
-                if (Esc && GameManager.Ratio_9_16)
+                if (!(GameManager.CurrentBeat < 0 && !LogoAniEnd && !Esc) && GameManager.Ratio_9_16)
                     PlayingText.rectTransform.anchoredPosition = Vector2.Lerp(PlayingText.rectTransform.anchoredPosition, new Vector2(10, -40), 0.15f * GameManager.FpsDeltaTime);
                 else
                     PlayingText.rectTransform.anchoredPosition = Vector2.Lerp(PlayingText.rectTransform.anchoredPosition, new Vector2(10, 10), 0.15f * GameManager.FpsDeltaTime);
@@ -295,7 +295,10 @@ namespace SDJK.MainMenu
 
                 Logo.localScale = Vector2.Lerp(Logo.localScale, new Vector2(0.9f, 0.9f), 0.15f * GameManager.FpsDeltaTime);
                 SelectUI.anchoredPosition = Vector2.Lerp(SelectUI.anchoredPosition, new Vector2(0, 0), 0.15f * GameManager.FpsDeltaTime);
-                PlayingText.rectTransform.anchoredPosition = Vector2.Lerp(PlayingText.rectTransform.anchoredPosition, new Vector2(10, 10), 0.15f * GameManager.FpsDeltaTime);
+                if (GameManager.Ratio_9_16)
+                    PlayingText.rectTransform.anchoredPosition = Vector2.Lerp(PlayingText.rectTransform.anchoredPosition, new Vector2(10, -40), 0.15f * GameManager.FpsDeltaTime);
+                else
+                    PlayingText.rectTransform.anchoredPosition = Vector2.Lerp(PlayingText.rectTransform.anchoredPosition, new Vector2(10, 10), 0.15f * GameManager.FpsDeltaTime);
                 GameStartText.anchoredPosition = Vector2.Lerp(GameStartText.anchoredPosition, new Vector2(-10, -40), 0.15f * GameManager.FpsDeltaTime);
                 backgroundVideo.videoPlayer.targetCameraAlpha = GameManager.Lerp(backgroundVideo.videoPlayer.targetCameraAlpha, 0.15f, 0.15f * GameManager.FpsDeltaTime);
 
