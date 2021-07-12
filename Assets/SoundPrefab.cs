@@ -196,12 +196,24 @@ namespace SDJK.Sound
 
                 if (MainMenu.MainMenu.Esc)
                 {
-                    if (GameManager.UpKey)
-                        GameManager.Pitch = 0.666f;
-                    else if (GameManager.DownKey)
-                        GameManager.Pitch = 1.5f;
+                    if (!GameManager.Ratio_9_16)
+                    {
+                        if (Input.GetKey(KeyCode.UpArrow))
+                            GameManager.Pitch = 0.666f;
+                        else if (Input.GetKey(KeyCode.DownArrow))
+                            GameManager.Pitch = 1.5f;
+                        else
+                            GameManager.Pitch = 1;
+                    }
                     else
-                        GameManager.Pitch = 1;
+                    {
+                        if (Input.GetKey(KeyCode.LeftArrow))
+                            GameManager.Pitch = 0.666f;
+                        else if (Input.GetKey(KeyCode.RightArrow))
+                            GameManager.Pitch = 1.5f;
+                        else
+                            GameManager.Pitch = 1;
+                    }
                 }
 
                 yield return null;
