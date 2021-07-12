@@ -555,9 +555,9 @@ namespace SDJK.PlayMode
                         if (!AutoMode && !PracticeMode)
                         {
                             if (!GameManager.mapRecord.ContainsKey(GameManager.Level))
-                                GameManager.mapRecord.Add(GameManager.Level, audioSource.time / audioSource.clip.length * 100);
+                                GameManager.mapRecord.Add(GameManager.Level, time / audioSource.clip.length * 100.0);
                             else
-                                GameManager.mapRecord[GameManager.Level] = audioSource.time / audioSource.clip.length * 100;
+                                GameManager.mapRecord[GameManager.Level] = time / audioSource.clip.length * 100.0;
                         }
 
                         Quit();
@@ -650,9 +650,9 @@ namespace SDJK.PlayMode
                     if (!isEditorMapPlay && !AutoMode && !PracticeMode)
                     {
                         if (!GameManager.mapRecord.ContainsKey(GameManager.Level))
-                            GameManager.mapRecord.Add(GameManager.Level, audioSource.time / audioSource.clip.length * 100);
+                            GameManager.mapRecord.Add(GameManager.Level, time / audioSource.clip.length * 100.0);
                         else
-                            GameManager.mapRecord[GameManager.Level] = audioSource.time / audioSource.clip.length * 100;
+                            GameManager.mapRecord[GameManager.Level] = time / audioSource.clip.length * 100.0;
                     }
 
                     HP = 0;
