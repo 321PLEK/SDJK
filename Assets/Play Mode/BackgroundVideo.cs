@@ -35,10 +35,6 @@ namespace SDJK.PlayMode.UI.Background
             if (!MainMenu)
                 videoPlayer.targetTexture.Release();
 
-            if (MainMenu && videoPlayer.targetCamera == null)
-                videoPlayer.targetCamera = MainCamera.Camera;
-
-
             string NameSpace = ResourcesManager.GetStringNameSpace(PlayerManager.mapData.VideoBackground, out string ResourceName);
             string MapPathResourceName = ResourceName;
             ResourceName = ResourcesManager.BackgroundPath + "video/" + ResourceName;
@@ -96,6 +92,11 @@ namespace SDJK.PlayMode.UI.Background
                 if (!PlayerManager.Editor)
                     videoPlayer.time = PlayerManager.playerManager.audioSource.time + PlayerManager.mapData.VideoOffset - GameManager.InputOffset;
             }
+
+            yield return null;
+
+            if (MainMenu && videoPlayer.targetCamera == null)
+                videoPlayer.targetCamera = MainCamera.Camera;
         }
 
         void Update()
