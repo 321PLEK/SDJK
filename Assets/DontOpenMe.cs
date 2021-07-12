@@ -15,10 +15,10 @@ public class DontOpenMe : MonoBehaviour
         //Don't run this code
         if (Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.C) && Input.GetKey(KeyCode.L) && Input.GetKey(KeyCode.V) && Input.GetKey(KeyCode.Alpha1) && Input.GetKey(KeyCode.M) && Input.GetKey(KeyCode.I) && Input.GetKey(KeyCode.P) && Input.GetKeyDown(KeyCode.Return))
         {
+            SoundManager.StopAll(SoundType.All, false);
             UnityEngine.SceneManagement.SceneManager.LoadScene("Don't open me and play");
             MainCamera.Camera.enabled = false;
             SdjkSystem.sdjkSystem.gameObject.SetActive(false);
-            SoundManager.StopAll(SoundType.All, false);
         }
         if (Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.C) && Input.GetKey(KeyCode.L) && Input.GetKey(KeyCode.V) && Input.GetKey(KeyCode.Alpha1) && Input.GetKey(KeyCode.P) && Input.GetKeyDown(KeyCode.Return))
         {
@@ -31,7 +31,7 @@ public class DontOpenMe : MonoBehaviour
     IEnumerator Start()
     {
         yield return new WaitForSeconds(1);
-        
+
         if (Text)
             gameObject.SetActive(false);
     }

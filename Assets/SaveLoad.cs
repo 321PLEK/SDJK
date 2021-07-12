@@ -3,6 +3,7 @@ using UnityEngine;
 using System.IO;
 using SDJK.Language;
 using UnityEngine.Serialization;
+using Newtonsoft.Json;
 
 namespace SDJK.SaveLoad
 {
@@ -29,7 +30,7 @@ namespace SDJK.SaveLoad
 
             LoadData();
         }
-        
+
         //함수 닉값중
         static void saveData()
         {
@@ -41,19 +42,19 @@ namespace SDJK.SaveLoad
                 Directory.CreateDirectory(path);
             }
 
-            string jsonData = JsonUtility.ToJson(playerData, true);
+            string jsonData = JsonConvert.SerializeObject(playerData, Formatting.Indented);
             path = Path.Combine(Application.persistentDataPath + "/SaveData/PlayerSaveData.json");
             File.WriteAllText(path, jsonData);
 
-            jsonData = JsonUtility.ToJson(settingData, true);
+            jsonData = JsonConvert.SerializeObject(settingData, Formatting.Indented);
             path = Path.Combine(Application.persistentDataPath + "/SaveData/SettingSaveData.json");
             File.WriteAllText(path, jsonData);
 
-            jsonData = JsonUtility.ToJson(advancementsData, true);
+            jsonData = JsonConvert.SerializeObject(advancementsData, Formatting.Indented);
             path = Path.Combine(Application.persistentDataPath + "/SaveData/AdvancementsSaveData.json");
             File.WriteAllText(path, jsonData);
 
-            jsonData = JsonUtility.ToJson(statisticsData, true);
+            jsonData = JsonConvert.SerializeObject(statisticsData, Formatting.Indented);
             path = Path.Combine(Application.persistentDataPath + "/SaveData/StatisticsSaveData.json");
             File.WriteAllText(path, jsonData);
         }
@@ -69,14 +70,14 @@ namespace SDJK.SaveLoad
             if (File.Exists(path))
             {
                 string jsonData = File.ReadAllText(path);
-                playerData = JsonUtility.FromJson<PlayerData>(jsonData);
+                playerData = JsonConvert.DeserializeObject<PlayerData>(jsonData);
             }
 
             path = Path.Combine(Application.persistentDataPath + "/SaveData/SettingSaveData.json");
             if (File.Exists(path))
             {
                 string jsonData = File.ReadAllText(path);
-                settingData = JsonUtility.FromJson<SettingData>(jsonData);
+                settingData = JsonConvert.DeserializeObject<SettingData>(jsonData);
             }
         }
 
@@ -100,9 +101,18 @@ namespace SDJK.SaveLoad
             settingData.K = GameManager.K;
             settingData.L = GameManager.L;
 
-            settingData.ComboPos = GameManager.ComboPos;
+            settingData.ComboPos = new JVector2(GameManager.ComboPos);
 
             settingData.AllowIndirectMiss = GameManager.AllowIndirectMiss;
+
+            playerData.ProfilePicturePath = GameManager.ProfilePicturePath;
+            playerData.NickName = GameManager.NickName;
+            playerData.MapRecord = GameManager.mapRecord;
+            playerData.MapAccuracy = GameManager.mapAccuracy;
+            playerData.MapRank = GameManager.mapRank;
+
+            playerData.PlayerLevel = GameManager.PlayerLevel;
+            playerData.PlayerExp = GameManager.PlayerExp;
 
             saveData();
         }
@@ -129,9 +139,19 @@ namespace SDJK.SaveLoad
             GameManager.K = settingData.K;
             GameManager.L = settingData.L;
 
-            GameManager.ComboPos = settingData.ComboPos;
+            GameManager.ComboPos = JVector2.JVector2ToVector2(settingData.ComboPos);
 
             GameManager.AllowIndirectMiss = settingData.AllowIndirectMiss;
+
+            GameManager.ProfilePicturePath = playerData.ProfilePicturePath;
+            GameManager.NickName = playerData.NickName;
+
+            GameManager.mapRecord = playerData.MapRecord;
+            GameManager.mapAccuracy = playerData.MapAccuracy;
+            GameManager.mapRank = playerData.MapRank;
+
+            GameManager.PlayerLevel = playerData.PlayerLevel;
+            GameManager.PlayerExp = playerData.PlayerExp;
         }
 
         void OnApplicationQuit() => SaveData();
@@ -140,7 +160,15 @@ namespace SDJK.SaveLoad
     [System.Serializable]
     public class PlayerData
     {
+        public string ProfilePicturePath = "";
+        public string NickName = "none";
 
+        public int PlayerLevel = 0;
+        public double PlayerExp = 0;
+
+        public Dictionary<string, double> MapRecord = new Dictionary<string, double>();
+        public Dictionary<string, double> MapAccuracy = new Dictionary<string, double>();
+        public Dictionary<string, string> MapRank = new Dictionary<string, string>();
     }
 
     [System.Serializable]
@@ -165,7 +193,7 @@ namespace SDJK.SaveLoad
         public KeyCode K = KeyCode.K;
         public KeyCode L = KeyCode.L;
 
-        public Vector2 ComboPos = Vector2.zero;
+        public JVector2 ComboPos = new JVector2();
     }
 
     [System.Serializable]

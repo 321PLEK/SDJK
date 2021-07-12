@@ -89,6 +89,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   image: {fileID: 4636911388254471349}
+  videoPlayer: {fileID: 3523648474786380072}
+  MainManu: 0
 --- !u!1 &543877102874294954
 GameObject:
   m_ObjectHideFlags: 0
@@ -2121,7 +2123,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   videoPlayer: {fileID: 3523648474786380072}
-  renderTexture: {fileID: 8400000, guid: 3ba5212ebe9c33f49bb970a20aa3406d, type: 2}
+  MainMenu: 0
 --- !u!114 &8914894148564365348
 MonoBehaviour:
   m_ObjectHideFlags: 0

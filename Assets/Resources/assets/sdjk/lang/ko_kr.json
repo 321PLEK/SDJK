@@ -1,6 +1,12 @@
 {
 	"language.name": "한국어",
 	"language.region": "대한민국",
+	
+	"system_ui.level": "레벨 %number",
+	"system_ui.number_of_map": "발견된 맵 %number개",
+	"system_ui.number_of_maps_cleared": "맵 %number개 클리어",
+	"system_ui.up_time": "업 타임: %hour:%minute:%second",
+	
 	"main_menu.version": "버전 ",
 	"main_menu.playing": "플레이 중: ",
 	"main_menu.game_start": "스페이스 바를 눌러 게임을 시작하세요",
@@ -12,6 +18,10 @@
 	"main_menu.level_select.difficulty.normal": "보통",
 	"main_menu.level_select.difficulty.hard": "어려움",
 	"main_menu.level_select.difficulty.very_hard": "매우 어려움",
+	
+	"main_menu.level_select.record": "최고 기록",
+	"main_menu.level_select.accuracy": "정확도",
+	"main_menu.level_select.rank": "랭크",
 
 	"main_menu.editor_select key_info": "엔터키를 눌러서 에디터 실행",
 	"main_menu.setting_screen key_info": "마우스로 조작\n드래그하여 스크롤",
@@ -29,6 +39,10 @@
 	"setting.key_change": "키 바인딩",
 	"setting.ui_pos_change": "UI 위치 변경",
 	"setting.allow_indirect_miss": "간접 미스 허용",
+	
+	"account.picture": "사진",
+	"account.change_profile_picture": "프로필 사진 변경",
+	"account.nickname": "닉네임",
 	
 	"resourcePack.basicResource": "기본 리소스팩",
 	"resourcePack.resourcePack_folderOpen": "리소스팩 폴더 열기",

@@ -11,6 +11,8 @@ using DiscordPresence;
 using Newtonsoft.Json;
 using UnityEngineInternal;
 using SDJK.PlayMode.UI.Background;
+using System.Windows.Forms;
+using Application = UnityEngine.Application;
 
 namespace SDJK.MainMenu
 {
@@ -18,6 +20,8 @@ namespace SDJK.MainMenu
     {
         public static MainMenu mainMenu;
         public RectTransform mainMenuRectTransform;
+
+        public SystemUI.SystemUI systemUI;
 
         public RectTransform Logo;
 
@@ -30,6 +34,7 @@ namespace SDJK.MainMenu
         public GameObject EditorSelect;
         public GameObject LangSetting;
         public GameObject ResourcePackSetting;
+        public GameObject AccountSetting;
         public GameObject Setting;
 
         public Text LevelInfo;
@@ -38,7 +43,9 @@ namespace SDJK.MainMenu
         public Text VolumeText;
         public InputField OffsetInputField;
         public InputField FPSLimitInputField;
+        public InputField NickNameInputField;
 
+        public BackgroundImage backgroundImage;
         public BackgroundVideo backgroundVideo;
 
         public static float NextBeat;
@@ -101,6 +108,7 @@ namespace SDJK.MainMenu
                 EditorSelect.SetActive(false);
                 LangSetting.SetActive(false);
                 ResourcePackSetting.SetActive(false);
+                AccountSetting.SetActive(false);
                 Setting.SetActive(false);
             }
             else if (ButtonSelect.Equals(2))
@@ -109,6 +117,7 @@ namespace SDJK.MainMenu
                 EditorSelect.SetActive(true);
                 LangSetting.SetActive(false);
                 ResourcePackSetting.SetActive(false);
+                AccountSetting.SetActive(false);
                 Setting.SetActive(false);
             }
             else if (ButtonSelect.Equals(3))
@@ -117,6 +126,7 @@ namespace SDJK.MainMenu
                 EditorSelect.SetActive(false);
                 LangSetting.SetActive(true);
                 ResourcePackSetting.SetActive(false);
+                AccountSetting.SetActive(false);
                 Setting.SetActive(false);
             }
             else if (ButtonSelect.Equals(4))
@@ -125,6 +135,7 @@ namespace SDJK.MainMenu
                 EditorSelect.SetActive(false);
                 LangSetting.SetActive(false);
                 ResourcePackSetting.SetActive(true);
+                AccountSetting.SetActive(false);
                 Setting.SetActive(false);
             }
             else if (ButtonSelect.Equals(5))
@@ -133,6 +144,16 @@ namespace SDJK.MainMenu
                 EditorSelect.SetActive(false);
                 LangSetting.SetActive(false);
                 ResourcePackSetting.SetActive(false);
+                AccountSetting.SetActive(true);
+                Setting.SetActive(false);
+            }
+            else if (ButtonSelect.Equals(6))
+            {
+                MapSelect.SetActive(false);
+                EditorSelect.SetActive(false);
+                LangSetting.SetActive(false);
+                ResourcePackSetting.SetActive(false);
+                AccountSetting.SetActive(false);
                 Setting.SetActive(true);
             }
 
@@ -205,6 +226,8 @@ namespace SDJK.MainMenu
                 else
                     PlayingText.rectTransform.anchoredPosition = Vector2.Lerp(PlayingText.rectTransform.anchoredPosition, new Vector2(10, 10), 0.15f * GameManager.FpsDeltaTime);
                 backgroundVideo.videoPlayer.targetCameraAlpha = GameManager.Lerp(backgroundVideo.videoPlayer.targetCameraAlpha, 0.4f, 0.15f * GameManager.FpsDeltaTime);
+                if (backgroundImage.image.sprite != null)
+                    backgroundImage.image.color = Color.Lerp(backgroundImage.image.color, new Color(1, 1, 1, 0.4f), 0.15f * GameManager.FpsDeltaTime);
 
                 if (Esc)
                     GameStartText.anchoredPosition = Vector2.Lerp(GameStartText.anchoredPosition, new Vector2(-10, 10), 0.15f * GameManager.FpsDeltaTime);
@@ -301,6 +324,8 @@ namespace SDJK.MainMenu
                     PlayingText.rectTransform.anchoredPosition = Vector2.Lerp(PlayingText.rectTransform.anchoredPosition, new Vector2(10, 10), 0.15f * GameManager.FpsDeltaTime);
                 GameStartText.anchoredPosition = Vector2.Lerp(GameStartText.anchoredPosition, new Vector2(-10, -40), 0.15f * GameManager.FpsDeltaTime);
                 backgroundVideo.videoPlayer.targetCameraAlpha = GameManager.Lerp(backgroundVideo.videoPlayer.targetCameraAlpha, 0.15f, 0.15f * GameManager.FpsDeltaTime);
+                if (backgroundImage.image.sprite != null)
+                    backgroundImage.image.color = Color.Lerp(backgroundImage.image.color, new Color(1, 1, 1, 0.15f), 0.15f * GameManager.FpsDeltaTime);
 
                 if (!GameManager.Ratio_9_16)
                 {
@@ -342,6 +367,7 @@ namespace SDJK.MainMenu
                         EditorSelect.SetActive(false);
                         LangSetting.SetActive(false);
                         ResourcePackSetting.SetActive(false);
+                        AccountSetting.SetActive(false);
                         Setting.SetActive(false);
                     }
                     else if (ButtonSelect.Equals(2))
@@ -350,6 +376,7 @@ namespace SDJK.MainMenu
                         EditorSelect.SetActive(true);
                         LangSetting.SetActive(false);
                         ResourcePackSetting.SetActive(false);
+                        AccountSetting.SetActive(false);
                         Setting.SetActive(false);
                     }
                     else if (ButtonSelect.Equals(3))
@@ -358,6 +385,7 @@ namespace SDJK.MainMenu
                         EditorSelect.SetActive(false);
                         LangSetting.SetActive(true);
                         ResourcePackSetting.SetActive(false);
+                        AccountSetting.SetActive(false);
                         Setting.SetActive(false);
                     }
                     else if (ButtonSelect.Equals(4))
@@ -366,6 +394,7 @@ namespace SDJK.MainMenu
                         EditorSelect.SetActive(false);
                         LangSetting.SetActive(false);
                         ResourcePackSetting.SetActive(true);
+                        AccountSetting.SetActive(false);
                         Setting.SetActive(false);
                     }
                     else if (ButtonSelect.Equals(5))
@@ -374,6 +403,16 @@ namespace SDJK.MainMenu
                         EditorSelect.SetActive(false);
                         LangSetting.SetActive(false);
                         ResourcePackSetting.SetActive(false);
+                        AccountSetting.SetActive(true);
+                        Setting.SetActive(false);
+                    }
+                    else if (ButtonSelect.Equals(6))
+                    {
+                        MapSelect.SetActive(false);
+                        EditorSelect.SetActive(false);
+                        LangSetting.SetActive(false);
+                        ResourcePackSetting.SetActive(false);
+                        AccountSetting.SetActive(false);
                         Setting.SetActive(true);
                     }
                 }
@@ -517,6 +556,12 @@ namespace SDJK.MainMenu
             mainMenu.LevelInfo.text = mapData.Artist + " - " + mapData.BGMName;
             mainMenu.LevelInfo.text += "\n" + LangManager.LangLoad(LangManager.Lang, "main_menu.level_select.difficulty") + " - " + LangManager.LangLoad(LangManager.Lang, "main_menu.level_select.difficulty." + mapData.Difficulty);
             mainMenu.LevelInfo.text += "\nBPM - " + mapData.Effect.BPM;
+            if (GameManager.mapRecord.ContainsKey(GameManager.Level))
+                mainMenu.LevelInfo.text += "\n" + LangManager.LangLoad(LangManager.Lang, "main_menu.level_select.record") + " - " + Mathf.RoundToInt((float)(GameManager.mapRecord[GameManager.Level] * 100)) * 0.01 + "%";
+            if (GameManager.mapAccuracy.ContainsKey(GameManager.Level))
+                mainMenu.LevelInfo.text += "\n" + LangManager.LangLoad(LangManager.Lang, "main_menu.level_select.accuracy") + " - " + Mathf.RoundToInt((float)(GameManager.Lerp(100, 0, GameManager.Abs(GameManager.mapAccuracy[GameManager.Level]) / 0.75) * 100)) * 0.01 + "%";
+            if (GameManager.mapRank.ContainsKey(GameManager.Level))
+                mainMenu.LevelInfo.text += "\n" + LangManager.LangLoad(LangManager.Lang, "main_menu.level_select.rank") + " - " + GameManager.mapRank[GameManager.Level];
 
             GameManager.BPM = (float)mapData.Effect.BPM;
             GameManager.StartDelay = (float)mapData.Offset;
@@ -530,6 +575,7 @@ namespace SDJK.MainMenu
             mainMenu.PlayingText.text = Playing + mapData.Artist + " - " + mapData.BGMName;
 
             mainMenu.backgroundVideo.StartCoroutine(mainMenu.backgroundVideo.Rerender());
+            mainMenu.backgroundImage.Rerender();
         }
 
         void ButtonSort(bool Lerp = true)
@@ -626,6 +672,8 @@ namespace SDJK.MainMenu
             ResourcesManager.LevelRefresh();
             ResourcesManager.ExtraLevelRefresh();
             ResourcesManager.BGMRefresh();
+
+            mainMenu.systemUI.Renderer();
 
             GameManager.LevelIndex = 0;
             GameManager.ExtraLevelIndex = 0;
@@ -810,6 +858,48 @@ namespace SDJK.MainMenu
                 AllowIndirectMissText.text = AllowIndirectMiss + ": " + On;
             else
                 AllowIndirectMissText.text = AllowIndirectMiss + ": " + Off;
+        }
+
+        public void ProfilePictureChange()
+        {
+            //파일오픈창 생성 및 설정
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Title = LangManager.LangLoad(LangManager.Lang, "account.change_profile_picture");
+            ofd.FileName = ".png";
+            ofd.Filter = $"{LangManager.LangLoad(LangManager.Lang, "account.picture")}(*.png, *.jpg) | *.png; *.jpg;";
+
+            //파일 오픈창 로드
+            DialogResult dr = ofd.ShowDialog();
+
+            //OK버튼 클릭시
+            if (dr == DialogResult.OK)
+            {
+                //File경로와 File명을 모두 가지고 온다.
+                string fileFullName = ofd.FileName;
+
+                //File경로 + 파일명 리턴
+                GameManager.ProfilePicturePath = fileFullName;
+                systemUI.Renderer();
+                return;
+            }
+
+            //취소버튼 클릭시 또는 ESC키로 파일창을 종료 했을경우
+            if (dr == DialogResult.Cancel)
+                return;
+
+            return;
+        }
+
+        public void NickNameChange()
+        {
+            if (NickNameInputField.text == "")
+            {
+                GameManager.NickName = "none";
+                return;
+            }
+
+            GameManager.NickName = NickNameInputField.text;
+            systemUI.Renderer();
         }
 
         public void UpKey()

@@ -1,6 +1,12 @@
 {
 	"language.name": "English",
 	"language.region": "United States",
+	
+	"system_ui.level": "Level %number",
+	"system_ui.number_of_map": "%number map found",
+	"system_ui.number_of_maps_cleared": "Clear %number map",
+	"system_ui.up_time": "Up Time: %hour:%minute:%second",
+	
 	"main_menu.version": "Version ",
 	"main_menu.playing": "Playing: ",
 	"main_menu.game_start": "Press the space bar to start the game",
@@ -12,6 +18,10 @@
 	"main_menu.level_select.difficulty.normal": "Normal",
 	"main_menu.level_select.difficulty.hard": "Hard",
 	"main_menu.level_select.difficulty.very_hard": "Very Hard",
+	
+	"main_menu.level_select.record": "Best Record",
+	"main_menu.level_select.accuracy": "Accuracy",
+	"main_menu.level_select.rank": "Rank",
 	
 	"main_menu.editor_select key_info": "Press Enter to launch the editor",
 	"main_menu.setting_screen key_info": "Manipulate it with the mouse\nScroll the by dragging",
@@ -29,6 +39,10 @@
 	"setting.key_change": "key Bindings",
 	"setting.ui_pos_change": "UI Pos Change",
 	"setting.allow_indirect_miss": "Allow Indirect Miss",
+	
+	"account.picture": "Picture",
+	"account.change_profile_picture": "Change your profile picture",
+	"account.nickname": "Nick Name",
 	
 	"resourcePack.basicResource": "Basic Resource Pack",
 	"resourcePack.resourcePack_folderOpen": "Open the resource pack folder",

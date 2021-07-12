@@ -72,10 +72,19 @@ namespace SDJK
 
         public static bool AllowIndirectMiss = false;
 
+        public static string ProfilePicturePath = "";
+        public static string NickName = "none";
+        public static int PlayerLevel = 0;
+        public static double PlayerExp = 0;
+
+        public static Dictionary<string, double> mapRecord = new Dictionary<string, double>();
+        public static Dictionary<string, double> mapAccuracy = new Dictionary<string, double>();
+        public static Dictionary<string, string> mapRank = new Dictionary<string, string>();
+
         void Awake()
         {
             QualitySettings.vSyncCount = 0;
-            
+
             foreach (Font font in fonts)
             {
                 Material mat = font.material;
@@ -148,6 +157,12 @@ namespace SDJK
                 Ratio_9_16 = true;
             else
                 Ratio_9_16 = false;
+
+            if (PlayerExp >= 1000)
+            {
+                PlayerLevel++;
+                PlayerExp = 0;
+            }
         }
 
         void LateUpdate()
@@ -341,7 +356,33 @@ namespace SDJK
         /// <returns></returns>
         public static double Lerp(double a, double b, double t) => a + (b - a) * t;
     }
-    
+
+    public class JVector2
+    {
+        [JsonProperty("x")]
+        public float x;
+        [JsonProperty("y")]
+        public float y;
+
+        public JVector2() => x = y = 0f;
+
+        public JVector2(Vector2 v)
+        {
+            x = v.x;
+            y = v.y;
+        }
+
+        public JVector2(float x, float y)
+        {
+            this.x = x;
+            this.y = y;
+        }
+
+        public JVector2(float f) => x = y = f;
+
+        public static Vector2 JVector2ToVector2(JVector2 jVector2) => new Vector2(jVector2.x, jVector2.y);
+    }
+
     public class JVector3
     {
         [JsonProperty("x")]

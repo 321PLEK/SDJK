@@ -130,6 +130,10 @@ namespace SDJK.PlayMode.Sound
             if (!Editor)
             {
                 PlayerManager.BPMChange(PlayerManager.mapData.Effect.BPM, 0);
+                PlayerManager.HitSoundCurrentBeat = -10;
+                PlayerManager.BeatTimer = 0;
+
+                yield return new WaitForSeconds((float)(60.0 / PlayerManager.mapData.Effect.BPM));
 
                 //4 비트 기다리기
                 yield return new WaitUntil(() => PlayerManager.HitSoundCurrentBeat >= -3);

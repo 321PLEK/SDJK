@@ -7,7 +7,6 @@ namespace SDJK
     public class SdjkSystem : MonoBehaviour
     {
         public static SdjkSystem sdjkSystem;
-        public SdjkSystem _sdjkSystem;
         
         void Awake()
         {
@@ -17,7 +16,7 @@ namespace SDJK
             else
                 Destroy(gameObject);
 
-            sdjkSystem = _sdjkSystem;
+            sdjkSystem = this;
         }
 
         void Update()

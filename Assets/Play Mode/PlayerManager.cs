@@ -99,6 +99,8 @@ namespace SDJK.PlayMode
 
         public RectTransform ComboPos;
 
+        public bool HitCurrentBeatStop = true;
+
         //public MidiPlayer MidiPlayer;
 
         //스크립트를 뜯을때, 주석도 좋지만 함수 이름이나 변수 이름이나 스크립트 또는 클래스의 이름을 보면 도움이 됩니다
@@ -279,6 +281,8 @@ namespace SDJK.PlayMode
 
             BPMCurrentBeat = 0;
             BPMTimer = 0;
+
+            playerManager.HitCurrentBeatStop = true;
         }
 
         void MapLoad()
@@ -547,7 +551,17 @@ namespace SDJK.PlayMode
                 if (!isEditorMapPlay)
                 {
                     if (Input.GetKeyDown(KeyCode.Escape) && (HP > 0.001f || Editor || PracticeMode))
+                    {
+                        if (!AutoMode && !PracticeMode)
+                        {
+                            if (!GameManager.mapRecord.ContainsKey(GameManager.Level))
+                                GameManager.mapRecord.Add(GameManager.Level, audioSource.time / audioSource.clip.length * 100);
+                            else
+                                GameManager.mapRecord[GameManager.Level] = audioSource.time / audioSource.clip.length * 100;
+                        }
+
                         Quit();
+                    }
                 }
                 else if (Input.GetKeyDown(KeyCode.Escape) && (HP > 0.001f || Editor || PracticeMode))
                     QuitEditPlay();
@@ -590,7 +604,8 @@ namespace SDJK.PlayMode
             }
 
             //히트 사운드 전용 (플레이어 오프셋 X) Current Beat 변수
-            HitSoundCurrentBeat = (BeatTimer + (time - BPMTimer) - StartDelay) * (effect.BPM / 60) + BPMCurrentBeat;
+            if (Editor || !HitCurrentBeatStop)
+                HitSoundCurrentBeat = (BeatTimer + (time - BPMTimer) - StartDelay) * (effect.BPM / 60) + BPMCurrentBeat;
             if (Editor)
                 HitSoundCurrentBeat += 1;
 
@@ -632,6 +647,14 @@ namespace SDJK.PlayMode
                 //게임 리스타트
                 if (HP <= 0 && !(Editor || PracticeMode) || Input.GetKeyDown(KeyCode.R) && !Editor)
                 {
+                    if (!isEditorMapPlay && !AutoMode && !PracticeMode)
+                    {
+                        if (!GameManager.mapRecord.ContainsKey(GameManager.Level))
+                            GameManager.mapRecord.Add(GameManager.Level, audioSource.time / audioSource.clip.length * 100);
+                        else
+                            GameManager.mapRecord[GameManager.Level] = audioSource.time / audioSource.clip.length * 100;
+                    }
+
                     HP = 0;
                     StartCoroutine(Restart());
                 }
@@ -639,12 +662,57 @@ namespace SDJK.PlayMode
                 if (HP > 0.001f || PracticeMode)
                 {
                     //자동 나가기
-                    if (mapData.AllBeat.Count != 0 &&
-                        mapData.AllBeat[mapData.AllBeat.Count - 1] <= HitSoundCurrentBeat - 3 && !Editor &&
-                        !isEditorMapPlay)
+                    if (mapData.AllBeat.Count != 0 && mapData.AllBeat[mapData.AllBeat.Count - 1] <= HitSoundCurrentBeat - 3 && !Editor && !isEditorMapPlay)
+                    {
+                        if (!AutoMode && !PracticeMode)
+                        {
+                            if (!GameManager.mapRecord.ContainsKey(GameManager.Level))
+                                GameManager.mapRecord.Add(GameManager.Level, 100);
+                            else
+                                GameManager.mapRecord[GameManager.Level] = audioSource.time / audioSource.clip.length * 100;
+                            if (!GameManager.mapAccuracy.ContainsKey(GameManager.Level))
+                                GameManager.mapAccuracy.Add(GameManager.Level, ScoreManager.Accuracy);
+                            else
+                            {
+                                if (GameManager.mapAccuracy[GameManager.Level] > GameManager.Abs(ScoreManager.Accuracy))
+                                    GameManager.mapAccuracy[GameManager.Level] = ScoreManager.Accuracy;
+                            }
+
+                            if (!GameManager.mapRank.ContainsKey(GameManager.Level))
+                                GameManager.mapRank.Add(GameManager.Level, ScoreManager.Rank);
+                            else
+                            {
+                                if (GameManager.mapRank[GameManager.Level] == "F" && (ScoreManager.Rank == "E" || ScoreManager.Rank == "D" || ScoreManager.Rank == "C" || ScoreManager.Rank == "B" || ScoreManager.Rank == "A" || ScoreManager.Rank == "S" || ScoreManager.Rank == "SS" || ScoreManager.Rank == "SSS"))
+                                    GameManager.mapRank[GameManager.Level] = ScoreManager.Rank;
+                                else if (GameManager.mapRank[GameManager.Level] == "E" && (ScoreManager.Rank == "C" || ScoreManager.Rank == "B" || ScoreManager.Rank == "A" || ScoreManager.Rank == "S" || ScoreManager.Rank == "SS" || ScoreManager.Rank == "SSS"))
+                                    GameManager.mapRank[GameManager.Level] = ScoreManager.Rank;
+                                else if (GameManager.mapRank[GameManager.Level] == "C" && (ScoreManager.Rank == "B" || ScoreManager.Rank == "A" || ScoreManager.Rank == "S" || ScoreManager.Rank == "SS" || ScoreManager.Rank == "SSS"))
+                                    GameManager.mapRank[GameManager.Level] = ScoreManager.Rank;
+                                else if (GameManager.mapRank[GameManager.Level] == "B" && (ScoreManager.Rank == "A" || ScoreManager.Rank == "S" || ScoreManager.Rank == "SS" || ScoreManager.Rank == "SSS"))
+                                    GameManager.mapRank[GameManager.Level] = ScoreManager.Rank;
+                                else if (GameManager.mapRank[GameManager.Level] == "A" && (ScoreManager.Rank == "S" || ScoreManager.Rank == "SS" || ScoreManager.Rank == "SSS"))
+                                    GameManager.mapRank[GameManager.Level] = ScoreManager.Rank;
+                                else if (GameManager.mapRank[GameManager.Level] == "S" && (ScoreManager.Rank == "SS" || ScoreManager.Rank == "SSS"))
+                                    GameManager.mapRank[GameManager.Level] = ScoreManager.Rank;
+                                else if (GameManager.mapRank[GameManager.Level] == "SS" && (ScoreManager.Rank == "SSS"))
+                                    GameManager.mapRank[GameManager.Level] = ScoreManager.Rank;
+                            }
+
+                            if (mapData.Difficulty == "very_easy")
+                                GameManager.PlayerExp += 20;
+                            else if (mapData.Difficulty == "easy")
+                                GameManager.PlayerExp += 40;
+                            else if (mapData.Difficulty == "normal")
+                                GameManager.PlayerExp += 60;
+                            else if (mapData.Difficulty == "hard")
+                                GameManager.PlayerExp += 80;
+                            else if (mapData.Difficulty == "very_hard")
+                                GameManager.PlayerExp += 100;
+                        }
+
                         Quit();
-                    else if (mapData.AllBeat.Count != 0 &&
-                             mapData.AllBeat[mapData.AllBeat.Count - 1] <= HitSoundCurrentBeat - 3 && !Editor)
+                    }
+                    else if (mapData.AllBeat.Count != 0 && mapData.AllBeat[mapData.AllBeat.Count - 1] <= HitSoundCurrentBeat - 3 && !Editor)
                         QuitEditPlay();
                 }
 
@@ -867,18 +935,25 @@ namespace SDJK.PlayMode
 
         static IEnumerator BGMPlay()
         {
+            HitSoundCurrentBeat = -10;
+            BeatTimer = 0;
+
+            yield return new WaitForSeconds((float)(60.0 / mapData.Effect.BPM));
+
             //설정한 오프셋 만큼 기다리기
             while (BeatTimer < StartDelay + 60 / effect.BPM - mapData.Offset)
             {
                 BeatTimer += GameManager.UnscaledDeltaTime * effect.Pitch * GameManager.GameSpeed;
                 yield return null;
+                HitSoundCurrentBeat = (BeatTimer + (time - BPMTimer) - StartDelay) * (effect.BPM / 60) + BPMCurrentBeat;
             }
             BeatTimer = StartDelay + 60 / effect.BPM - mapData.Offset;
 
             /*Debug.Log(File.Exists(MapPath + mapData.BGM + ".mid")); 
             if (File.Exists(MapPath + mapData.BGM + ".mid"))
                 MidiPlayer.Play();
-            else*/ 
+            else*/
+            playerManager.HitCurrentBeatStop = false;
             playerManager.audioSource.Play();
             
             //BGM 재생후, 끝났을때 타이머를 가동시켜서 노트를 이어서 재생하기
