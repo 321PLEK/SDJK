@@ -36,6 +36,7 @@ namespace SDJK
 
         public MainMenu.MainMenu mainMenu;
 
+        public static List<string> AllLevelList = new List<string>();
         public static List<string> LevelList = new List<string>();
         public static List<string> ExtraLevelList = new List<string>();
 
@@ -300,6 +301,10 @@ namespace SDJK
             for (int i = 0; i < LevelList.Count; i++)
                 resourcesManager.mainMenu.LevelList.Add(LevelList[i]);
 
+            resourcesManager.mainMenu.AllLevelList.Clear();
+            for (int i = 0; i < AllLevelList.Count; i++)
+                resourcesManager.mainMenu.AllLevelList.Add(AllLevelList[i]);
+
             for (int i = 0; i < ResourcePackPath.Count; i++)
             {
                 for (int ii = 0; i < NameSpaceList.Count; i++)
@@ -316,10 +321,10 @@ namespace SDJK
                             temp = temp.Substring(iiii, temp.LastIndexOf(".") - iiii);
 
                             if (!resourcesManager.mainMenu.LevelList.Contains(temp))
-                            {
                                 resourcesManager.mainMenu.LevelList.Add(temp);
+
+                            if (!resourcesManager.mainMenu.AllLevelList.Contains(temp))
                                 resourcesManager.mainMenu.AllLevelList.Add(temp);
-                            }
                         }
                     }
                 }
@@ -348,10 +353,9 @@ namespace SDJK
                             temp = temp.Substring(iiii, temp.LastIndexOf(".") - iiii);
 
                             if (!resourcesManager.mainMenu.ExtraLevelList.Contains("extra/" + temp))
-                            {
                                 resourcesManager.mainMenu.ExtraLevelList.Add("extra/" + temp);
+                            if (!resourcesManager.mainMenu.AllLevelList.Contains("extra/" + temp))
                                 resourcesManager.mainMenu.AllLevelList.Add("extra/" + temp);
-                            }
                         }
                     }
                 }
@@ -400,6 +404,10 @@ namespace SDJK
 
             if (!Start)
             {
+                AllLevelList.Clear();
+                for (int i = 0; i < resourcesManager.mainMenu.AllLevelList.Count; i++)
+                    AllLevelList.Add(resourcesManager.mainMenu.AllLevelList[i]);
+
                 LevelList.Clear();
                 for (int i = 0; i < resourcesManager.mainMenu.LevelList.Count; i++)
                     LevelList.Add(resourcesManager.mainMenu.LevelList[i]);

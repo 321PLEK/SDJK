@@ -21,8 +21,6 @@ namespace SDJK.MainMenu
         public static MainMenu mainMenu;
         public RectTransform mainMenuRectTransform;
 
-        public SystemUI.SystemUI systemUI;
-
         public RectTransform Logo;
 
         public CanvasScaler CanvasScaler;
@@ -673,8 +671,6 @@ namespace SDJK.MainMenu
             ResourcesManager.ExtraLevelRefresh();
             ResourcesManager.BGMRefresh();
 
-            mainMenu.systemUI.Renderer();
-
             GameManager.LevelIndex = 0;
             GameManager.ExtraLevelIndex = 0;
 
@@ -682,6 +678,8 @@ namespace SDJK.MainMenu
                 LangManager.Lang = "en_us";
 
             LangReload();
+
+            SystemUI.SystemUI.systemUI.Renderer();
 
             GameObject.BroadcastMessage("Rerender");
 
@@ -879,7 +877,7 @@ namespace SDJK.MainMenu
 
                 //File경로 + 파일명 리턴
                 GameManager.ProfilePicturePath = fileFullName;
-                systemUI.Renderer();
+                SystemUI.SystemUI.systemUI.Renderer();
                 return;
             }
 
@@ -895,11 +893,12 @@ namespace SDJK.MainMenu
             if (NickNameInputField.text == "")
             {
                 GameManager.NickName = "none";
+                SystemUI.SystemUI.systemUI.Renderer();
                 return;
             }
 
             GameManager.NickName = NickNameInputField.text;
-            systemUI.Renderer();
+            SystemUI.SystemUI.systemUI.Renderer();
         }
 
         public void UpKey()

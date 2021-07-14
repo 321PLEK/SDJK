@@ -713,6 +713,8 @@ namespace SDJK.PlayMode
                                 GameManager.PlayerExp += 80;
                             else if (mapData.Difficulty == "very_hard")
                                 GameManager.PlayerExp += 100;
+
+                            SystemUI.SystemUI.systemUI.Renderer();
                         }
 
                         Quit();

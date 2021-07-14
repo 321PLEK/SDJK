@@ -37,7 +37,11 @@ namespace SDJK.SystemUI
         public int tempLevel = 0;
         public float tempVolume = 0;
 
-        void OnEnable()
+        public string tempLang = "";
+        public string tempNickName = "";
+        public string tempProfile = "";
+
+        void Awake()
         {
             systemUI = this;
             Renderer();
@@ -45,6 +49,9 @@ namespace SDJK.SystemUI
 
         void Update()
         {
+            if (systemUI == null)
+                systemUI = this;
+
             if (MainMenu.MainMenu.Esc || Input.mousePosition.y >= Screen.height - 1)
                 TopUI.anchoredPosition = Vector2.Lerp(TopUI.anchoredPosition, Vector2.zero, 0.15f * GameManager.FpsDeltaTime);
             else

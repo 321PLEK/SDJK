@@ -295,7 +295,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1328019866}
   m_HandleRect: {fileID: 517244084}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -643,7 +643,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: 3a3573c3f0123b04e9c41a8fbedb210e, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -3444,7 +3444,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainMenuRectTransform: {fileID: 720630912}
-  systemUI: {fileID: 846860664}
   Logo: {fileID: 818166080}
   CanvasScaler: {fileID: 720630910}
   LevelCover: {fileID: 124709949}
@@ -3828,17 +3827,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LogoText: {fileID: 818166081}
   Info: {fileID: 1236934508}
---- !u!114 &846860664 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7828201659469955363, guid: 6a1431060bf4fb24ea1cef8ebf615700, type: 3}
-  m_PrefabInstance: {fileID: 2224090802465782971}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 54d557e943ca4454db85252430a0df5b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &850742625
 GameObject:
   m_ObjectHideFlags: 0
@@ -5321,7 +5309,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2076047473}
   m_HandleRect: {fileID: 2076047472}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -5447,7 +5435,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 617547294}
   m_HandleRect: {fileID: 517244084}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
