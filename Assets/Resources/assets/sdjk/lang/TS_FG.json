@@ -1,0 +1,76 @@
+{
+	"language.name": "운터어",
+	"language.region": "팀 샐러드",
+	
+	"system_ui.level": "레벨 %number",
+	"system_ui.number_of_map": "발견된 맵 %number개",
+	"system_ui.number_of_maps_cleared": "운터는 못하는 맵 %number개 클리어",
+	"system_ui.up_time": "업 타임: %hour:%minute:%second",
+	
+	"main_menu.version": "글자 잘림 현상 운트롤에 의해... ",
+	"main_menu.playing": "노동요: ",
+	"main_menu.game_start": "스페이스 바를 눌러 게임을 시작하지마시죠",
+	
+	"main_menu.level_select screen key_info": "방향키 키로 맵 선택하시죠\n엔터키를 눌러서 플레이하시죠",
+	"main_menu.level_select.difficulty": "높으면 안하는게 정신건강에 좋은데요",
+	"main_menu.level_select.difficulty.very_easy": "모두가 잘함",
+	"main_menu.level_select.difficulty.easy": "운터가 잘함",
+	"main_menu.level_select.difficulty.normal": "운터가 못함",
+	"main_menu.level_select.difficulty.hard": "마플도 못함",
+	"main_menu.level_select.difficulty.very_hard": "모두가 못함",
+	
+	"main_menu.level_select.record": "최고 기록",
+	"main_menu.level_select.accuracy": "70% 이하면 못하는거",
+	"main_menu.level_select.rank": "낮으면 허-접",
+
+	"main_menu.editor_select key_info": "엔터키를 눌러서 에디터 실행하시죠",
+	"main_menu.setting_screen key_info": "마우스로 조작하시죠\n드래그하여 스크롤하시죠",
+	"setting.on": "켜졌는데요",
+	"setting.off": "꺼졌는데요",
+	"setting.enter_text": "텍스트 입력하시죠!",
+	"setting.volume": "\"여기서 재일 정상적인 단어\"",
+	"setting.optimization": "개적화",
+	"setting.offset": "꺼졌는데요정하기 (마이크로소프트)",
+	"setting.note_interpolation": "키는거 추천",
+	"setting.editor_optimization": "에디터 개적화",
+	"setting.osu_hit_sound": "이거 뭐죠?",
+	"setting.up_scroll": "운터가 못하는 모드",
+	"setting.fps_limit": "CPU 온도 떡상 싫으면 걸어라",
+	"setting.key_change": "재일 인기 있는 설정",
+	"setting.ui_pos_change": "재일 인기 없는 설정",
+	"setting.allow_indirect_miss": "쫄?",
+	
+	"account.picture": "운터 사진",
+	"account.change_profile_picture": "운터의 프로필 사진 변경",
+	"account.nickname": "FGcounter",
+	
+	"resourcePack.basicResource": "베이스(?) 리소스팩",
+	"resourcePack.resourcePack_folderOpen": "리소스팩 폴더 열지마시죠",
+
+	"editMode.currentBeat": "현재 비트: ",
+	"editMode.time": "시간: ",
+	"editMode.mouse_y_beat": "마우스 비트: ",
+	
+	"editMode.map_save": "다른 이름으로 저장",
+	"editMode.map_load": "불러오기",
+	"editMode.sdjk_map": "SDJK 맵",
+	
+	"editMode.fnf_camera_zoom": "프나펑 카메라 줌",
+	"editMode.fnf_camera_zoom warning": "프나펑 카메라 줌 애니메이션을 구현합니다\n(카메라 줌 이펙트가 삭제되며, 다시 생성됩니다)\n계속 하시갰습니까?",
+	"editMode.fnf_camera_zoom count": "줌 이펙트를 %number개를 생성할까요? (아니요를 누르면 %number2개로 넘어감)",
+	"editMode.fnf_camera_zoom delay": "줌 딜레이를 %number 비트로 설정할까요? (아니요를 누르면 %number2 비트로 넘어감)",
+	
+	"editMode.hit_sound_reset": "히트 사운드 재설정",
+	"editMode.hit_sound_reset warning": "AllBeat 리스트를 리셋시키고 새로 만듭니다\n문제가 있을때만 사용해주세요\n계속 하시갰습니까?",
+	
+	"editMode.note_reset": "모든 노트 리셋",
+	"editMode.note_reset warning": "모든 노트를 리셋합니다\n(자동으로 저장되며, 되돌아갈수 없습니다)\n계속 하시갰습니까?",
+	"editMode.note_reset warning2": "모든 노트를 리셋합니다\n(자동으로 저장되며, 되돌아갈수 없습니다)\n정말 계속 하시갰습니까?",
+	"editMode.note_reset warning3": "모든 노트를 리셋합니다\n(자동으로 저장되며, 되돌아갈수 없습니다)\n마지막 입니다 정말 계속 하시갰습니까?",
+	
+	"setting.resource_pack version down": "리소스팩 버전이 낮습니다!",
+	"setting.resource_pack version up": "리소스팩 버전이 높습니다!",
+	
+	"setting.key_change select_key": "선택한 키: ",
+	"none": "없음"
+}

@@ -22,6 +22,8 @@ namespace SDJK.Effect
         public static int MaxHPValueIndex = 0;
         public static int BPMIndex = 0;
         public static int JudgmentSizeIndex = 0;
+        public static int WindowSizeIndex = 0;
+        public static int WindowPosIndex = 0;
 
         public static double HPAddValue = 100;
         public static bool HPRemove = true;
@@ -150,6 +152,35 @@ namespace SDJK.Effect
                         JudgmentSize = PlayerManager.mapData.Effect.JudgmentSizeEffect[JudgmentSizeIndex].Value;
                         JudgmentSizeIndex++;
                     }
+
+                    while (WindowSizeIndex >= 0 && WindowSizeIndex < PlayerManager.mapData.Effect.WindowSizeEffect.Count && PlayerManager.VisibleCurrentBeat >= PlayerManager.mapData.Effect.WindowSizeEffect[WindowSizeIndex].Beat)
+                    {
+                        if (PlayerManager.mapData.Effect.WindowSizeEffect.Count != 0)
+                        {
+                            PlayerManager.effect.WindowSize = PlayerManager.mapData.Effect.WindowSizeEffect[WindowSizeIndex].Value;
+                            PlayerManager.effect.WindowSizeLerp = PlayerManager.mapData.Effect.WindowSizeEffect[WindowSizeIndex].Lerp;
+                        }
+
+                        WindowSizeIndex++;
+
+                        if (PlayerManager.effect.WindowSizeLerp == 0 || PlayerManager.effect.WindowSizeLerp == 1)
+                            SdjkSystem.WindowSize = PlayerManager.effect.WindowSize;
+                    }
+
+                    while (WindowPosIndex >= 0 && WindowPosIndex < PlayerManager.mapData.Effect.WindowPosEffect.Count && PlayerManager.VisibleCurrentBeat >= PlayerManager.mapData.Effect.WindowPosEffect[WindowPosIndex].Beat)
+                    {
+                        if (PlayerManager.mapData.Effect.WindowPosEffect.Count != 0)
+                        {
+                            PlayerManager.effect.WindowPos = PlayerManager.mapData.Effect.WindowPosEffect[WindowPosIndex].Pos;
+                            PlayerManager.effect.WindowDatumPoint = PlayerManager.mapData.Effect.WindowPosEffect[WindowPosIndex].WindowDatumPoint;
+                            PlayerManager.effect.ScreenDatumPoint = PlayerManager.mapData.Effect.WindowPosEffect[WindowPosIndex].ScreenDatumPoint;
+                            PlayerManager.effect.WindowPosLerp = PlayerManager.mapData.Effect.WindowPosEffect[WindowPosIndex].Lerp;
+                        }
+                        WindowPosIndex++;
+
+                        if (PlayerManager.effect.WindowPosLerp == 0 || PlayerManager.effect.WindowPosLerp == 1)
+                            SdjkSystem.WindowPos = JVector2.JVector2ToVector2(PlayerManager.effect.WindowPos);
+                    }
                 }
                 else
                 {
@@ -262,6 +293,34 @@ namespace SDJK.Effect
                         JudgmentSize = PlayerManager.mapData.Effect.JudgmentSizeEffect[JudgmentSizeIndex].Value;
                         JudgmentSizeIndex--;
                     }
+
+                    while (WindowSizeIndex >= 0 && WindowSizeIndex < PlayerManager.mapData.Effect.WindowSizeEffect.Count && PlayerManager.VisibleCurrentBeat <= PlayerManager.mapData.Effect.WindowSizeEffect[WindowSizeIndex].Beat)
+                    {
+                        if (PlayerManager.mapData.Effect.WindowSizeEffect.Count != 0)
+                        {
+                            PlayerManager.effect.WindowSize = PlayerManager.mapData.Effect.WindowSizeEffect[WindowSizeIndex].Value;
+                            PlayerManager.effect.WindowSizeLerp = PlayerManager.mapData.Effect.WindowSizeEffect[WindowSizeIndex].Lerp;
+                        }
+                        WindowSizeIndex--;
+
+                        if (PlayerManager.effect.WindowSizeLerp == 0 || PlayerManager.effect.WindowSizeLerp == 1)
+                            SdjkSystem.WindowSize = PlayerManager.effect.WindowSize;
+                    }
+
+                    while (WindowPosIndex >= 0 && WindowPosIndex < PlayerManager.mapData.Effect.WindowPosEffect.Count && PlayerManager.VisibleCurrentBeat <= PlayerManager.mapData.Effect.WindowPosEffect[WindowPosIndex].Beat)
+                    {
+                        if (PlayerManager.mapData.Effect.WindowPosEffect.Count != 0)
+                        {
+                            PlayerManager.effect.WindowPos = PlayerManager.mapData.Effect.WindowPosEffect[WindowPosIndex].Pos;
+                            PlayerManager.effect.WindowDatumPoint = PlayerManager.mapData.Effect.WindowPosEffect[WindowPosIndex].WindowDatumPoint;
+                            PlayerManager.effect.ScreenDatumPoint = PlayerManager.mapData.Effect.WindowPosEffect[WindowPosIndex].ScreenDatumPoint;
+                            PlayerManager.effect.WindowPosLerp = PlayerManager.mapData.Effect.WindowPosEffect[WindowPosIndex].Lerp;
+                        }
+                        WindowPosIndex--;
+
+                        if (PlayerManager.effect.WindowPosLerp == 0 || PlayerManager.effect.WindowPosLerp == 1)
+                            SdjkSystem.WindowPos = JVector2.JVector2ToVector2(PlayerManager.effect.WindowPos);
+                    }
                 }
 
                 EffectPlay();
@@ -319,6 +378,11 @@ namespace SDJK.Effect
             HPRemoveValue = PlayerManager.mapData.Effect.HPRemoveValue;
             MaxHPValue = PlayerManager.mapData.Effect.MaxHPValue;
             JudgmentSize = PlayerManager.mapData.Effect.JudgmentSize;
+            PlayerManager.effect.WindowSize = PlayerManager.mapData.Effect.WindowSize;
+            PlayerManager.effect.WindowPos = PlayerManager.mapData.Effect.WindowPos;
+            PlayerManager.effect.WindowDatumPoint = PlayerManager.mapData.Effect.WindowDatumPoint;
+            PlayerManager.effect.ScreenDatumPoint = PlayerManager.mapData.Effect.ScreenDatumPoint;
+            SdjkSystem.tempWindowSize = 0;
 
 
 
@@ -341,6 +405,8 @@ namespace SDJK.Effect
             MaxHPValueIndex = value;
             BPMIndex = value;
             JudgmentSizeIndex = value;
+            WindowSizeIndex = value;
+            WindowPosIndex = value;
         }
 
         public static void EffectIndexReset()
@@ -422,6 +488,18 @@ namespace SDJK.Effect
                 JudgmentSizeIndex = 0;
                 PlayerManager.effect.JudgmentSize = PlayerManager.mapData.Effect.JudgmentSize;
             }
+            if (WindowSizeIndex < 0)
+            {
+                WindowSizeIndex = 0;
+                PlayerManager.effect.WindowSize = PlayerManager.mapData.Effect.WindowSize;
+            }
+            if (WindowPosIndex < 0)
+            {
+                WindowPosIndex = 0;
+                PlayerManager.effect.WindowPos = PlayerManager.mapData.Effect.WindowPos;
+                PlayerManager.effect.WindowDatumPoint = PlayerManager.mapData.Effect.WindowDatumPoint;
+                PlayerManager.effect.ScreenDatumPoint = PlayerManager.mapData.Effect.ScreenDatumPoint;
+            }
 
             if (CameraPosIndex >= PlayerManager.mapData.Effect.Camera.CameraPosEffect.Count)
                 CameraPosIndex = PlayerManager.mapData.Effect.Camera.CameraPosEffect.Count - 1;
@@ -447,6 +525,10 @@ namespace SDJK.Effect
                 MaxHPValueIndex = PlayerManager.mapData.Effect.MaxHPValueEffect.Count - 1;
             if (JudgmentSizeIndex >= PlayerManager.mapData.Effect.JudgmentSizeEffect.Count)
                 JudgmentSizeIndex = PlayerManager.mapData.Effect.JudgmentSizeEffect.Count - 1;
+            if (WindowSizeIndex >= PlayerManager.mapData.Effect.WindowSizeEffect.Count)
+                WindowSizeIndex = PlayerManager.mapData.Effect.WindowSizeEffect.Count - 1;
+            if (WindowPosIndex >= PlayerManager.mapData.Effect.WindowPosEffect.Count)
+                WindowPosIndex = PlayerManager.mapData.Effect.WindowPosEffect.Count - 1;
         }
 
         static void EffectPlay()
@@ -507,6 +589,15 @@ namespace SDJK.Effect
                 PlayerManager.effect.MaxHPValue = MaxHPValue;
 
             PlayerManager.effect.JudgmentSize = JudgmentSize;
+
+            if (PlayerManager.effect.WindowSizeLerp != 0 && PlayerManager.effect.WindowSizeLerp != 1)
+                SdjkSystem.WindowSize = GameManager.Lerp(SdjkSystem.WindowSize, PlayerManager.effect.WindowSize, PlayerManager.effect.WindowSizeLerp * GameManager.FpsDeltaTime * GameManager.Abs(PlayerManager.playerManager.audioSource.pitch));
+            else
+                SdjkSystem.WindowSize = PlayerManager.effect.WindowSize;
+
+            SdjkSystem.WindowPos = JVector2.JVector2ToVector2(PlayerManager.effect.WindowPos);
+            SdjkSystem.WindowDatumPoint = PlayerManager.effect.WindowDatumPoint;
+            SdjkSystem.ScreenDatumPoint = PlayerManager.effect.ScreenDatumPoint;
         }
     }
 }

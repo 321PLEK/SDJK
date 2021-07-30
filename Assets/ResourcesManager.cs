@@ -271,6 +271,7 @@ namespace SDJK
             LangList.Clear();
             LangList.Add("en_us");
             LangList.Add("ko_kr");
+            LangList.Add("TS_FG");
 
             for (int i = 0; i < ResourcePackPath.Count; i++)
             {

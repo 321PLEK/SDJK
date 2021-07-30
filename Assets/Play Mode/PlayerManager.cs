@@ -17,6 +17,7 @@ using SDJK.PlayMode.Score;
 using SDJK.PlayMode.UI.Background;
 using Application = UnityEngine.Application;
 using SDJK.PlayMode.Sound;
+using SFB;
 
 namespace SDJK.PlayMode
 {
@@ -367,16 +368,18 @@ namespace SDJK.PlayMode
 
         string MapLoadScreen()
         {
-            //파일오픈창 생성 및 설정
-            OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Title = LangManager.LangLoad(LangManager.Lang, "editMode.map_load");
-            ofd.FileName = ".sdjk";
-            ofd.Filter = $"{LangManager.LangLoad(LangManager.Lang, "editMode.sdjk_map")}(*.sdjk, *.json) | *.sdjk; *.json;";
+            /*//파일오픈창 생성 및 설정
+            OpenFileDialog ofd = new OpenFileDialog
+            {
+                Title = LangManager.LangLoad(LangManager.Lang, "editMode.map_load"),
+                FileName = ".sdjk",
+                Filter = $"{LangManager.LangLoad(LangManager.Lang, "editMode.sdjk_map")}(*.sdjk, *.json) | *.sdjk; *.json;"
+            };
 
             //파일 오픈창 로드
-            DialogResult dr = ofd.ShowDialog();
+            DialogResult dr = ofd.ShowDialog();*/
 
-            //OK버튼 클릭시
+            /*//OK버튼 클릭시
             if (dr == DialogResult.OK)
             {
                 //File경로와 File명을 모두 가지고 온다.
@@ -389,9 +392,12 @@ namespace SDJK.PlayMode
             //취소버튼 클릭시 또는 ESC키로 파일창을 종료 했을경우
 
             if (dr == DialogResult.Cancel)
-                return "";
+                return "";*/
 
-            return "";
+            string[] Path = StandaloneFileBrowser.OpenFilePanel(LangManager.LangLoad(LangManager.Lang, "editMode.map_load"), "", "sdjk", false);
+            if (Path.Length > 0)
+                MapJsonPath = Path[0];
+            return MapJsonPath;
         }
 
         public static void MapDataLoad(string path)
@@ -485,7 +491,7 @@ namespace SDJK.PlayMode
         //맵 저장
         static void MapSaveScreen()
         {
-            //파일오픈창 생성 및 설정
+            /*//파일오픈창 생성 및 설정
             SaveFileDialog ofd = new SaveFileDialog();
             ofd.Title = LangManager.LangLoad(LangManager.Lang, "editMode.map_save");
             ofd.FileName = $"{mapData.BGMName}";
@@ -497,7 +503,11 @@ namespace SDJK.PlayMode
             //OK버튼 클릭시
             if (dr == DialogResult.OK)
                 //File경로 + 파일명 리턴
-                MapSave(ofd.FileName);
+                MapSave(ofd.FileName);*/
+
+            string Path = StandaloneFileBrowser.SaveFilePanel(LangManager.LangLoad(LangManager.Lang, "editMode.map_save"), "", "", "sdjk");
+            if (Path != "")
+                MapSave(Path);
         }
 
         public static void MapSave(string path)
@@ -593,11 +603,11 @@ namespace SDJK.PlayMode
                         MapSaveScreen();
                 }
                 //컨트롤 + 쉬프트 + S
-                if (Input.GetKey(KeyCode.LeftControl) && Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.S) && !EditorManager.AutoScroll && !(Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.DownArrow)))
+                if (Input.GetKey(KeyCode.LeftControl) && Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.S) && !EditorManager.AutoScroll && !(Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.DownArrow)))
                     MapSaveScreen();
 
                 //컨트롤 + L
-                if (Input.GetKey(KeyCode.LeftControl) && Input.GetKey(KeyCode.L) && !EditorManager.AutoScroll && !(Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.DownArrow)))
+                if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.L) && !EditorManager.AutoScroll && !(Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.DownArrow)))
                     MapLoad();
 
                 //Enter
@@ -1412,6 +1422,14 @@ namespace SDJK.PlayMode
         public double MaxHPValueLerp = 1;
 
         public double JudgmentSize = 1;
+
+        public double WindowSize = 1;
+        public double WindowSizeLerp = 1;
+
+        public JVector2 WindowPos = new JVector2();
+        public WindowManager.datumPoint WindowDatumPoint;
+        public WindowManager.datumPoint ScreenDatumPoint;
+        public double WindowPosLerp = 1;
     }
 }
 
@@ -1450,6 +1468,14 @@ namespace SDJK.Effect
 
         public bool AudioSpectrumUse = false;
         public JColor32 AudioSpectrumColor = new JColor32(255);
+
+        public double WindowSize = 1;
+        public List<WindowSizeEffect> WindowSizeEffect = new List<WindowSizeEffect>();
+
+        public JVector2 WindowPos = new JVector2();
+        public WindowManager.datumPoint WindowDatumPoint = WindowManager.datumPoint.Center;
+        public WindowManager.datumPoint ScreenDatumPoint = WindowManager.datumPoint.Center;
+        public List<WindowPosEffect> WindowPosEffect = new List<WindowPosEffect>();
 
         public List<double> AllBeat = new List<double>();
     }
@@ -1552,5 +1578,21 @@ namespace SDJK.Effect
     {
         public double Beat = 0;
         public double Value = 1;
+    }
+
+    public class WindowSizeEffect
+    {
+        public double Beat = 0;
+        public double Value = 1;
+        public double Lerp = 1;
+    }
+
+    public class WindowPosEffect
+    {
+        public double Beat = 0;
+        public JVector2 Pos = new JVector2();
+        public WindowManager.datumPoint WindowDatumPoint = WindowManager.datumPoint.Center;
+        public WindowManager.datumPoint ScreenDatumPoint = WindowManager.datumPoint.Center;
+        public double Lerp = 1;
     }
 }

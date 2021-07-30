@@ -21,7 +21,7 @@ namespace SDJK.PlayMode.UI.Background
             if (GameManager.EditorOptimization && PlayerManager.Editor && !MainMenu)
                 videoPlayer.gameObject.SetActive(false);
                 
-            if (!MainMenu)
+            if (!MainMenu && gameObject.activeSelf)
                 StartCoroutine(Rerender());
         }
 
