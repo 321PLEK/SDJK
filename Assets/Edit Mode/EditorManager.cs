@@ -196,71 +196,71 @@ namespace SDJK.EditMode
                 MouseYBeat = (MainCamera.Camera.ScreenToWorldPoint(Input.mousePosition - Vector3.forward * MainCamera.Camera.transform.position.z).y - 5.5f + MainCamera.UiPosY) / PlayerManager.effect.BeatYPos;
             if (!Input.GetKey(KeyCode.LeftControl) && !Input.GetKey(KeyCode.LeftShift))
             {
-                if (MouseYBeat < (45f / 180f) + (int)MouseYBeat)
+                if (MouseYBeat < (45d / 180d) + (int)MouseYBeat)
                     MouseYBeat = 0 + (int)MouseYBeat;
-                else if (MouseYBeat >= (45f / 180f) + (int)MouseYBeat && MouseYBeat < (90f / 180f) + (int)MouseYBeat)
-                    MouseYBeat = (45f / 180f) + (int)MouseYBeat;
-                else if (MouseYBeat >= (90f / 180f) + (int)MouseYBeat && MouseYBeat < (135f / 180f) + (int)MouseYBeat)
-                    MouseYBeat = (90f / 180f) + (int)MouseYBeat;
-                else if (MouseYBeat >= (135f / 180f) + (int)MouseYBeat)
-                    MouseYBeat = (135f / 180f) + (int)MouseYBeat;
+                else if (MouseYBeat >= (45d / 180d) + (int)MouseYBeat && MouseYBeat < (90d / 180d) + (int)MouseYBeat)
+                    MouseYBeat = (45d / 180d) + (int)MouseYBeat;
+                else if (MouseYBeat >= (90d / 180d) + (int)MouseYBeat && MouseYBeat < (135d / 180d) + (int)MouseYBeat)
+                    MouseYBeat = (90d / 180d) + (int)MouseYBeat;
+                else if (MouseYBeat >= (135d / 180d) + (int)MouseYBeat)
+                    MouseYBeat = (135d / 180d) + (int)MouseYBeat;
             }
             else if (Input.GetKey(KeyCode.LeftShift) && !Input.GetKey(KeyCode.LeftControl))
             {
-                if (MouseYBeat < (30f / 180f) + (int)MouseYBeat)
+                if (MouseYBeat < (30d / 180d) + (int)MouseYBeat)
                     MouseYBeat = 0 + (int)MouseYBeat;
-                else if (MouseYBeat >= (30f / 180f) + (int)MouseYBeat && MouseYBeat < (60f / 180f) + (int)MouseYBeat)
-                    MouseYBeat = (30f / 180f) + (int)MouseYBeat;
-                else if (MouseYBeat >= (60f / 180f) + (int)MouseYBeat && MouseYBeat < (90f / 180f) + (int)MouseYBeat)
-                    MouseYBeat = (60f / 180f) + (int)MouseYBeat;
-                else if (MouseYBeat >= (90f / 180f) + (int)MouseYBeat && MouseYBeat < (120f / 180f) + (int)MouseYBeat)
-                    MouseYBeat = (90f / 180f) + (int)MouseYBeat;
-                else if (MouseYBeat >= (120f / 180f) + (int)MouseYBeat && MouseYBeat < (150f / 180f) + (int)MouseYBeat)
-                    MouseYBeat = (120f / 180f) + (int)MouseYBeat;
-                else if (MouseYBeat >= (150f / 180f) + (int)MouseYBeat)
-                    MouseYBeat = (150f / 180f) + (int)MouseYBeat;
+                else if (MouseYBeat >= (30d / 180d) + (int)MouseYBeat && MouseYBeat < (60d / 180d) + (int)MouseYBeat)
+                    MouseYBeat = (30d / 180d) + (int)MouseYBeat;
+                else if (MouseYBeat >= (60d / 180d) + (int)MouseYBeat && MouseYBeat < (90d / 180d) + (int)MouseYBeat)
+                    MouseYBeat = (60d / 180d) + (int)MouseYBeat;
+                else if (MouseYBeat >= (90d / 180d) + (int)MouseYBeat && MouseYBeat < (120d / 180d) + (int)MouseYBeat)
+                    MouseYBeat = (90d / 180d) + (int)MouseYBeat;
+                else if (MouseYBeat >= (120d / 180d) + (int)MouseYBeat && MouseYBeat < (150d / 180d) + (int)MouseYBeat)
+                    MouseYBeat = (120d / 180d) + (int)MouseYBeat;
+                else if (MouseYBeat >= (150d / 180d) + (int)MouseYBeat)
+                    MouseYBeat = (150d / 180d) + (int)MouseYBeat;
             }
             else if (Input.GetKey(KeyCode.LeftControl) && !Input.GetKey(KeyCode.LeftShift))
             {
-                if (MouseYBeat < (15f / 180f) + (int)MouseYBeat)
+                if (MouseYBeat < (15d / 180d) + (int)MouseYBeat)
                     MouseYBeat = 0 + (int)MouseYBeat;
-                else if (MouseYBeat >= (15f / 180f) + (int)MouseYBeat && MouseYBeat < (75f / 180f) + (int)MouseYBeat)
-                    MouseYBeat = (15f / 180f) + (int)MouseYBeat;
-                else if (MouseYBeat >= (75f / 180f) + (int)MouseYBeat && MouseYBeat < (90f / 180f) + (int)MouseYBeat)
-                    MouseYBeat = (75f / 180f) + (int)MouseYBeat;
-                else if (MouseYBeat >= (90f / 180f) + (int)MouseYBeat && MouseYBeat < (105f / 180f) + (int)MouseYBeat)
-                    MouseYBeat = (90f / 180f) + (int)MouseYBeat;
-                else if (MouseYBeat >= (105f / 180f) + (int)MouseYBeat && MouseYBeat < (165f / 180f) + (int)MouseYBeat)
-                    MouseYBeat = (105f / 180f) + (int)MouseYBeat;
-                else if (MouseYBeat >= (165f / 180f) + (int)MouseYBeat)
-                    MouseYBeat = (165f / 180f) + (int)MouseYBeat;
+                else if (MouseYBeat >= (15d / 180d) + (int)MouseYBeat && MouseYBeat < (75d / 180d) + (int)MouseYBeat)
+                    MouseYBeat = (15d / 180d) + (int)MouseYBeat;
+                else if (MouseYBeat >= (75d / 180d) + (int)MouseYBeat && MouseYBeat < (90d / 180d) + (int)MouseYBeat)
+                    MouseYBeat = (75d / 180d) + (int)MouseYBeat;
+                else if (MouseYBeat >= (90d / 180d) + (int)MouseYBeat && MouseYBeat < (105d / 180d) + (int)MouseYBeat)
+                    MouseYBeat = (90d / 180d) + (int)MouseYBeat;
+                else if (MouseYBeat >= (105d / 180d) + (int)MouseYBeat && MouseYBeat < (165d / 180d) + (int)MouseYBeat)
+                    MouseYBeat = (105d / 180d) + (int)MouseYBeat;
+                else if (MouseYBeat >= (165d / 180d) + (int)MouseYBeat)
+                    MouseYBeat = (165d / 180d) + (int)MouseYBeat;
             }
             else if (Input.GetKey(KeyCode.LeftControl) && Input.GetKey(KeyCode.LeftShift))
             {
-                if (MouseYBeat < (15f / 180f) + (int)MouseYBeat)
+                if (MouseYBeat < (15d / 180d) + (int)MouseYBeat)
                     MouseYBeat = 0 + (int)MouseYBeat;
-                else if (MouseYBeat >= (15f / 180f) + (int)MouseYBeat && MouseYBeat < (30f / 180f) + (int)MouseYBeat)
-                    MouseYBeat = (15f / 180f) + (int)MouseYBeat;
-                else if (MouseYBeat >= (30f / 180f) + (int)MouseYBeat && MouseYBeat < (45f / 180f) + (int)MouseYBeat)
-                    MouseYBeat = (30f / 180f) + (int)MouseYBeat;
-                else if (MouseYBeat >= (45f / 180f) + (int)MouseYBeat && MouseYBeat < (60f / 180f) + (int)MouseYBeat)
-                    MouseYBeat = (45f / 180f) + (int)MouseYBeat;
-                else if (MouseYBeat >= (60f / 180f) + (int)MouseYBeat && MouseYBeat < (75f / 180f) + (int)MouseYBeat)
-                    MouseYBeat = (60f / 180f) + (int)MouseYBeat;
-                else if (MouseYBeat >= (75f / 180f) + (int)MouseYBeat && MouseYBeat < (90f / 180f) + (int)MouseYBeat)
-                    MouseYBeat = (75f / 180f) + (int)MouseYBeat;
-                else if (MouseYBeat >= (90f / 180f) + (int)MouseYBeat && MouseYBeat < (105f / 180f) + (int)MouseYBeat)
-                    MouseYBeat = (90f / 180f) + (int)MouseYBeat;
-                else if (MouseYBeat >= (105f / 180f) + (int)MouseYBeat && MouseYBeat < (120f / 180f) + (int)MouseYBeat)
-                    MouseYBeat = (105f / 180f) + (int)MouseYBeat;
-                else if (MouseYBeat >= (120f / 180f) + (int)MouseYBeat && MouseYBeat < (135f / 180f) + (int)MouseYBeat)
-                    MouseYBeat = (120f / 180f) + (int)MouseYBeat;
-                else if (MouseYBeat >= (135f / 180f) + (int)MouseYBeat && MouseYBeat < (150f / 180f) + (int)MouseYBeat)
-                    MouseYBeat = (135f / 180f) + (int)MouseYBeat;
-                else if (MouseYBeat >= (150f / 180f) + (int)MouseYBeat && MouseYBeat < (165f / 180f) + (int)MouseYBeat)
-                    MouseYBeat = (150f / 180f) + (int)MouseYBeat;
-                else if (MouseYBeat >= (165f / 180f) + (int)MouseYBeat)
-                    MouseYBeat = (165f / 180f) + (int)MouseYBeat;
+                else if (MouseYBeat >= (15d / 180d) + (int)MouseYBeat && MouseYBeat < (30d / 180d) + (int)MouseYBeat)
+                    MouseYBeat = (15d / 180d) + (int)MouseYBeat;
+                else if (MouseYBeat >= (30d / 180d) + (int)MouseYBeat && MouseYBeat < (45d / 180d) + (int)MouseYBeat)
+                    MouseYBeat = (30d / 180d) + (int)MouseYBeat;
+                else if (MouseYBeat >= (45d / 180d) + (int)MouseYBeat && MouseYBeat < (60d / 180d) + (int)MouseYBeat)
+                    MouseYBeat = (45d / 180d) + (int)MouseYBeat;
+                else if (MouseYBeat >= (60d / 180d) + (int)MouseYBeat && MouseYBeat < (75d / 180d) + (int)MouseYBeat)
+                    MouseYBeat = (60d / 180d) + (int)MouseYBeat;
+                else if (MouseYBeat >= (75d / 180d) + (int)MouseYBeat && MouseYBeat < (90d / 180d) + (int)MouseYBeat)
+                    MouseYBeat = (75d / 180d) + (int)MouseYBeat;
+                else if (MouseYBeat >= (90d / 180d) + (int)MouseYBeat && MouseYBeat < (105d / 180d) + (int)MouseYBeat)
+                    MouseYBeat = (90d / 180d) + (int)MouseYBeat;
+                else if (MouseYBeat >= (105d / 180d) + (int)MouseYBeat && MouseYBeat < (120d / 180d) + (int)MouseYBeat)
+                    MouseYBeat = (105d / 180d) + (int)MouseYBeat;
+                else if (MouseYBeat >= (120d / 180d) + (int)MouseYBeat && MouseYBeat < (135d / 180d) + (int)MouseYBeat)
+                    MouseYBeat = (120d / 180d) + (int)MouseYBeat;
+                else if (MouseYBeat >= (135d / 180d) + (int)MouseYBeat && MouseYBeat < (150d / 180d) + (int)MouseYBeat)
+                    MouseYBeat = (135d / 180d) + (int)MouseYBeat;
+                else if (MouseYBeat >= (150d / 180d) + (int)MouseYBeat && MouseYBeat < (165d / 180d) + (int)MouseYBeat)
+                    MouseYBeat = (150d / 180d) + (int)MouseYBeat;
+                else if (MouseYBeat >= (165d / 180d) + (int)MouseYBeat)
+                    MouseYBeat = (165d / 180d) + (int)MouseYBeat;
             }
         }
 

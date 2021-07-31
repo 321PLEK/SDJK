@@ -128,9 +128,9 @@ public class WindowManager : MonoBehaviour
         }
 
         if (!Lerp)
-            SetWindowPos(handle, IntPtr.Zero, Mathf.RoundToInt(x), Mathf.RoundToInt(y), width, height, SWP_NOZORDER | SWP_SHOWWINDOW);
+            SetWindowPos(handle, IntPtr.Zero, Mathf.RoundToInt(x), Mathf.RoundToInt(y), 0, 0, SWP_NOZORDER | SWP_NOSIZE | SWP_SHOWWINDOW);
         else
-            SetWindowPos(handle, IntPtr.Zero, Mathf.RoundToInt(WindowManager.x), Mathf.RoundToInt(WindowManager.y), width, height, SWP_NOZORDER | SWP_SHOWWINDOW);
+            SetWindowPos(handle, IntPtr.Zero, Mathf.RoundToInt(WindowManager.x), Mathf.RoundToInt(WindowManager.y), 0, 0, SWP_NOZORDER | SWP_NOSIZE | SWP_SHOWWINDOW);
     }
     #endif
 
