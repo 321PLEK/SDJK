@@ -1,9 +1,6 @@
 using System;
-using System.Diagnostics;
-using System.Drawing;
 using System.Runtime.InteropServices;
 using UnityEngine;
-//using UnityEngine;
 
 public class WindowManager : MonoBehaviour
 {
@@ -15,6 +12,7 @@ public class WindowManager : MonoBehaviour
     static extern bool SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter, int X, int Y, int cx, int cy, int uFlags);
 
     private const int SWP_NOSIZE = 0x0001;
+    private const int SWP_NOMOVE = 0x0002;
     private const int SWP_NOZORDER = 0x0004;
     private const int SWP_SHOWWINDOW = 0x0040;
 
@@ -23,106 +21,116 @@ public class WindowManager : MonoBehaviour
 
     [DllImport("user32.dll")]
     [return: MarshalAs(UnmanagedType.Bool)]
-    static extern bool GetWindowRect(IntPtr hWnd, out Rectangle lpRect);
+    static extern bool GetWindowRect(IntPtr hWnd, out RECT lpRect);
+
+    [StructLayout(LayoutKind.Sequential)]
+    public struct RECT
+    {
+        public int Left;        // x position of upper-left corner
+        public int Top;         // y position of upper-left corner
+        public int Right;       // x position of lower-right corner
+        public int Bottom;      // y position of lower-right corner
+    }
 
     [DllImport("user32.dll", EntryPoint = "FindWindow")]
     static extern IntPtr FindWindow(string LpClassName, string lpWindowName);
 
     public static void GetWindowResolution(out int width, out int height)
     {
-        Rectangle rectangle;
+        RECT rect;
         IntPtr temp = GetWindowHandle();
         if (temp != IntPtr.Zero)
             handle = temp;
 
-        GetWindowRect(handle, out rectangle);
-        width = rectangle.Width - rectangle.X;
-        height = rectangle.Height - rectangle.Y;
+        GetWindowRect(handle, out rect);
+        width = rect.Right - rect.Left;
+        height = rect.Bottom - rect.Top;
     }
 
     public static IntPtr GetWindowHandle() => GetActiveWindow();
 
-    public static void SetWindowPosition(float x2, float y2, datumPoint windowDatumPoint = datumPoint.Center, datumPoint screenDatumPoint = datumPoint.Center, bool Lerp = false, float time = 0.05f)
+    public static void SetWindowPosition(float x, float y, int width, int height, datumPoint windowDatumPoint = datumPoint.Center, datumPoint screenDatumPoint = datumPoint.Center, bool Lerp = false, float time = 0.05f)
     {
         IntPtr temp = GetWindowHandle();
         if (temp != IntPtr.Zero)
             handle = temp;
 
-        GetWindowResolution(out int width, out int height);
+        SetWindowPos(handle, IntPtr.Zero, 0, 0, width, height, SWP_NOZORDER | SWP_NOMOVE | SWP_SHOWWINDOW);
+        GetWindowResolution(out int width2, out int height2);
 
         if (windowDatumPoint == datumPoint.Center)
         {
-            x2 -= width * 0.5f;
-            y2 -= height * 0.5f;
+            x -= width2 * 0.5f;
+            y -= height2 * 0.5f;
         }
         else if (windowDatumPoint == datumPoint.LeftBottom)
-            y2 -= height;
+            y -= height2;
         else if (windowDatumPoint == datumPoint.LeftCenter)
-            y2 -= height * 0.5f;
+            y -= height2 * 0.5f;
         else if (windowDatumPoint == datumPoint.RightBottom)
         {
-            x2 -= width;
-            y2 -= height;
+            x -= width2;
+            y -= height2;
         }
         else if (windowDatumPoint == datumPoint.RightCenter)
         {
-            x2 -= width;
-            y2 -= height * 0.5f;
+            x -= width2;
+            y -= height2 * 0.5f;
         }
         else if (windowDatumPoint == datumPoint.RightTop)
-            x2 -= width;
+            x -= width2;
         else if (windowDatumPoint == datumPoint.CenterTop)
-            x2 -= width * 0.5f;
+            x -= width2 * 0.5f;
         else if (windowDatumPoint == datumPoint.CenterBottom)
         {
-            x2 -= width * 0.5f;
-            y2 -= height;
+            x -= width2 * 0.5f;
+            y -= height2;
         }
 
         if (screenDatumPoint == datumPoint.Center)
         {
-            x2 += Screen.currentResolution.width * 0.5f;
-            y2 += Screen.currentResolution.height * 0.5f;
+            x += Screen.currentResolution.width * 0.5f;
+            y += Screen.currentResolution.height * 0.5f;
         }
         else if (screenDatumPoint == datumPoint.LeftBottom)
-            y2 += Screen.currentResolution.height;
+            y += Screen.currentResolution.height;
         else if (screenDatumPoint == datumPoint.LeftCenter)
-            y2 += Screen.currentResolution.height * 0.5f;
+            y += Screen.currentResolution.height * 0.5f;
         else if (screenDatumPoint == datumPoint.RightBottom)
         {
-            x2 += Screen.currentResolution.width;
-            y2 += Screen.currentResolution.height;
+            x += Screen.currentResolution.width;
+            y += Screen.currentResolution.height;
         }
         else if (screenDatumPoint == datumPoint.RightCenter)
         {
-            x2 += Screen.currentResolution.width;
-            y2 += Screen.currentResolution.height * 0.5f;
+            x += Screen.currentResolution.width;
+            y += Screen.currentResolution.height * 0.5f;
         }
         else if (screenDatumPoint == datumPoint.RightTop)
-            x2 += Screen.currentResolution.width;
+            x += Screen.currentResolution.width;
         else if (screenDatumPoint == datumPoint.CenterTop)
-            x2 += Screen.currentResolution.width * 0.5f;
+            x += Screen.currentResolution.width * 0.5f;
         else if (screenDatumPoint == datumPoint.CenterBottom)
         {
-            x2 += Screen.currentResolution.width * 0.5f;
-            y2 += Screen.currentResolution.height;
+            x += Screen.currentResolution.width * 0.5f;
+            y += Screen.currentResolution.height;
         }
 
         if (!Lerp)
         {
-            x = x2;
-            y = y2;
+            WindowManager.x = x;
+            WindowManager.y = y;
         }
         else
         {
-            x = Mathf.Lerp(x, x2, time * 60 * Time.deltaTime);
-            y = Mathf.Lerp(y, y2, time * 60 * Time.deltaTime);
+            WindowManager.x = Mathf.Lerp(WindowManager.x, x, time * 60 * Time.deltaTime);
+            WindowManager.y = Mathf.Lerp(WindowManager.y, y, time * 60 * Time.deltaTime);
         }
 
         if (!Lerp)
-            SetWindowPos(handle, IntPtr.Zero, Mathf.RoundToInt(x2), Mathf.RoundToInt(y2), 0, 0, SWP_NOZORDER | SWP_NOSIZE | SWP_SHOWWINDOW);
+            SetWindowPos(handle, IntPtr.Zero, Mathf.RoundToInt(x), Mathf.RoundToInt(y), width, height, SWP_NOZORDER | SWP_SHOWWINDOW);
         else
-            SetWindowPos(handle, IntPtr.Zero, Mathf.RoundToInt(x), Mathf.RoundToInt(y), 0, 0, SWP_NOZORDER | SWP_NOSIZE | SWP_SHOWWINDOW);
+            SetWindowPos(handle, IntPtr.Zero, Mathf.RoundToInt(WindowManager.x), Mathf.RoundToInt(WindowManager.y), width, height, SWP_NOZORDER | SWP_SHOWWINDOW);
     }
     #endif
 

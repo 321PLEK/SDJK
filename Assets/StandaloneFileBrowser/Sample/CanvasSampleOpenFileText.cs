@@ -46,7 +46,9 @@ public class CanvasSampleOpenFileText : MonoBehaviour, IPointerDownHandler {
 #endif
 
     private IEnumerator OutputRoutine(string url) {
+#pragma warning disable CS0618 // 형식 또는 멤버는 사용되지 않습니다.
         var loader = new WWW(url);
+#pragma warning restore CS0618 // 형식 또는 멤버는 사용되지 않습니다.
         yield return loader;
         output.text = loader.text;
     }

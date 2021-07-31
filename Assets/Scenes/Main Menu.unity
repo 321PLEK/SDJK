@@ -3329,6 +3329,7 @@ GameObject:
   - component: {fileID: 720630910}
   - component: {fileID: 720630909}
   - component: {fileID: 720630913}
+  - component: {fileID: 720630914}
   m_Layer: 5
   m_Name: Main Menu
   m_TagString: Untagged
@@ -3505,6 +3506,18 @@ MonoBehaviour:
   _OsuHitSoundButtonText: {fileID: 456306318}
   _UpScrollText: {fileID: 717079378}
   _AllowIndirectMissText: {fileID: 1669924207}
+--- !u!114 &720630914
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 720630908}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5000abec0b8770b40a02c624d74feb8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &721467969
 GameObject:
   m_ObjectHideFlags: 0

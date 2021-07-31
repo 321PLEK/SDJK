@@ -383,6 +383,9 @@ namespace SDJK.Effect
             PlayerManager.effect.WindowDatumPoint = PlayerManager.mapData.Effect.WindowDatumPoint;
             PlayerManager.effect.ScreenDatumPoint = PlayerManager.mapData.Effect.ScreenDatumPoint;
             SdjkSystem.tempWindowSize = 0;
+            SdjkSystem.tempWindowPos = Vector2.zero;
+            SdjkSystem.tempScreenDatumPoint = 0;
+            SdjkSystem.tempWindowDatumPoint = 0;
 
 
 
