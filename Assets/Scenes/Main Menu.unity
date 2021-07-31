@@ -3485,6 +3485,7 @@ MonoBehaviour:
   - extra/Expurgation Left
   - breakfast
   - extra/School Live! OP
+  - extra/Dark Sheep
   LevelList:
   - Rainbow Tylenol
   - Night of Knights
@@ -3497,6 +3498,7 @@ MonoBehaviour:
   - Stress
   - Expurgation
   - Expurgation Left
+  - Dark Sheep
   PhoneControll: {fileID: 1355133083}
   PlayingText: {fileID: 1578534477}
   GameStartText: {fileID: 355269403}
