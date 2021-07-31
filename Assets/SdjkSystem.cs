@@ -30,6 +30,7 @@ namespace SDJK
             sdjkSystem = this;
         }
 
+#if !UNITY_EDITOR
         void Update()
         {
             if (!(PlayerManager.MapPlay || PlayerManager.Editor) || ((PlayerManager.MapPlay || PlayerManager.Editor) && PlayerManager.mapData.Effect.WindowSizeEffect.Count == 0 && PlayerManager.mapData.Effect.WindowPosEffect.Count == 0) || !((PlayerManager.MapPlay && !GameManager.Optimization) || (PlayerManager.Editor && !GameManager.EditorOptimization)))
@@ -62,5 +63,6 @@ namespace SDJK
                 }
             }
         }
+#endif
     }
 }
