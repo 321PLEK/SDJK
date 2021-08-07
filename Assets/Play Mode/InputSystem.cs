@@ -304,12 +304,12 @@ namespace SDJK.PlayMode
                         }
                         else if (Delay.Count > i && Delay[i] < PlayerManager.JudgmentCurrentBeat - 0.75 * PlayerManager.effect.JudgmentSize)
                         {
-                            if (temp >= HoldDelay.Count || HoldDelay[temp] >= 0)
+                            if (HoldDelay[i] >= 0 || HoldDelay[i] < -1)
                             {
                                 //미스
                                 if (Delay[i] != PlayerManager.mapData.AllBeat[PlayerManager.mapData.AllBeat.Count - 1])
                                     PlayerManager.Judgment(PlayerManager.JudgmentCurrentBeat - Delay[i]);
-                                
+
                                 NoteHide();
 
                                 HoldStop = false;
