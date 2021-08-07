@@ -143,8 +143,9 @@ namespace SDJK.EditMode
                     PlayerManager.playerManager.audioSource.time = Time;
             }
 
-            if ((!(Input.GetKey(KeyCode.UpArrow) || AutoScroll || Input.GetKey(KeyCode.DownArrow))))
+            if (!(Input.GetKey(KeyCode.UpArrow) || AutoScroll || Input.GetKey(KeyCode.DownArrow)))
             {
+                PlayerManager.playerManager.audioSource.pitch = 0;
                 PlayerManager.playerManager.audioSource.Pause();
                 if (tempTime != Time)
                     PlayerManager.playerManager.audioSource.UnPause();

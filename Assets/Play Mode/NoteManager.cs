@@ -74,6 +74,24 @@ namespace SDJK.PlayMode
                     item.transform.localPosition = new Vector3(pos.x, y, MainCamera.CameraPos.z + 14);
                     item.HoldNote.localPosition = new Vector2(0, (float)(GameManager.Abs(PlayerManager.effect.BeatYPos) * item.HoldBeat));
 
+                    if (!(item.HoldBeat >= -1 && item.HoldBeat < 0))
+                    {
+                        if (item.HoldBeat > 0 && (Input.GetKey(item.keyCode) && !PlayerManager.Editor) || PlayerManager.AutoMode)
+                        {
+                            double temp = 0;
+
+                            if (item.Beat < PlayerManager.VisibleCurrentBeat)
+                                temp = item.Beat - PlayerManager.VisibleCurrentBeat;
+
+                            if (item.HoldBeat + temp < 0)
+                                temp = -item.HoldBeat;
+
+                            item.HoldNote.localScale = new Vector3(1, (float)(1.666666666666667 * GameManager.Abs(PlayerManager.effect.BeatYPos) * (item.HoldBeat + temp)), 1);
+                        }
+                        else if (!(Input.GetKey(item.keyCode) && !PlayerManager.Editor))
+                            item.HoldNote.localScale = new Vector3(1, (float)(1.666666666666667 * GameManager.Abs(PlayerManager.effect.BeatYPos) * item.HoldBeat), 1);
+                    }
+
                     if (!GameManager.UpScroll
                         ? !(Vector2.Distance(new Vector2(0, y + MainCamera.UiPos.y), new Vector2(0, cameraPos.y - MainCamera.CameraPos.y)) < 10f * GameManager.Abs(MainCamera.UiZoom))
                         : !(Vector2.Distance(new Vector2(0, y + MainCamera.UiPos.y + 11), new Vector2(0, cameraPos.y - MainCamera.CameraPos.y)) < 10f * GameManager.Abs(MainCamera.UiZoom)))

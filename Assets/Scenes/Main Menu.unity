@@ -3486,6 +3486,7 @@ MonoBehaviour:
   - breakfast
   - extra/School Live! OP
   - extra/Dark Sheep
+  - extra/The World Revolving
   LevelList:
   - Rainbow Tylenol
   - Night of Knights
@@ -3499,6 +3500,7 @@ MonoBehaviour:
   - Expurgation
   - Expurgation Left
   - Dark Sheep
+  - The World Revolving
   PhoneControll: {fileID: 1355133083}
   PlayingText: {fileID: 1578534477}
   GameStartText: {fileID: 355269403}

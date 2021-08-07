@@ -591,8 +591,8 @@ namespace SDJK.PlayMode
                 time = audioSource.time;
 
                 //화살표로 이동하고 있을때, 피치 변경이 막히는걸 방지
-                if ((!(Input.GetKey(KeyCode.UpArrow) || EditorManager.AutoScroll || Input.GetKey(KeyCode.DownArrow))))
-                    audioSource.pitch = (float) (effect.Pitch * GameManager.GameSpeed);
+                if (!(Input.GetKey(KeyCode.UpArrow) || EditorManager.AutoScroll || Input.GetKey(KeyCode.DownArrow)))
+                    audioSource.pitch = 0;
 
                 //컨트롤 + S
                 if (Input.GetKey(KeyCode.LeftControl) && Input.GetKey(KeyCode.S) && !EditorManager.AutoScroll && !(Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.DownArrow)))
@@ -633,7 +633,7 @@ namespace SDJK.PlayMode
                 VisibleCurrentBeat += 1;
 
             if (GameManager.NoteInterpolation)
-                VisibleCurrentBeat += 0.05 * (effect.BPM / 60.0);
+                VisibleCurrentBeat += 0.0425 * (effect.BPM / 60.0) * audioSource.pitch;
 
             //판정 전용 (플레이어 오프셋 O) Current Beat 변수
             JudgmentCurrentBeat = ((BeatTimer + (time - BPMTimer) - StartDelay - (GameManager.InputOffset * audioSource.pitch)) * (effect.BPM / 60) + BPMCurrentBeat);
