@@ -6,6 +6,7 @@ using SDJK.Camera;
 using SDJK.PlayMode.Score;
 using SDJK.PlayMode.Sound;
 using UnityEngine.Serialization;
+using System.Linq;
 
 namespace SDJK.PlayMode
 {
@@ -154,14 +155,11 @@ namespace SDJK.PlayMode
                 if (!GameManager.Optimization && (PlayerManager.effect.Pitch != 0 || PlayerManager.HP > 0.001f))
                 {
                     //눌렀을때, 색상 변경
-                    if ((!Input.GetKey(keyCode) || PlayerManager.AutoMode) && image.color.r < 1)
+                    if ((!Input.GetKey(keyCode) || PlayerManager.AutoMode) && image.color.g < 1)
                     {
-                        image.color += new Color(0.05f * GameManager.FpsDeltaTime, 0.05f * GameManager.FpsDeltaTime,
-                            0.05f * GameManager.FpsDeltaTime);
-                        image2.color += new Color(0.05f * GameManager.FpsDeltaTime, 0.05f * GameManager.FpsDeltaTime,
-                            0.05f * GameManager.FpsDeltaTime);
-                        text.color += new Color(0.05f * GameManager.FpsDeltaTime, 0.05f * GameManager.FpsDeltaTime,
-                            0.05f * GameManager.FpsDeltaTime);
+                        image.color += new Color(0.05f * GameManager.FpsDeltaTime, 0.05f * GameManager.FpsDeltaTime, 0.05f * GameManager.FpsDeltaTime);
+                        image2.color += new Color(0.05f * GameManager.FpsDeltaTime, 0.05f * GameManager.FpsDeltaTime, 0.05f * GameManager.FpsDeltaTime);
+                        text.color += new Color(0.05f * GameManager.FpsDeltaTime, 0.05f * GameManager.FpsDeltaTime, 0.05f * GameManager.FpsDeltaTime);
                     }
 
                     if (Input.GetKey(keyCode) && !PlayerManager.AutoMode)
@@ -219,12 +217,31 @@ namespace SDJK.PlayMode
                         HoldDelay = PlayerManager.mapData.HoldL;
                     }
 
-                    //가장 가까운 타일의 딜레이를 체크
-                    double delay = GameManager.CloseValue(Delay, PlayerManager.JudgmentCurrentBeat);
-
                     //판정
                     if (Input.GetKeyDown(keyCode))
-                        PlayerManager.Judgment(PlayerManager.JudgmentCurrentBeat - delay);
+                    {
+                        //가장 가까운 타일의 딜레이를 체크
+                        double delay = GameManager.CloseValue(Delay, PlayerManager.JudgmentCurrentBeat);
+                        double holdDelay = 0;
+                        if (Delay.Count > 0 && HoldDelay.Count > 0)
+                            holdDelay = HoldDelay[Delay.BinarySearch(delay)];
+
+                        if (holdDelay >= -1 && holdDelay < 0)
+                        {
+                            if (!PlayerManager.Judgment(PlayerManager.JudgmentCurrentBeat - delay, false))
+                            {
+                                PlayerManager.HP = 0;
+
+                                image.color = Color.red;
+                                image2.color = Color.red;
+                                text.color = Color.red;
+
+                                RedColor = true;
+                            }
+                        }
+                        else
+                            PlayerManager.Judgment(PlayerManager.JudgmentCurrentBeat - delay);
+                    }
                 }
                 else
                 {

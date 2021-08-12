@@ -167,6 +167,12 @@ namespace SDJK.PlayMode
             if (!Editor)
                 MapPlay = true;
 
+            if (Editor)
+            {
+                AutoMode = false;
+                PracticeMode = false;
+            }
+
             AUse = false;
             SUse = false;
             DUse = false;
@@ -633,7 +639,7 @@ namespace SDJK.PlayMode
                 VisibleCurrentBeat += 1;
 
             if (GameManager.NoteInterpolation)
-                VisibleCurrentBeat += 0.0425 * (effect.BPM / 60.0) * audioSource.pitch;
+                VisibleCurrentBeat += 0.2 * (60.0 / effect.BPM) * audioSource.pitch;
 
             //판정 전용 (플레이어 오프셋 O) Current Beat 변수
             JudgmentCurrentBeat = ((BeatTimer + (time - BPMTimer) - StartDelay - (GameManager.InputOffset * audioSource.pitch)) * (effect.BPM / 60) + BPMCurrentBeat);

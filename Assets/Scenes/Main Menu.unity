@@ -3482,11 +3482,11 @@ MonoBehaviour:
   - extra/Zavodila
   - extra/Stress
   - extra/Expurgation
-  - extra/Expurgation Left
   - breakfast
   - extra/School Live! OP
   - extra/Dark Sheep
   - extra/The World Revolving
+  - extra/Madness
   LevelList:
   - Rainbow Tylenol
   - Night of Knights
@@ -3501,6 +3501,8 @@ MonoBehaviour:
   - Expurgation Left
   - Dark Sheep
   - The World Revolving
+  - Madness
+  - Madness Left
   PhoneControll: {fileID: 1355133083}
   PlayingText: {fileID: 1578534477}
   GameStartText: {fileID: 355269403}
