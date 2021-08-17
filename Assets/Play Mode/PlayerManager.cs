@@ -903,31 +903,33 @@ namespace SDJK.PlayMode
                 Path = Path.Substring(0, Path.LastIndexOf("\\") + 1);
                 if (File.Exists(Path + mapData.BGM + ".mp3"))
                 {
-                    using (UnityWebRequest www = UnityWebRequestMultimedia.GetAudioClip(Path + mapData.BGM + ".mp3", AudioType.MPEG))
-                    {
-                        yield return www.SendWebRequest();
+                    UnityWebRequest www = UnityWebRequestMultimedia.GetAudioClip(Path + mapData.BGM + ".mp3", AudioType.MPEG);
+                    ((DownloadHandlerAudioClip)www.downloadHandler).streamAudio = true;
+                    yield return www.SendWebRequest();
 
-                        if (www.result == UnityWebRequest.Result.ConnectionError)
-                            Debug.Log(www.error);
-                        else
-                            playerManager.audioSource.clip = DownloadHandlerAudioClip.GetContent(www);
-                        
-                        temp = true;
-                    }
+                    if (www.result == UnityWebRequest.Result.ConnectionError)
+                        Debug.Log(www.error);
+                    else
+                        playerManager.audioSource.clip = DownloadHandlerAudioClip.GetContent(www);
+
+                    temp = true;
+
+                    www = null;
                 }
                 else if (File.Exists(Path + mapData.BGM + ".ogg"))
                 {
-                    using (UnityWebRequest www = UnityWebRequestMultimedia.GetAudioClip(Path + mapData.BGM + ".ogg", AudioType.OGGVORBIS))
-                    {
-                        yield return www.SendWebRequest();
+                    UnityWebRequest www = UnityWebRequestMultimedia.GetAudioClip(Path + mapData.BGM + ".ogg", AudioType.OGGVORBIS);
+                    ((DownloadHandlerAudioClip)www.downloadHandler).streamAudio = true;
+                    yield return www.SendWebRequest();
 
-                        if (www.result == UnityWebRequest.Result.ConnectionError)
-                            Debug.Log(www.error);
-                        else
-                            playerManager.audioSource.clip = DownloadHandlerAudioClip.GetContent(www);
-                        
-                        temp = true;
-                    }
+                    if (www.result == UnityWebRequest.Result.ConnectionError)
+                        Debug.Log(www.error);
+                    else
+                        playerManager.audioSource.clip = DownloadHandlerAudioClip.GetContent(www);
+
+                    temp = true;
+
+                    www = null;
                 }
                 /*else if (File.Exists(Path + mapData.BGM + ".mid"))
                 {

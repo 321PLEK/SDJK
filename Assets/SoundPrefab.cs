@@ -77,6 +77,7 @@ namespace SDJK.Sound
                     {
                         using (UnityWebRequest www = UnityWebRequestMultimedia.GetAudioClip(ResourcesManager.ResourcePackPath[i] + AudioName.Replace("%NameSpace%", NameSpace) + ".mp3", AudioType.MPEG))
                         {
+                            ((DownloadHandlerAudioClip)www.downloadHandler).streamAudio = true;
                             yield return www.SendWebRequest();
 
                             if (www.result == UnityWebRequest.Result.ConnectionError)
@@ -97,6 +98,7 @@ namespace SDJK.Sound
                     {
                         using (UnityWebRequest www = UnityWebRequestMultimedia.GetAudioClip(ResourcesManager.ResourcePackPath[i] + AudioName.Replace("%NameSpace%", NameSpace) + ".ogg", AudioType.OGGVORBIS))
                         {
+                            ((DownloadHandlerAudioClip)www.downloadHandler).streamAudio = true;
                             yield return www.SendWebRequest();
 
                             if (www.result == UnityWebRequest.Result.ConnectionError)

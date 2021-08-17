@@ -169,7 +169,7 @@ namespace SDJK
         {
             if (PlayerManager.playerManager != null)
             {
-                if (FPS >= 120 && !Optimization && PlayerManager.playerManager.audioSource.pitch != 0)
+                if (FPS >= 15 && !Optimization && PlayerManager.playerManager.audioSource.pitch != 0)
                     Time.fixedDeltaTime = 60f / (float)PlayerManager.effect.BPM * 0.25f * (1 / (float)Abs(PlayerManager.playerManager.audioSource.pitch));
                 else
                     Time.fixedDeltaTime = 0.25f;
