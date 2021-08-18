@@ -557,7 +557,7 @@ namespace SDJK.Effect
                 MainCamera.UiZoom =  PlayerManager.effect.UiZoom;
 
             if (PlayerManager.effect.PitchLerp != 0 && PlayerManager.effect.PitchLerp != 1)
-                PlayerManager.effect.Pitch = GameManager.Lerp(PlayerManager.effect.Pitch,  Pitch, PlayerManager.effect.PitchLerp * GameManager.FpsDeltaTime * GameManager.Abs(PlayerManager.playerManager.audioSource.pitch));
+                PlayerManager.effect.Pitch = GameManager.Lerp(PlayerManager.effect.Pitch, Pitch, PlayerManager.effect.PitchLerp * GameManager.FpsDeltaTime * GameManager.Abs(PlayerManager.playerManager.audioSource.pitch));
             else
                 PlayerManager.effect.Pitch = Pitch;
 
