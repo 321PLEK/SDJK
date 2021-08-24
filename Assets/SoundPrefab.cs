@@ -75,45 +75,45 @@ namespace SDJK.Sound
                 {
                     if (File.Exists(ResourcesManager.ResourcePackPath[i] + AudioName.Replace("%NameSpace%", NameSpace) + ".mp3"))
                     {
-                        using (UnityWebRequest www = UnityWebRequestMultimedia.GetAudioClip(ResourcesManager.ResourcePackPath[i] + AudioName.Replace("%NameSpace%", NameSpace) + ".mp3", AudioType.MPEG))
-                        {
-                            ((DownloadHandlerAudioClip)www.downloadHandler).streamAudio = true;
-                            yield return www.SendWebRequest();
+                        UnityWebRequest www = UnityWebRequestMultimedia.GetAudioClip(ResourcesManager.ResourcePackPath[i] + AudioName.Replace("%NameSpace%", NameSpace) + ".mp3", AudioType.MPEG);
+                        ((DownloadHandlerAudioClip)www.downloadHandler).streamAudio = true;
+                        yield return www.SendWebRequest();
 
-                            if (www.result == UnityWebRequest.Result.ConnectionError)
-                                Debug.Log(www.error);
-                            else
-                            {
-                                temp = true;
-                                audioClip = DownloadHandlerAudioClip.GetContent(www);
-                                audioSource.clip = audioClip;
-                                audioSource.clip.name = AudioName.Substring(AudioName.LastIndexOf("/") + 1);
-                                ResourcesManager.ResourcesPackBGMList.Add(audioSource.clip);
-                                if (!DoNotPlayAudio)
-                                    audioSource.Play();
-                            }
+                        if (www.result == UnityWebRequest.Result.ConnectionError)
+                            Debug.Log(www.error);
+                        else
+                        {
+                            temp = true;
+                            audioClip = DownloadHandlerAudioClip.GetContent(www);
+                            audioSource.clip = audioClip;
+                            audioSource.clip.name = AudioName.Substring(AudioName.LastIndexOf("/") + 1);
+                            ResourcesManager.ResourcesPackBGMList.Add(audioSource.clip);
+                            if (!DoNotPlayAudio)
+                                audioSource.Play();
                         }
+
+                        www.Dispose();
                     }
                     else if (File.Exists(ResourcesManager.ResourcePackPath[i] + AudioName.Replace("%NameSpace%", NameSpace) + ".ogg"))
                     {
-                        using (UnityWebRequest www = UnityWebRequestMultimedia.GetAudioClip(ResourcesManager.ResourcePackPath[i] + AudioName.Replace("%NameSpace%", NameSpace) + ".ogg", AudioType.OGGVORBIS))
-                        {
-                            ((DownloadHandlerAudioClip)www.downloadHandler).streamAudio = true;
-                            yield return www.SendWebRequest();
+                        UnityWebRequest www = UnityWebRequestMultimedia.GetAudioClip(ResourcesManager.ResourcePackPath[i] + AudioName.Replace("%NameSpace%", NameSpace) + ".ogg", AudioType.OGGVORBIS);
+                        ((DownloadHandlerAudioClip)www.downloadHandler).streamAudio = true;
+                        yield return www.SendWebRequest();
 
-                            if (www.result == UnityWebRequest.Result.ConnectionError)
-                                Debug.Log(www.error);
-                            else
-                            {
-                                temp = true;
-                                audioClip = DownloadHandlerAudioClip.GetContent(www);
-                                audioSource.clip = audioClip;
-                                audioSource.clip.name = AudioName.Substring(AudioName.LastIndexOf("/") + 1);
-                                ResourcesManager.ResourcesPackBGMList.Add(audioSource.clip);
-                                if (!DoNotPlayAudio)
-                                    audioSource.Play();
-                            }
+                        if (www.result == UnityWebRequest.Result.ConnectionError)
+                            Debug.Log(www.error);
+                        else
+                        {
+                            temp = true;
+                            audioClip = DownloadHandlerAudioClip.GetContent(www);
+                            audioSource.clip = audioClip;
+                            audioSource.clip.name = AudioName.Substring(AudioName.LastIndexOf("/") + 1);
+                            ResourcesManager.ResourcesPackBGMList.Add(audioSource.clip);
+                            if (!DoNotPlayAudio)
+                                audioSource.Play();
                         }
+
+                        www.Dispose();
                     }
                 }
             }
@@ -224,6 +224,10 @@ namespace SDJK.Sound
 
         void OnDestroy()
         {
+            audioSource.clip = null;
+            audioClip = null;
+            Resources.UnloadUnusedAssets();
+
             if (BGM)
                 SoundManager.BGMCount -= 1;
             else

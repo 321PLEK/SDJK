@@ -83,5 +83,12 @@ namespace SDJK.Renderer
             sprite2 = null;
             sprite3 = null;
         }
+
+        void OnDestroy()
+        {
+            sprite = null;
+            sprite2 = null;
+            sprite3 = null;
+        }
     }
 }

@@ -426,5 +426,11 @@ namespace SDJK
 
             Start = true;
         }
+
+        void OnDestroy()
+        {
+            BGMList = null;
+            ResourcesPackBGMList = null;
+        }
     }
 }

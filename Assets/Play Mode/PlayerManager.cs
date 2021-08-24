@@ -914,7 +914,7 @@ namespace SDJK.PlayMode
 
                     temp = true;
 
-                    www = null;
+                    www.Dispose();
                 }
                 else if (File.Exists(Path + mapData.BGM + ".ogg"))
                 {
@@ -928,7 +928,7 @@ namespace SDJK.PlayMode
 
                     temp = true;
 
-                    www = null;
+                    www.Dispose();
                 }
                 /*else if (File.Exists(Path + mapData.BGM + ".mid"))
                 {

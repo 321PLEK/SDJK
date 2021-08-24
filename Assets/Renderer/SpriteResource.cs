@@ -39,5 +39,12 @@ namespace SDJK.Renderer
         }
 
         void Awake() => Rerender();
+
+        void OnDestroy()
+        {
+            sprite = null;
+            if (spriteRenderer != null)
+                spriteRenderer.sprite = null;
+        }
     }
 }

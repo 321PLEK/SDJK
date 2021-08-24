@@ -550,6 +550,8 @@ namespace SDJK.MainMenu
             MapData mapData = JsonConvert.DeserializeObject<MapData>(json);
             PlayerManager.mapData = mapData;
 
+            mainMenu.LevelCover.sprite = null;
+            Resources.UnloadUnusedAssets();
             mainMenu.LevelCover.sprite = ResourcesManager.Search<Sprite>(ResourcesManager.GetStringNameSpace("cover/" + mapData.Cover, out string temp), ResourcesManager.GuiTexturePath + temp);
             mainMenu.LevelInfo.text = mapData.Artist + " - " + mapData.BGMName;
             mainMenu.LevelInfo.text += "\n" + LangManager.LangLoad(LangManager.Lang, "main_menu.level_select.difficulty") + " - " + LangManager.LangLoad(LangManager.Lang, "main_menu.level_select.difficulty." + mapData.Difficulty);
