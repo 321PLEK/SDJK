@@ -904,7 +904,6 @@ namespace SDJK.PlayMode
                 if (File.Exists(Path + mapData.BGM + ".mp3"))
                 {
                     UnityWebRequest www = UnityWebRequestMultimedia.GetAudioClip(Path + mapData.BGM + ".mp3", AudioType.MPEG);
-                    //((DownloadHandlerAudioClip)www.downloadHandler).streamAudio = true;
                     yield return www.SendWebRequest();
 
                     if (www.result == UnityWebRequest.Result.ConnectionError)
@@ -919,7 +918,6 @@ namespace SDJK.PlayMode
                 else if (File.Exists(Path + mapData.BGM + ".ogg"))
                 {
                     UnityWebRequest www = UnityWebRequestMultimedia.GetAudioClip(Path + mapData.BGM + ".ogg", AudioType.OGGVORBIS);
-                    //((DownloadHandlerAudioClip)www.downloadHandler).streamAudio = true;
                     yield return www.SendWebRequest();
                     if (www.result == UnityWebRequest.Result.ConnectionError)
                         Debug.Log(www.error);
