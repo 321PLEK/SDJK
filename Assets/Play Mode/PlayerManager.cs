@@ -886,7 +886,7 @@ namespace SDJK.PlayMode
             bool temp = false;
             ResourcesManager.GetStringNameSpace(mapData.BGM, out string ResourceName);
             ResourceName = ResourcesManager.BGMPath + ResourceName;
-
+            
             //리소스팩에서 리소스를 가져오기
             foreach (AudioClip item in ResourcesManager.ResourcesPackBGMList)
             {

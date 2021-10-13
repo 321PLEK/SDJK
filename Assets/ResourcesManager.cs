@@ -429,8 +429,11 @@ namespace SDJK
 
         void OnDestroy()
         {
-            BGMList = new List<AudioClip[]>();
-            ResourcesPackBGMList = new List<AudioClip>();
+            if (!Application.isPlaying)
+            {
+                BGMList = new List<AudioClip[]>();
+                ResourcesPackBGMList = new List<AudioClip>();
+            }
         }
     }
 }
