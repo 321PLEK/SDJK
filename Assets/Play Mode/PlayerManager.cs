@@ -1397,6 +1397,7 @@ namespace SDJK.PlayMode
         public string Difficulty = "";
 
         public string Cover = "";
+        public string CoverNight = "";
     }
 
     public class Effect

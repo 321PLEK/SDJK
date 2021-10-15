@@ -13,6 +13,7 @@ using UnityEngineInternal;
 using SDJK.PlayMode.UI.Background;
 using System.Windows.Forms;
 using Application = UnityEngine.Application;
+using SDJK.Camera;
 
 namespace SDJK.MainMenu
 {
@@ -213,6 +214,8 @@ namespace SDJK.MainMenu
                 AFKTimer = 0;
             else if (AFKTimer >= 60)
                 Esc = true;
+
+            MainCamera.mainCamera.PostProcessVolume.weight = 0;
 
             if ((GameManager.CurrentBeat < 0 && !LogoAniEnd) || Esc)
             {
@@ -552,7 +555,16 @@ namespace SDJK.MainMenu
 
             mainMenu.LevelCover.sprite = null;
             Resources.UnloadUnusedAssets();
-            mainMenu.LevelCover.sprite = ResourcesManager.Search<Sprite>(ResourcesManager.GetStringNameSpace("cover/" + mapData.Cover, out string temp), ResourcesManager.GuiTexturePath + temp);
+
+            if (DateTime.Now.Hour >= 0 && DateTime.Now.Hour < 4)
+            {
+                mainMenu.LevelCover.sprite = ResourcesManager.Search<Sprite>(ResourcesManager.GetStringNameSpace("cover/" + mapData.CoverNight, out string temp), ResourcesManager.GuiTexturePath + temp);
+                if (mainMenu.LevelCover.sprite == null)
+                    mainMenu.LevelCover.sprite = ResourcesManager.Search<Sprite>(ResourcesManager.GetStringNameSpace("cover/" + mapData.Cover, out temp), ResourcesManager.GuiTexturePath + temp);
+            }
+            else
+                mainMenu.LevelCover.sprite = ResourcesManager.Search<Sprite>(ResourcesManager.GetStringNameSpace("cover/" + mapData.Cover, out string temp), ResourcesManager.GuiTexturePath + temp);
+
             mainMenu.LevelInfo.text = mapData.Artist + " - " + mapData.BGMName;
             mainMenu.LevelInfo.text += "\n" + LangManager.LangLoad(LangManager.Lang, "main_menu.level_select.difficulty") + " - " + LangManager.LangLoad(LangManager.Lang, "main_menu.level_select.difficulty." + mapData.Difficulty);
             mainMenu.LevelInfo.text += "\nBPM - " + mapData.Effect.BPM;

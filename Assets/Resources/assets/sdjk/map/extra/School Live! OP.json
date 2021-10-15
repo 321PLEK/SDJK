@@ -1137,5 +1137,6 @@
   "BGMName": "School Live! OP",
   "Offset": 4.0,
   "Difficulty": "easy",
-  "Cover": "School Live! Logo"
+  "Cover": "School Live! Logo",
+  "CoverNight": "School Live! Logo Night"
 }
