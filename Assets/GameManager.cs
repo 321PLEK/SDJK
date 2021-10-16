@@ -126,7 +126,17 @@ namespace SDJK
             Time.timeScale = (float)Abs(GameSpeed);
             _GameSpeed = GameSpeed;
 
-            if (Application.isFocused)
+            if (!MainMenu.MainMenu.Esc)
+            {
+                if (FPSLimit > 0)
+                    Application.targetFrameRate = FPSLimit;
+                else
+                    Application.targetFrameRate = -1;
+            }
+            else
+                Application.targetFrameRate = 70;
+
+            /*if (Application.isFocused)
             {
                 if (!MainMenu.MainMenu.Esc)
                 {
@@ -144,7 +154,7 @@ namespace SDJK
                 }
             }
             else
-                Application.targetFrameRate = 20;
+                Application.targetFrameRate = 20;*/
 
             foreach (Font font in fonts)
             {

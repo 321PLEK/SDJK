@@ -3487,6 +3487,7 @@ MonoBehaviour:
   - extra/Dark Sheep
   - extra/The World Revolving
   - extra/Madness
+  - extra/Geometrical Dominator
   - extra/Smoked Turkey Rag
   LevelList:
   - Rainbow Tylenol
@@ -3504,6 +3505,7 @@ MonoBehaviour:
   - The World Revolving
   - Madness
   - Madness Left
+  - Geometrical Dominator
   - Smoked Turkey Rag
   PhoneControll: {fileID: 1355133083}
   PlayingText: {fileID: 1578534477}
