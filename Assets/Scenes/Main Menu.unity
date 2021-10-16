@@ -3487,6 +3487,7 @@ MonoBehaviour:
   - extra/Dark Sheep
   - extra/The World Revolving
   - extra/Madness
+  - extra/Smoked Turkey Rag
   LevelList:
   - Rainbow Tylenol
   - Night of Knights
@@ -3503,6 +3504,7 @@ MonoBehaviour:
   - The World Revolving
   - Madness
   - Madness Left
+  - Smoked Turkey Rag
   PhoneControll: {fileID: 1355133083}
   PlayingText: {fileID: 1578534477}
   GameStartText: {fileID: 355269403}
