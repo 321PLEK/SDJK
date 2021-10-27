@@ -11,7 +11,9 @@ using DiscordPresence;
 using Newtonsoft.Json;
 using UnityEngineInternal;
 using SDJK.PlayMode.UI.Background;
+#if UNITY_STANDALONE_WIN
 using System.Windows.Forms;
+#endif
 using Application = UnityEngine.Application;
 using SDJK.Camera;
 
@@ -874,6 +876,7 @@ namespace SDJK.MainMenu
 
         public void ProfilePictureChange()
         {
+#if UNITY_STANDALONE_WIN
             //파일오픈창 생성 및 설정
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.Title = LangManager.LangLoad(LangManager.Lang, "account.change_profile_picture");
@@ -900,6 +903,7 @@ namespace SDJK.MainMenu
                 return;
 
             return;
+#endif
         }
 
         public void NickNameChange()

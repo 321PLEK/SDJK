@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class test : MonoBehaviour
 {
+#if UNITY_STANDALONE_WIN
     int i = 6;
     bool b = false;
     float x = 0;
@@ -108,4 +109,5 @@ public class test : MonoBehaviour
         else
             i = 0;
     }
+#endif
 }

@@ -7,7 +7,9 @@ using SDJK.PlayMode.Sound;
 using SDJK.Scene;
 using System.Collections;
 using System.Collections.Generic;
+#if UNITY_STANDALONE_WIN
 using System.Windows.Forms;
+#endif
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -606,6 +608,7 @@ namespace SDJK.EditMode
 
         public void FNFCameraZoom()
         {
+#if UNITY_STANDALONE_WIN
             DialogResult dialogResult = MessageBox.Show(LangManager.LangLoad(LangManager.Lang, "editMode.fnf_camera_zoom warning"), LangManager.LangLoad(LangManager.Lang, "editMode.fnf_camera_zoom"), MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (dialogResult == DialogResult.Yes)
             {
@@ -669,11 +672,13 @@ namespace SDJK.EditMode
                 }
             }
 
+#endif
             RightClickMenu.Show = false;
         }
 
         public void HitSoundReset()
         {
+#if UNITY_STANDALONE_WIN
             DialogResult dialogResult = MessageBox.Show(LangManager.LangLoad(LangManager.Lang, "editMode.hit_sound_reset warning"), LangManager.LangLoad(LangManager.Lang, "editMode.hit_sound_reset"), MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (dialogResult == DialogResult.Yes)
             {
@@ -697,11 +702,13 @@ namespace SDJK.EditMode
                 PlayerManager.mapData.AllBeat.Sort();
             }
 
+#endif
             RightClickMenu.Show = false;
         }
 
         public void AllNoteReset()
         {
+#if UNITY_STANDALONE_WIN
             DialogResult dialogResult = MessageBox.Show(LangManager.LangLoad(LangManager.Lang, "editMode.note_reset warning"), LangManager.LangLoad(LangManager.Lang, "editMode.note_reset"), MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (dialogResult == DialogResult.Yes)
             {
@@ -736,6 +743,7 @@ namespace SDJK.EditMode
                 }
             }
 
+#endif
             RightClickMenu.Show = false;
         }
     }
