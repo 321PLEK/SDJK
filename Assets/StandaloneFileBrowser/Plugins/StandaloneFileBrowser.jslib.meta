@@ -64,7 +64,7 @@ PluginImporter:
     second:
       enabled: 0
       settings:
-        CPU: AnyCPU
+        CPU: None
   - first:
       Standalone: LinuxUniversal
     second:
@@ -82,13 +82,13 @@ PluginImporter:
     second:
       enabled: 0
       settings:
-        CPU: AnyCPU
+        CPU: None
   - first:
       Standalone: Win64
     second:
       enabled: 0
       settings:
-        CPU: AnyCPU
+        CPU: None
   - first:
       WebGL: WebGL
     second:
