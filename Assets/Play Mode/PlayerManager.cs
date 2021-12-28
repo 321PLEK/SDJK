@@ -1388,6 +1388,7 @@ namespace SDJK.PlayMode
         public string BGM = "";
         public string Background = "";
         public string VideoBackground = "";
+        public string VideoBackgroundNight = "";
         public double VideoOffset = 0;
         
         public string Artist = "none";

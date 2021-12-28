@@ -36,34 +36,41 @@ namespace SDJK.PlayMode.UI.Background
                 videoPlayer.targetTexture.Release();
 
             string NameSpace = ResourcesManager.GetStringNameSpace(PlayerManager.mapData.VideoBackground, out string ResourceName);
+            string NameSpaceNight = ResourcesManager.GetStringNameSpace(PlayerManager.mapData.VideoBackgroundNight, out string ResourceNameNight);
             string MapPathResourceName = ResourceName;
+            string MapPathResourceNameNight = ResourceNameNight;
+
             ResourceName = ResourcesManager.BackgroundPath + "video/" + ResourceName;
+            ResourceNameNight = ResourcesManager.BackgroundPath + "video/" + ResourceNameNight;
 
             bool temp = false;
 
             if (NameSpace == "")
                 NameSpace = "sdjk";
-            
+            if (NameSpaceNight == "")
+                NameSpaceNight = "sdjk";
+
             //리소스팩에서 리소스를 가져오기
             for (int i = 0; i < ResourcesManager.ResourcePackPath.Count; i++)
             {
-                if (File.Exists(ResourcesManager.ResourcePackPath[i] + ResourceName.Replace("%NameSpace%", NameSpace) + ".mp4"))
+                if (DateTime.Now.Hour >= 0 && DateTime.Now.Hour < 4)
                 {
-                    videoPlayer.url = ResourcesManager.ResourcePackPath[i] + ResourceName.Replace("%NameSpace%", NameSpace) + ".mp4";
-                    temp = true;
-                }
-            }
-
-            if (!temp)
-            {
-                if (PlayerManager.MapPath != "" && (PlayerManager.Editor || PlayerManager.isEditorMapPlay))
-                {
-                    //맵 파일에서 리소스를 가져오기
-                    string ResourceNameMapPath = PlayerManager.MapPath + MapPathResourceName;
-
-                    if (File.Exists(ResourceNameMapPath + ".mp4"))
+                    if (File.Exists(ResourcesManager.ResourcePackPath[i] + ResourceNameNight.Replace("%NameSpace%", NameSpaceNight) + ".mp4"))
                     {
-                        videoPlayer.url = ResourceNameMapPath + ".mp4";
+                        videoPlayer.url = ResourcesManager.ResourcePackPath[i] + ResourceNameNight.Replace("%NameSpace%", NameSpaceNight) + ".mp4";
+                        temp = true;
+                    }
+                    else if (File.Exists(ResourcesManager.ResourcePackPath[i] + ResourceName.Replace("%NameSpace%", NameSpace) + ".mp4"))
+                    {
+                        videoPlayer.url = ResourcesManager.ResourcePackPath[i] + ResourceName.Replace("%NameSpace%", NameSpace) + ".mp4";
+                        temp = true;
+                    }
+                }
+                else
+                {
+                    if (File.Exists(ResourcesManager.ResourcePackPath[i] + ResourceName.Replace("%NameSpace%", NameSpace) + ".mp4"))
+                    {
+                        videoPlayer.url = ResourcesManager.ResourcePackPath[i] + ResourceName.Replace("%NameSpace%", NameSpace) + ".mp4";
                         temp = true;
                     }
                 }
@@ -71,11 +78,66 @@ namespace SDJK.PlayMode.UI.Background
 
             if (!temp)
             {
-                //원본 리소스를 가져오기
-                if (File.Exists(Application.streamingAssetsPath + "/" + ResourceName.Replace("%NameSpace%", NameSpace) + ".mp4"))
+                if (PlayerManager.MapPath != "" && (PlayerManager.Editor || PlayerManager.isEditorMapPlay))
                 {
-                    videoPlayer.url = Application.streamingAssetsPath + "/" + ResourceName.Replace("%NameSpace%", NameSpace) + ".mp4";
-                    temp = true;
+                    if (DateTime.Now.Hour >= 0 && DateTime.Now.Hour < 4)
+                    {
+                        //맵 파일에서 리소스를 가져오기
+                        string ResourceNameMapPath = PlayerManager.MapPath + MapPathResourceNameNight;
+
+                        if (File.Exists(ResourceNameMapPath + ".mp4"))
+                        {
+                            videoPlayer.url = ResourceNameMapPath + ".mp4";
+                            temp = true;
+                        }
+                        else
+                        {
+                            ResourceNameMapPath = PlayerManager.MapPath + MapPathResourceName;
+
+                            if (File.Exists(ResourceNameMapPath + ".mp4"))
+                            {
+                                videoPlayer.url = ResourceNameMapPath + ".mp4";
+                                temp = true;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        string ResourceNameMapPath = PlayerManager.MapPath + MapPathResourceName;
+
+                        if (File.Exists(ResourceNameMapPath + ".mp4"))
+                        {
+                            videoPlayer.url = ResourceNameMapPath + ".mp4";
+                            temp = true;
+                        }
+                    }
+                }
+            }
+
+            if (!temp)
+            {
+                if (DateTime.Now.Hour >= 0 && DateTime.Now.Hour < 4)
+                {
+                    //원본 리소스를 가져오기
+                    if (File.Exists(Application.streamingAssetsPath + "/" + ResourceNameNight.Replace("%NameSpace%", NameSpaceNight) + ".mp4"))
+                    {
+                        videoPlayer.url = Application.streamingAssetsPath + "/" + ResourceNameNight.Replace("%NameSpace%", NameSpaceNight) + ".mp4";
+                        temp = true;
+                    }
+                    else if (File.Exists(Application.streamingAssetsPath + "/" + ResourceName.Replace("%NameSpace%", NameSpace) + ".mp4"))
+                    {
+                        videoPlayer.url = Application.streamingAssetsPath + "/" + ResourceName.Replace("%NameSpace%", NameSpace) + ".mp4";
+                        temp = true;
+                    }
+                }
+                else
+                {
+                    //원본 리소스를 가져오기
+                    if (File.Exists(Application.streamingAssetsPath + "/" + ResourceName.Replace("%NameSpace%", NameSpace) + ".mp4"))
+                    {
+                        videoPlayer.url = Application.streamingAssetsPath + "/" + ResourceName.Replace("%NameSpace%", NameSpace) + ".mp4";
+                        temp = true;
+                    }
                 }
             }
 
