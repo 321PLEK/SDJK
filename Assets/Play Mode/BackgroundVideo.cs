@@ -27,10 +27,10 @@ namespace SDJK.PlayMode.UI.Background
 
         public IEnumerator Rerender()
         {
-            videoPlayer.enabled = true;
-            
             videoPlayer.Stop();
             videoPlayer.clip = null;
+
+            videoPlayer.enabled = true;
             
             if (!MainMenu)
                 videoPlayer.targetTexture.Release();
