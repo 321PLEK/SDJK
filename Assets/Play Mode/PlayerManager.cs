@@ -628,10 +628,11 @@ namespace SDJK.PlayMode
 
             //플레이어 전용 (플레이어 오프셋 O) Current Beat 변수
             double CurrentBeat = (BeatTimer + (time - BPMTimer) - StartDelay - (GameManager.InputOffset * audioSource.pitch)) * (effect.BPM / 60) + BPMCurrentBeat;
-            if (GameManager.NoteInterpolation)
+            VisibleCurrentBeatLerp = Mathf.Lerp((float)VisibleCurrentBeatLerp, (float)CurrentBeat, (float)(effect.BPM / 60.0 * 0.2 * GameManager.FpsDeltaTime));
+            /*if (GameManager.NoteInterpolation)
                 VisibleCurrentBeatLerp = Mathf.Lerp((float)VisibleCurrentBeatLerp, (float)CurrentBeat, (float)(effect.BPM / 60.0 * 0.2 * GameManager.FpsDeltaTime));
             else
-                VisibleCurrentBeatLerp = CurrentBeat;
+                VisibleCurrentBeatLerp = CurrentBeat;*/
 
             VisibleCurrentBeat = VisibleCurrentBeatLerp;
             if (Editor)
@@ -641,7 +642,11 @@ namespace SDJK.PlayMode
                 VisibleCurrentBeat += 0.2 * (60.0 / effect.BPM) * audioSource.pitch;
 
             //판정 전용 (플레이어 오프셋 O) Current Beat 변수
-            JudgmentCurrentBeat = ((BeatTimer + (time - BPMTimer) - StartDelay - (GameManager.InputOffset * audioSource.pitch)) * (effect.BPM / 60) + BPMCurrentBeat);
+            if (GameManager.NoteInterpolation)
+                JudgmentCurrentBeat = VisibleCurrentBeat;
+            else
+                JudgmentCurrentBeat = ((BeatTimer + (time - BPMTimer) - StartDelay - (GameManager.InputOffset * audioSource.pitch)) * (effect.BPM / 60) + BPMCurrentBeat);
+
             if (Editor)
                 JudgmentCurrentBeat += 1;
 

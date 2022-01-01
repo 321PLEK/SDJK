@@ -49,13 +49,10 @@ namespace SDJK
                 if ((PlayerManager.MapPlay || PlayerManager.Editor) && (PlayerManager.mapData.Effect.WindowSizeEffect.Count > 0 || PlayerManager.mapData.Effect.WindowPosEffect.Count > 0))
                 {
 #if UNITY_STANDALONE_WIN
-                    if (tempWindowSize != WindowSize || tempWindowPos != WindowPos || tempWindowDatumPoint != WindowDatumPoint || tempScreenDatumPoint != ScreenDatumPoint)
-                    {
-                        if (PlayerManager.effect.WindowPosLerp != 1 && PlayerManager.effect.WindowPosLerp != 0)
-                            WindowManager.SetWindowPosition(WindowPos.x, WindowPos.y, (int)(1280 * WindowSize), (int)(720 * WindowSize), WindowDatumPoint, ScreenDatumPoint, true, (float)(PlayerManager.effect.WindowPosLerp * PlayerManager.playerManager.audioSource.pitch));
-                        else
-                            WindowManager.SetWindowPosition(WindowPos.x, WindowPos.y, (int)(1280 * WindowSize), (int)(720 * WindowSize), WindowDatumPoint, ScreenDatumPoint);
-                    }
+                    if (PlayerManager.effect.WindowPosLerp < 1 && PlayerManager.effect.WindowPosLerp > 0)
+                        WindowManager.SetWindowPosition(WindowPos.x, WindowPos.y, (int)(1280 * WindowSize), (int)(720 * WindowSize), WindowDatumPoint, ScreenDatumPoint, true, (float)(PlayerManager.effect.WindowPosLerp * PlayerManager.playerManager.audioSource.pitch));
+                    else
+                        WindowManager.SetWindowPosition(WindowPos.x, WindowPos.y, (int)(1280 * WindowSize), (int)(720 * WindowSize), WindowDatumPoint, ScreenDatumPoint);
 #endif
 
                     tempWindowSize = WindowSize;

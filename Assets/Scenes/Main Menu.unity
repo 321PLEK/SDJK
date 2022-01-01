@@ -297,8 +297,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1328019866}
   m_HandleRect: {fileID: 517244084}
   m_Direction: 2
-  m_Value: 1.0000015
-  m_Size: 0.921556
+  m_Value: 1
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -3515,7 +3515,6 @@ MonoBehaviour:
   - extra/Zavodila
   - extra/Stress
   - extra/Expurgation
-  - breakfast
   - extra/School Live! OP
   - extra/Dark Sheep
   - extra/The World Revolving
@@ -5385,8 +5384,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2076047473}
   m_HandleRect: {fileID: 2076047472}
   m_Direction: 2
-  m_Value: 1.0000015
-  m_Size: 0.921556
+  m_Value: 1
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -5512,8 +5511,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 617547294}
   m_HandleRect: {fileID: 517244084}
   m_Direction: 2
-  m_Value: 1.0000015
-  m_Size: 0.921556
+  m_Value: 1
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
