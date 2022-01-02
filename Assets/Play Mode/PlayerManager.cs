@@ -645,10 +645,12 @@ namespace SDJK.PlayMode
             if (GameManager.NoteInterpolation)
                 JudgmentCurrentBeat = VisibleCurrentBeat;
             else
+            {
                 JudgmentCurrentBeat = ((BeatTimer + (time - BPMTimer) - StartDelay - (GameManager.InputOffset * audioSource.pitch)) * (effect.BPM / 60) + BPMCurrentBeat);
 
-            if (Editor)
-                JudgmentCurrentBeat += 1;
+                if (Editor)
+                    JudgmentCurrentBeat += 1;
+            }
 
             //HP Bar
             if (!(GameManager.EditorOptimization && Editor))
