@@ -35,6 +35,10 @@ public class WindowManager : MonoBehaviour
     [DllImport("user32.dll", EntryPoint = "FindWindow")]
     static extern IntPtr FindWindow(string LpClassName, string lpWindowName);
 
+    [DllImport("user32.dll")]
+    [return: MarshalAs(UnmanagedType.Bool)]
+    static extern bool GetClientRect(IntPtr hWnd, out RECT lpRect);
+
     public static void GetWindowResolution(out int width, out int height)
     {
         RECT rect;
@@ -49,13 +53,43 @@ public class WindowManager : MonoBehaviour
 
     public static IntPtr GetWindowHandle() => GetActiveWindow();
 
+    public static Vector2 GetWindowSize()
+    {
+#if UNITY_STANDALONE_WIN
+        IntPtr temp = GetWindowHandle();
+        if (temp != IntPtr.Zero)
+            handle = temp;
+
+        GetWindowRect(handle, out RECT rect);
+        return new Vector2(rect.Right - rect.Left, rect.Bottom - rect.Top);
+#else
+            return Vector2.zero;
+#endif
+    }
+
+    public static Vector2 GetClientSize()
+    {
+#if UNITY_STANDALONE_WIN
+        IntPtr temp = GetWindowHandle();
+        if (temp != IntPtr.Zero)
+            handle = temp;
+
+        GetClientRect(handle, out RECT rect);
+        return new Vector2(rect.Right, rect.Bottom);
+#else
+            return Vector2.zero;
+#endif
+    }
+
     public static void SetWindowPosition(float x, float y, int width, int height, datumPoint windowDatumPoint = datumPoint.Center, datumPoint screenDatumPoint = datumPoint.Center, bool Lerp = false, float time = 0.05f)
     {
         IntPtr temp = GetWindowHandle();
         if (temp != IntPtr.Zero)
             handle = temp;
 
-        SetWindowPos(handle, IntPtr.Zero, 0, 0, width, height, SWP_NOZORDER | SWP_NOMOVE | SWP_SHOWWINDOW);
+        Vector2 border = GetWindowSize() - GetClientSize();
+
+        SetWindowPos(handle, IntPtr.Zero, 0, 0, Mathf.RoundToInt(width + border.x), Mathf.RoundToInt(height + border.y), SWP_NOZORDER | SWP_NOMOVE | SWP_SHOWWINDOW);
         GetWindowResolution(out int width2, out int height2);
 
         if (windowDatumPoint == datumPoint.Center)
