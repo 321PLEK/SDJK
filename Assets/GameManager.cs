@@ -31,6 +31,7 @@ namespace SDJK
         public static int AllLevelIndex = 0;
         public static int LevelIndex = 0;
         public static int ExtraLevelIndex = 0;
+        public static int OrnamentalLevelIndex = 0;
 
         public static bool Pause = false;
 

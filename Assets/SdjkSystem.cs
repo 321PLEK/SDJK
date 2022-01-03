@@ -48,6 +48,9 @@ namespace SDJK
             {
                 if ((PlayerManager.MapPlay || PlayerManager.Editor) && (PlayerManager.mapData.Effect.WindowSizeEffect.Count > 0 || PlayerManager.mapData.Effect.WindowPosEffect.Count > 0))
                 {
+                    if (Screen.fullScreen)
+                        Screen.fullScreen = false;
+
 #if UNITY_STANDALONE_WIN
                     if (PlayerManager.effect.WindowPosLerp < 1 && PlayerManager.effect.WindowPosLerp > 0)
                         WindowManager.SetWindowPosition(WindowPos.x, WindowPos.y, (int)(1280 * WindowSize), (int)(720 * WindowSize), WindowDatumPoint, ScreenDatumPoint, true, (float)(PlayerManager.effect.WindowPosLerp * PlayerManager.playerManager.audioSource.pitch));

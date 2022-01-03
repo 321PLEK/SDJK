@@ -21,6 +21,7 @@ namespace SDJK
 
         readonly public static string MapPath = "assets/%NameSpace%/map/";
         readonly public static string ExtraMapPath = "assets/%NameSpace%/map/extra/";
+        readonly public static string OrnamentalMapPath = "assets/%NameSpace%/map/ornamental/";
 
         readonly public static string BackgroundPath = "assets/%NameSpace%/textures/background/";
 
@@ -39,6 +40,7 @@ namespace SDJK
         public static List<string> AllLevelList = new List<string>();
         public static List<string> LevelList = new List<string>();
         public static List<string> ExtraLevelList = new List<string>();
+        public static List<string> OrnamentalLevelList = new List<string>();
 
         /// <summary>
         /// 리소스팩에서 리소스를 찾고, 반환 합니다 네임스페이스는 sdjk 입니다
@@ -363,6 +365,37 @@ namespace SDJK
             }
         }
 
+        public static void OrnamentalLevelRefresh()
+        {
+            resourcesManager.mainMenu.OrnamentalLevelList.Clear();
+            for (int i = 0; i < OrnamentalLevelList.Count; i++)
+                resourcesManager.mainMenu.OrnamentalLevelList.Add(OrnamentalLevelList[i]);
+
+            for (int i = 0; i < ResourcePackPath.Count; i++)
+            {
+                for (int ii = 0; i < NameSpaceList.Count; i++)
+                {
+                    string item = ResourcePackPath[i];
+                    if (Directory.Exists(item + OrnamentalMapPath.Replace("%NameSpace%", NameSpaceList[ii])))
+                    {
+                        string[] item2 = Directory.GetFiles(item + OrnamentalMapPath.Replace("%NameSpace%", NameSpaceList[ii]));
+                        for (int iii = 0; iii < item2.Length; iii++)
+                        {
+                            string item3 = item2[iii];
+                            string temp = item3.Replace("\\", "/");
+                            int iiii = temp.LastIndexOf("/") + 1;
+                            temp = temp.Substring(iiii, temp.LastIndexOf(".") - iiii);
+
+                            if (!resourcesManager.mainMenu.OrnamentalLevelList.Contains("ornamental/" + temp))
+                                resourcesManager.mainMenu.OrnamentalLevelList.Add("ornamental/" + temp);
+                            if (!resourcesManager.mainMenu.OrnamentalLevelList.Contains("ornamental/" + temp))
+                                resourcesManager.mainMenu.OrnamentalLevelList.Add("ornamental/" + temp);
+                        }
+                    }
+                }
+            }
+        }
+
         public static void BGMRefresh()
         {
             BGMList.Clear();
@@ -417,10 +450,15 @@ namespace SDJK
                 for (int i = 0; i < resourcesManager.mainMenu.ExtraLevelList.Count; i++)
                     ExtraLevelList.Add("extra/" + resourcesManager.mainMenu.ExtraLevelList[i]);
 
+                OrnamentalLevelList.Clear();
+                for (int i = 0; i < resourcesManager.mainMenu.OrnamentalLevelList.Count; i++)
+                    OrnamentalLevelList.Add("ornamental/" + resourcesManager.mainMenu.OrnamentalLevelList[i]);
+
                 NameSpaceRefresh();
                 LangRefresh();
                 LevelRefresh();
                 ExtraLevelRefresh();
+                OrnamentalLevelRefresh();
                 BGMRefresh();
             }
 

@@ -5218,8 +5218,8 @@
     ]
   },
   "BGM": "Friend Shitai Full",
-  "Background": "extra/School Live!",
-  "BackgroundNight": "extra/School Live! Night",
+  "Background": "ornamental/School Live!",
+  "BackgroundNight": "ornamental/School Live! Night",
   "VideoBackground": "",
   "VideoBackgroundNight": "",
   "VideoOffset": 0.0,

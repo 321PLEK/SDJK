@@ -60,6 +60,7 @@ namespace SDJK.MainMenu
         public List<string> AllLevelList = new List<string>();
         public List<string> LevelList = new List<string>();
         public List<string> ExtraLevelList = new List<string>();
+        public List<string> OrnamentalLevelList = new List<string>();
 
         static GameObject GameObject;
 
@@ -364,7 +365,7 @@ namespace SDJK.MainMenu
                 //Screen
                 if (GameManager.LeftKey || GameManager.RightKey)
                 {
-                    if (ButtonSelect.Equals(0) || ButtonSelect.Equals(1))
+                    if (ButtonSelect.Equals(0) || ButtonSelect.Equals(1) || ButtonSelect.Equals(2))
                     {
                         MapSelect.SetActive(true);
                         EditorSelect.SetActive(false);
@@ -450,15 +451,30 @@ namespace SDJK.MainMenu
                         PlayerManager.PracticeMode = true;
                 }
 
-                //Editor Start
+                //Map Start
                 if (ButtonSelect.Equals(2) && GameManager.EnterKey)
+                {
+                    SceneManager.SceneLoading("Play Mode");
+                    enabled = false;
+
+                    PlayerManager.AutoMode = false;
+                    PlayerManager.PracticeMode = false;
+
+                    if (Input.GetKey(KeyCode.A) || GameManager.AKey)
+                        PlayerManager.AutoMode = true;
+                    if (Input.GetKey(KeyCode.P) || GameManager.PKey)
+                        PlayerManager.PracticeMode = true;
+                }
+
+                //Editor Start
+                if (ButtonSelect.Equals(3) && GameManager.EnterKey)
                 {
                     SceneManager.SceneLoading("Editor Mode");
                     enabled = false;
                 }
 
                 //BGM Change
-                if ((GameManager.LeftKey || GameManager.RightKey || GameManager.UpKey || GameManager.DownKey) && (ButtonSelect.Equals(0) || ButtonSelect.Equals(1)))
+                if ((GameManager.LeftKey || GameManager.RightKey || GameManager.UpKey || GameManager.DownKey) && (ButtonSelect.Equals(0) || ButtonSelect.Equals(1) || ButtonSelect.Equals(2)))
                 {
                     //Level Mix Max
                     if (ButtonSelect.Equals(0))
@@ -490,6 +506,22 @@ namespace SDJK.MainMenu
                             GameManager.ExtraLevelIndex = 0;
 
                         GameManager.Level = ExtraLevelList[GameManager.ExtraLevelIndex];
+                    }
+
+                    //Level Mix Max
+                    if (ButtonSelect.Equals(2))
+                    {
+                        if (GameManager.UpKey)
+                            GameManager.OrnamentalLevelIndex -= 1;
+                        else if (GameManager.DownKey)
+                            GameManager.OrnamentalLevelIndex += 1;
+
+                        if (GameManager.OrnamentalLevelIndex < 0)
+                            GameManager.OrnamentalLevelIndex = OrnamentalLevelList.Count - 1;
+                        else if (GameManager.OrnamentalLevelIndex >= OrnamentalLevelList.Count)
+                            GameManager.OrnamentalLevelIndex = 0;
+
+                        GameManager.Level = OrnamentalLevelList[GameManager.OrnamentalLevelIndex];
                     }
 
                     LevelRefresh();
