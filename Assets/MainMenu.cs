@@ -104,7 +104,7 @@ namespace SDJK.MainMenu
             AllowIndirectMissText = _AllowIndirectMissText;
             LangReload();
 
-            if (ButtonSelect.Equals(0) || ButtonSelect.Equals(1))
+            if (ButtonSelect.Equals(0) || ButtonSelect.Equals(1) || ButtonSelect.Equals(2))
             {
                 MapSelect.SetActive(true);
                 EditorSelect.SetActive(false);
@@ -113,7 +113,7 @@ namespace SDJK.MainMenu
                 AccountSetting.SetActive(false);
                 Setting.SetActive(false);
             }
-            else if (ButtonSelect.Equals(2))
+            else if (ButtonSelect.Equals(3))
             {
                 MapSelect.SetActive(false);
                 EditorSelect.SetActive(true);
@@ -122,7 +122,7 @@ namespace SDJK.MainMenu
                 AccountSetting.SetActive(false);
                 Setting.SetActive(false);
             }
-            else if (ButtonSelect.Equals(3))
+            else if (ButtonSelect.Equals(4))
             {
                 MapSelect.SetActive(false);
                 EditorSelect.SetActive(false);
@@ -131,7 +131,7 @@ namespace SDJK.MainMenu
                 AccountSetting.SetActive(false);
                 Setting.SetActive(false);
             }
-            else if (ButtonSelect.Equals(4))
+            else if (ButtonSelect.Equals(5))
             {
                 MapSelect.SetActive(false);
                 EditorSelect.SetActive(false);
@@ -140,7 +140,7 @@ namespace SDJK.MainMenu
                 AccountSetting.SetActive(false);
                 Setting.SetActive(false);
             }
-            else if (ButtonSelect.Equals(5))
+            else if (ButtonSelect.Equals(6))
             {
                 MapSelect.SetActive(false);
                 EditorSelect.SetActive(false);
@@ -149,7 +149,7 @@ namespace SDJK.MainMenu
                 AccountSetting.SetActive(true);
                 Setting.SetActive(false);
             }
-            else if (ButtonSelect.Equals(6))
+            else if (ButtonSelect.Equals(7))
             {
                 MapSelect.SetActive(false);
                 EditorSelect.SetActive(false);
@@ -172,6 +172,7 @@ namespace SDJK.MainMenu
             ResourcesManager.resourcesManager.mainMenu = this;
             ResourcesManager.LevelRefresh();
             ResourcesManager.ExtraLevelRefresh();
+            ResourcesManager.OrnamentalLevelRefresh();
 
             if (Esc)
             {
@@ -374,7 +375,7 @@ namespace SDJK.MainMenu
                         AccountSetting.SetActive(false);
                         Setting.SetActive(false);
                     }
-                    else if (ButtonSelect.Equals(2))
+                    else if (ButtonSelect.Equals(3))
                     {
                         MapSelect.SetActive(false);
                         EditorSelect.SetActive(true);
@@ -383,7 +384,7 @@ namespace SDJK.MainMenu
                         AccountSetting.SetActive(false);
                         Setting.SetActive(false);
                     }
-                    else if (ButtonSelect.Equals(3))
+                    else if (ButtonSelect.Equals(4))
                     {
                         MapSelect.SetActive(false);
                         EditorSelect.SetActive(false);
@@ -392,7 +393,7 @@ namespace SDJK.MainMenu
                         AccountSetting.SetActive(false);
                         Setting.SetActive(false);
                     }
-                    else if (ButtonSelect.Equals(4))
+                    else if (ButtonSelect.Equals(5))
                     {
                         MapSelect.SetActive(false);
                         EditorSelect.SetActive(false);
@@ -401,7 +402,7 @@ namespace SDJK.MainMenu
                         AccountSetting.SetActive(false);
                         Setting.SetActive(false);
                     }
-                    else if (ButtonSelect.Equals(5))
+                    else if (ButtonSelect.Equals(6))
                     {
                         MapSelect.SetActive(false);
                         EditorSelect.SetActive(false);
@@ -410,7 +411,7 @@ namespace SDJK.MainMenu
                         AccountSetting.SetActive(true);
                         Setting.SetActive(false);
                     }
-                    else if (ButtonSelect.Equals(6))
+                    else if (ButtonSelect.Equals(7))
                     {
                         MapSelect.SetActive(false);
                         EditorSelect.SetActive(false);
@@ -569,10 +570,12 @@ namespace SDJK.MainMenu
                     else if (ButtonSelect.Equals(2))
                         PresenceManager.UpdatePresence("Main Menu", "Editor Select Screen");
                     else if (ButtonSelect.Equals(3))
-                        PresenceManager.UpdatePresence("Main Menu", "Lang Select Screen");
+                        PresenceManager.UpdatePresence("Main Menu", "Editor Select Screen");
                     else if (ButtonSelect.Equals(4))
-                        PresenceManager.UpdatePresence("Main Menu", "Resource Pack Select Screen");
+                        PresenceManager.UpdatePresence("Main Menu", "Lang Select Screen");
                     else if (ButtonSelect.Equals(5))
+                        PresenceManager.UpdatePresence("Main Menu", "Resource Pack Select Screen");
+                    else if (ButtonSelect.Equals(6))
                         PresenceManager.UpdatePresence("Main Menu", "Setting Screen");
                 }
                 else

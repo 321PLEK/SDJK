@@ -3518,12 +3518,13 @@ MonoBehaviour:
   - extra/Stress
   - extra/Expurgation
   - extra/School Live! OP
-  - extra/Dark Sheep
+  - ornamental/Dark Sheep
   - extra/The World Revolving
   - extra/Madness
   - extra/Geometrical Dominator
   - extra/Smoked Turkey Rag
-  - extra/School Live! OP Full
+  - ornamental/School Live! OP Full
+  - ornamental/MEGALOVANIA
   LevelList:
   - Rainbow Tylenol
   - Night of Knights
@@ -3545,6 +3546,7 @@ MonoBehaviour:
   OrnamentalLevelList:
   - Dark Sheep
   - School Live! OP Full
+  - MEGALOVANIA
   PhoneControll: {fileID: 1355133083}
   PlayingText: {fileID: 1578534477}
   GameStartText: {fileID: 355269403}
