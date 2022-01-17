@@ -15,7 +15,6 @@ namespace SDJK.PlayMode
         public KeyCode keyCode;
 
         public Transform HoldNote;
-        public SpriteRenderer holdNoteSpriteRenderer;
 
         public bool hide = false;
 

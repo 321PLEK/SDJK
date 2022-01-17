@@ -100,13 +100,11 @@ namespace SDJK.PlayMode
                             : !(Vector2.Distance(new Vector2(0, y + MainCamera.UiPos.y + 11), new Vector2(0, cameraPos.y - MainCamera.CameraPos.y)) < 20f * GameManager.Abs(MainCamera.UiZoom)))
                         {
                             item.spriteRenderer.enabled = false;
-                            item.holdNoteSpriteRenderer.enabled = false;
                             item.enabled = false;
                         }
                         else
                         {
                             item.spriteRenderer.enabled = true;
-                            item.holdNoteSpriteRenderer.enabled = true;
                             item.enabled = true;
                         }
                     }
