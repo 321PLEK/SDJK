@@ -18,17 +18,17 @@ namespace SDJK.PlayMode
         void Update()
         {
             if (A)
-                transform.position = JVector3.JVector3ToVector3(PlayerManager.effect.ABarPos) + defaultPos;
+                transform.localPosition = JVector3.JVector3ToVector3(PlayerManager.effect.ABarPos) + defaultPos;
             else if (S)
-                transform.position = JVector3.JVector3ToVector3(PlayerManager.effect.SBarPos) + defaultPos;
+                transform.localPosition = JVector3.JVector3ToVector3(PlayerManager.effect.SBarPos) + defaultPos;
             else if (D)
-                transform.position = JVector3.JVector3ToVector3(PlayerManager.effect.DBarPos) + defaultPos;
+                transform.localPosition = JVector3.JVector3ToVector3(PlayerManager.effect.DBarPos) + defaultPos;
             else if (J)
-                transform.position = JVector3.JVector3ToVector3(PlayerManager.effect.JBarPos) + defaultPos;
+                transform.localPosition = JVector3.JVector3ToVector3(PlayerManager.effect.JBarPos) + defaultPos;
             else if (K)
-                transform.position = JVector3.JVector3ToVector3(PlayerManager.effect.KBarPos) + defaultPos;
+                transform.localPosition = JVector3.JVector3ToVector3(PlayerManager.effect.KBarPos) + defaultPos;
             else if (L)
-                transform.position = JVector3.JVector3ToVector3(PlayerManager.effect.LBarPos) + defaultPos;
+                transform.localPosition = JVector3.JVector3ToVector3(PlayerManager.effect.LBarPos) + defaultPos;
         }
     }
 }

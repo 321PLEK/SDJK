@@ -1634,7 +1634,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.00029034016}
+  m_AnchoredPosition: {x: 0, y: -0.000030517578}
   m_SizeDelta: {x: 0, y: 515}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &351291951
@@ -3523,9 +3523,10 @@ MonoBehaviour:
   - extra/The World Revolving
   - extra/Madness
   - extra/Geometrical Dominator
-  - extra/Smoked Turkey Rag
+  - ornamenta/Smoked Turkey Rag
   - ornamental/School Live! OP Full
   - ornamental/MEGALOVANIA
+  - ornamental/Dadadada Tenshi
   LevelList:
   - Rainbow Tylenol
   - Night of Knights
@@ -3543,11 +3544,12 @@ MonoBehaviour:
   - Madness
   - Madness Left
   - Geometrical Dominator
-  - Smoked Turkey Rag
   OrnamentalLevelList:
   - Dark Sheep
+  - Smoked Turkey Rag
   - School Live! OP Full
   - MEGALOVANIA
+  - Dadadada Tenshi
   PhoneControll: {fileID: 1355133083}
   PlayingText: {fileID: 1578534477}
   GameStartText: {fileID: 355269403}
@@ -4821,8 +4823,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 517244085}
   m_HandleRect: {fileID: 517244084}
   m_Direction: 2
-  m_Value: 0
-  m_Size: 0.99999726
+  m_Value: 1
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:

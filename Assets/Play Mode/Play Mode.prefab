@@ -207,6 +207,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rectTransform: {fileID: 6547707381923741428}
   boxCollider2D: {fileID: 0}
+  A: 0
+  S: 1
+  D: 0
+  J: 0
+  K: 0
+  L: 0
 --- !u!114 &8975677874011047411
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -624,6 +630,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rectTransform: {fileID: 6483631098795218823}
   boxCollider2D: {fileID: 0}
+  A: 0
+  S: 0
+  D: 0
+  J: 1
+  K: 0
+  L: 0
 --- !u!114 &1051644626401364474
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1198,6 +1210,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rectTransform: {fileID: 3804606590409830482}
   boxCollider2D: {fileID: 0}
+  A: 0
+  S: 0
+  D: 0
+  J: 0
+  K: 1
+  L: 0
 --- !u!114 &3192150493480963167
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1332,6 +1350,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rectTransform: {fileID: 8798823080502741620}
   boxCollider2D: {fileID: 0}
+  A: 0
+  S: 0
+  D: 1
+  J: 0
+  K: 0
+  L: 0
 --- !u!114 &7829459243592632209
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1635,6 +1659,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rectTransform: {fileID: 6303003664629311802}
   boxCollider2D: {fileID: 0}
+  A: 1
+  S: 0
+  D: 0
+  J: 0
+  K: 0
+  L: 0
 --- !u!114 &2112298412995906867
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1974,6 +2004,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rectTransform: {fileID: 636977248959632450}
   boxCollider2D: {fileID: 0}
+  A: 0
+  S: 0
+  D: 0
+  J: 0
+  K: 0
+  L: 1
 --- !u!114 &2945230432747438111
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7987,6 +8023,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rectTransform: {fileID: 8812015999344328972}
   boxCollider2D: {fileID: 3167215220692746001}
+  A: 0
+  S: 1
+  D: 0
+  J: 0
+  K: 0
+  L: 0
 --- !u!61 &3167215220692746001
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -13344,6 +13386,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rectTransform: {fileID: 8812015999660320587}
   boxCollider2D: {fileID: 3789377608785527832}
+  A: 0
+  S: 0
+  D: 0
+  J: 1
+  K: 0
+  L: 0
 --- !u!61 &3789377608785527832
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -14014,6 +14062,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rectTransform: {fileID: 8812016000268662017}
   boxCollider2D: {fileID: 8348271196674246865}
+  A: 1
+  S: 0
+  D: 0
+  J: 0
+  K: 0
+  L: 0
 --- !u!61 &8348271196674246865
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -14370,6 +14424,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rectTransform: {fileID: 8812016000370144593}
   boxCollider2D: {fileID: 3501252048975874789}
+  A: 0
+  S: 0
+  D: 1
+  J: 0
+  K: 0
+  L: 0
 --- !u!61 &3501252048975874789
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -15195,6 +15255,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rectTransform: {fileID: 8812016000916923623}
   boxCollider2D: {fileID: 3627602474261033672}
+  A: 0
+  S: 0
+  D: 0
+  J: 0
+  K: 1
+  L: 0
 --- !u!61 &3627602474261033672
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -15504,6 +15570,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rectTransform: {fileID: 8812016001004636975}
   boxCollider2D: {fileID: 3785777545449537787}
+  A: 0
+  S: 0
+  D: 0
+  J: 0
+  K: 0
+  L: 1
 --- !u!61 &3785777545449537787
 BoxCollider2D:
   m_ObjectHideFlags: 0
