@@ -15,25 +15,52 @@ namespace SDJK.PlayMode
         public KeyCode keyCode;
 
         public Transform HoldNote;
+        public SpriteRenderer holdNoteSpriteRenderer;
 
         public bool hide = false;
 
         public SpriteRenderer spriteRenderer;
 
+        public BarPosEffect barPosEffect;
+
         void Start()
         {
             if (keyCode == GameManager.A)
+            {
                 transform.localPosition = new Vector2(-5.535f, transform.localPosition.y);
+                barPosEffect.A = true;
+                barPosEffect.defaultPos = new Vector3(-5.535f, barPosEffect.defaultPos.y, 0);
+            }
             else if (keyCode == GameManager.S)
+            {
                 transform.localPosition = new Vector2(-3.321f, transform.localPosition.y);
+                barPosEffect.S = true;
+                barPosEffect.defaultPos = new Vector3(-3.321f, barPosEffect.defaultPos.y, 0);
+            }
             else if (keyCode == GameManager.D)
+            {
                 transform.localPosition = new Vector2(-1.107f, transform.localPosition.y);
+                barPosEffect.D = true;
+                barPosEffect.defaultPos = new Vector3(-1.107f, barPosEffect.defaultPos.y, 0);
+            }
             else if (keyCode == GameManager.J)
+            {
                 transform.localPosition = new Vector2(1.107f, transform.localPosition.y);
+                barPosEffect.J = true;
+                barPosEffect.defaultPos = new Vector3(1.107f, barPosEffect.defaultPos.y, 0);
+            }
             else if (keyCode == GameManager.K)
+            {
                 transform.localPosition = new Vector2(3.321f, transform.localPosition.y);
+                barPosEffect.K = true;
+                barPosEffect.defaultPos = new Vector3(3.321f, barPosEffect.defaultPos.y, 0);
+            }
             else if (keyCode == GameManager.L)
+            {
                 transform.localPosition = new Vector2(5.535f, transform.localPosition.y);
+                barPosEffect.L = true;
+                barPosEffect.defaultPos = new Vector3(5.535f, barPosEffect.defaultPos.y, 0);
+            }
 
             if (GameManager.Optimization && !PlayerManager.Editor)
                 note.enabled = false;

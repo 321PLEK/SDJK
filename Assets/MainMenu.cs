@@ -102,6 +102,7 @@ namespace SDJK.MainMenu
             OsuHitSoundButtonText = _OsuHitSoundButtonText;
             UpScrollText = _UpScrollText;
             AllowIndirectMissText = _AllowIndirectMissText;
+            IncreasedNoteReadabilityText = _IncreasedNoteReadabilityText;
             LangReload();
 
             if (ButtonSelect.Equals(0) || ButtonSelect.Equals(1) || ButtonSelect.Equals(2))
@@ -713,6 +714,7 @@ namespace SDJK.MainMenu
         public static string UpScroll = "Up Scroll";
         public static string Playing = "Playing: ";
         public static string AllowIndirectMiss = "Allow Indirect Miss";
+        public static string IncreasedNoteReadability = "Increased Note Readability";
 
         public static void AllRerender()
         {
@@ -757,6 +759,7 @@ namespace SDJK.MainMenu
             UpScroll = LangManager.LangLoad(LangManager.Lang, "setting.up_scroll");
             Playing = LangManager.LangLoad(LangManager.Lang, "main_menu.playing");
             AllowIndirectMiss = LangManager.LangLoad(LangManager.Lang, "setting.allow_indirect_miss");
+            IncreasedNoteReadability = LangManager.LangLoad(LangManager.Lang, "setting.increased_note_readability");
 
             if (GameManager.Optimization)
                 OptimizationButtonText.text = Optimization + ": " + On;
@@ -787,6 +790,11 @@ namespace SDJK.MainMenu
                 AllowIndirectMissText.text = AllowIndirectMiss + ": " + On;
             else
                 AllowIndirectMissText.text = AllowIndirectMiss + ": " + Off;
+
+            if (GameManager.IncreasedNoteReadability)
+                IncreasedNoteReadabilityText.text = IncreasedNoteReadability + ": " + On;
+            else
+                IncreasedNoteReadabilityText.text = IncreasedNoteReadability + ": " + Off;
         }
 
         public void SetVolume() => GameManager.MainVolume = VolumeSlider.value * 0.01f;
@@ -808,6 +816,9 @@ namespace SDJK.MainMenu
 
         public static Text AllowIndirectMissText;
         public Text _AllowIndirectMissText;
+
+        public static Text IncreasedNoteReadabilityText;
+        public Text _IncreasedNoteReadabilityText;
 
         public void OptimizationToggle()
         {
@@ -907,6 +918,16 @@ namespace SDJK.MainMenu
                 AllowIndirectMissText.text = AllowIndirectMiss + ": " + On;
             else
                 AllowIndirectMissText.text = AllowIndirectMiss + ": " + Off;
+        }
+
+        public void IncreasedNoteReadabilityToggle()
+        {
+            GameManager.IncreasedNoteReadability = !GameManager.IncreasedNoteReadability;
+
+            if (GameManager.IncreasedNoteReadability)
+                IncreasedNoteReadabilityText.text = IncreasedNoteReadability + ": " + On;
+            else
+                IncreasedNoteReadabilityText.text = IncreasedNoteReadability + ": " + Off;
         }
 
         public void ProfilePictureChange()

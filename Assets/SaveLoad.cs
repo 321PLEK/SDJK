@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using SDJK.Language;
-using UnityEngine.Serialization;
 using Newtonsoft.Json;
 
 namespace SDJK.SaveLoad
@@ -105,6 +104,8 @@ namespace SDJK.SaveLoad
 
             settingData.AllowIndirectMiss = GameManager.AllowIndirectMiss;
 
+            settingData.IncreasedNoteReadability = GameManager.IncreasedNoteReadability;
+
             playerData.ProfilePicturePath = GameManager.ProfilePicturePath;
             playerData.NickName = GameManager.NickName;
             playerData.MapRecord = GameManager.mapRecord;
@@ -142,6 +143,8 @@ namespace SDJK.SaveLoad
             GameManager.ComboPos = JVector2.JVector2ToVector2(settingData.ComboPos);
 
             GameManager.AllowIndirectMiss = settingData.AllowIndirectMiss;
+
+            GameManager.IncreasedNoteReadability = settingData.IncreasedNoteReadability;
 
             GameManager.ProfilePicturePath = playerData.ProfilePicturePath;
             GameManager.NickName = playerData.NickName;
@@ -194,6 +197,8 @@ namespace SDJK.SaveLoad
         public KeyCode L = KeyCode.L;
 
         public JVector2 ComboPos = new JVector2();
+
+        public bool IncreasedNoteReadability = false;
     }
 
     [System.Serializable]

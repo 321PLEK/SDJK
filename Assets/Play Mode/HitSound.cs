@@ -133,21 +133,6 @@ namespace SDJK.PlayMode.Sound
                 PlayerManager.HitSoundCurrentBeat = -10;
                 PlayerManager.BeatTimer = 0;
 
-                yield return new WaitForSeconds((float)(60.0 / PlayerManager.mapData.Effect.BPM));
-
-                //4 비트 기다리기
-                yield return new WaitUntil(() => PlayerManager.HitSoundCurrentBeat >= -3);
-                audioSource.PlayOneShot(startHitSound, audioSource.volume * GameManager.MainVolume);
-
-                yield return new WaitUntil(() => PlayerManager.HitSoundCurrentBeat >= -2);
-                audioSource.PlayOneShot(startHitSound, audioSource.volume * GameManager.MainVolume);
-
-                yield return new WaitUntil(() => PlayerManager.HitSoundCurrentBeat >= -1);
-                audioSource.PlayOneShot(startHitSound, audioSource.volume * GameManager.MainVolume);
-
-                yield return new WaitUntil(() => PlayerManager.HitSoundCurrentBeat >= 0);
-                audioSource.PlayOneShot(startHitSound, audioSource.volume * GameManager.MainVolume);
-
                 bool end = false;
 
                 if (!GameManager.OsuHitSound)
@@ -173,33 +158,33 @@ namespace SDJK.PlayMode.Sound
                         {
                             if (PlayerManager.effect.Pitch * GameManager.GameSpeed >= 0)
                             {
-                                bool hitSoundPlay = false;
+                                int hitSoundPlay = 0;
                                 while (PlayerManager.HitSoundCurrentBeat >= PlayerManager.mapData.AllBeat[BeatIndex])
                                 {
-                                    if (BeatIndex > 0 && BeatIndex < PlayerManager.mapData.AllBeat.Count - 2 && PlayerManager.mapData.AllBeat[BeatIndex] != PlayerManager.mapData.AllBeat[BeatIndex - 1])
-                                        hitSoundPlay = true;
+                                    if (BeatIndex > 0 && BeatIndex < PlayerManager.mapData.AllBeat.Count - 2 && (PlayerManager.mapData.AllBeat[BeatIndex] != PlayerManager.mapData.AllBeat[BeatIndex - 1] || PlayerManager.mapData.HitSoundSimultaneousPlayAllow))
+                                        hitSoundPlay++;
                                     else if (BeatIndex <= 0)
-                                        hitSoundPlay = true;
+                                        hitSoundPlay++;
                                     BeatIndex++;
                                 }
 
-                                if (hitSoundPlay)
+                                for (int i = 0; i < hitSoundPlay; i++)
                                     audioSource.PlayOneShot(hitSound, audioSource.volume * GameManager.MainVolume);
                             }
                             else
                             {
-                                bool hitSoundPlay = false;
+                                int hitSoundPlay = 0;
                                 while (PlayerManager.HitSoundCurrentBeat <= PlayerManager.mapData.AllBeat[BeatIndex])
                                 {
-                                    if (BeatIndex > 1 && BeatIndex < PlayerManager.mapData.AllBeat.Count - 2 && PlayerManager.mapData.AllBeat[BeatIndex] != PlayerManager.mapData.AllBeat[BeatIndex + 1])
-                                        hitSoundPlay = true;
+                                    if (BeatIndex > 1 && (BeatIndex < PlayerManager.mapData.AllBeat.Count - 2 && PlayerManager.mapData.AllBeat[BeatIndex] != PlayerManager.mapData.AllBeat[BeatIndex + 1] || PlayerManager.mapData.HitSoundSimultaneousPlayAllow))
+                                        hitSoundPlay++;
                                     else if (BeatIndex >= PlayerManager.mapData.AllBeat.Count - 2)
-                                        hitSoundPlay = true;
+                                        hitSoundPlay++;
 
                                     BeatIndex--;
                                 }
 
-                                if (hitSoundPlay)
+                                for (int i = 0; i < hitSoundPlay; i++)
                                     audioSource.PlayOneShot(hitSound, audioSource.volume * GameManager.MainVolume);
                             }
                         }
@@ -221,21 +206,21 @@ namespace SDJK.PlayMode.Sound
                             if (BeatIndex < 0)
                                 BeatIndex = 0;
 
-                            bool hitSoundPlay = false;
+                            int hitSoundPlay = 0;
                             while (BeatIndex < PlayerManager.mapData.AllBeat.Count - 1 && PlayerManager.HitSoundCurrentBeat >= PlayerManager.mapData.AllBeat[BeatIndex])
                             {
                                 if (!Input.GetKey(KeyCode.T))
                                 {
-                                    if (BeatIndex > 0 && PlayerManager.mapData.AllBeat[BeatIndex] != PlayerManager.mapData.AllBeat[BeatIndex - 1])
-                                        hitSoundPlay = true;
+                                    if (BeatIndex > 0 && (PlayerManager.mapData.AllBeat[BeatIndex] != PlayerManager.mapData.AllBeat[BeatIndex - 1] || PlayerManager.mapData.HitSoundSimultaneousPlayAllow))
+                                        hitSoundPlay++;
                                     else if (BeatIndex <= 0)
-                                        hitSoundPlay = true;
+                                        hitSoundPlay++;
                                 }
 
                                 BeatIndex++;
                             }
 
-                            if (hitSoundPlay)
+                            for (int i = 0; i < hitSoundPlay; i++)
                                 audioSource.PlayOneShot(hitSound, audioSource.volume * GameManager.MainVolume);
                         }
                         else
@@ -243,21 +228,21 @@ namespace SDJK.PlayMode.Sound
                             if (BeatIndex >= PlayerManager.mapData.AllBeat.Count - 1)
                                 BeatIndex = PlayerManager.mapData.AllBeat.Count - 2;
 
-                            bool hitSoundPlay = false;
+                            int hitSoundPlay = 0;
                             while (BeatIndex >= 0 && PlayerManager.HitSoundCurrentBeat <= PlayerManager.mapData.AllBeat[BeatIndex])
                             {
                                 if (!Input.GetKey(KeyCode.T))
                                 {
-                                    if (BeatIndex < PlayerManager.mapData.AllBeat.Count - 2 && PlayerManager.mapData.AllBeat[BeatIndex] != PlayerManager.mapData.AllBeat[BeatIndex + 1])
-                                        hitSoundPlay = true;
+                                    if (BeatIndex < PlayerManager.mapData.AllBeat.Count - 2 && (PlayerManager.mapData.AllBeat[BeatIndex] != PlayerManager.mapData.AllBeat[BeatIndex + 1] || PlayerManager.mapData.HitSoundSimultaneousPlayAllow))
+                                        hitSoundPlay++;
                                     else if (BeatIndex >= PlayerManager.mapData.AllBeat.Count - 2)
-                                        hitSoundPlay = true;
+                                        hitSoundPlay++;
                                 }
 
                                 BeatIndex--;
                             }
 
-                            if (hitSoundPlay)
+                            for (int i = 0; i < hitSoundPlay; i++)
                                 audioSource.PlayOneShot(hitSound, audioSource.volume * GameManager.MainVolume);
                         }
 

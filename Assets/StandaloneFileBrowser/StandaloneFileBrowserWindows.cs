@@ -1,10 +1,9 @@
 #if UNITY_STANDALONE_WIN
-
+//
 using System;
 using System.IO;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
-using Ookii.Dialogs;
 
 namespace SFB {
     // For fullscreen support
@@ -22,7 +21,7 @@ namespace SFB {
         private static extern IntPtr GetActiveWindow();
 
         public string[] OpenFilePanel(string title, string directory, ExtensionFilter[] extensions, bool multiselect) {
-            var fd = new VistaOpenFileDialog();
+            var fd = new OpenFileDialog();
             fd.Title = title;
             if (extensions != null) {
                 fd.Filter = GetFilterFromFileExtensionList(extensions);
@@ -46,7 +45,7 @@ namespace SFB {
         }
 
         public string[] OpenFolderPanel(string title, string directory, bool multiselect) {
-            var fd = new VistaFolderBrowserDialog();
+            var fd = new FolderBrowserDialog();
             fd.Description = title;
             if (!string.IsNullOrEmpty(directory)) {
                 fd.SelectedPath = GetDirectoryPath(directory);
@@ -62,7 +61,7 @@ namespace SFB {
         }
 
         public string SaveFilePanel(string title, string directory, string defaultName, ExtensionFilter[] extensions) {
-            var fd = new VistaSaveFileDialog();
+            var fd = new SaveFileDialog();
             fd.Title = title;
 
             var finalFilename = "";

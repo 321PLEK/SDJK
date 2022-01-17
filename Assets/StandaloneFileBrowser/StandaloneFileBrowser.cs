@@ -9,10 +9,6 @@ namespace SFB {
             Name = filterName;
             Extensions = filterExtensions;
         }
-
-        public ExtensionFilter(string filterName, string filterExtensions, string v) : this()
-        {
-        }
     }
 
     public class StandaloneFileBrowser {

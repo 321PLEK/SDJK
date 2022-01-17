@@ -82,6 +82,8 @@ namespace SDJK
         public static Dictionary<string, double> mapAccuracy = new Dictionary<string, double>();
         public static Dictionary<string, string> mapRank = new Dictionary<string, string>();
 
+        public static bool IncreasedNoteReadability = false;
+
         void Awake()
         {
             QualitySettings.vSyncCount = 0;
@@ -181,9 +183,9 @@ namespace SDJK
             if (PlayerManager.playerManager != null)
             {
                 if (FPS >= 15 && !Optimization && PlayerManager.playerManager.audioSource.pitch != 0)
-                    Time.fixedDeltaTime = 60f / (float)PlayerManager.effect.BPM * 0.25f * (1 / (float)Abs(PlayerManager.playerManager.audioSource.pitch));
+                    Time.fixedDeltaTime = 60f / (float)PlayerManager.effect.BPM * 0.125f * (1 / (float)Abs(PlayerManager.playerManager.audioSource.pitch));
                 else
-                    Time.fixedDeltaTime = 0.25f;
+                    Time.fixedDeltaTime = 0.125f;
             }
 
             FixedDeltaTime = Time.fixedDeltaTime;
@@ -356,7 +358,15 @@ namespace SDJK
         /// <param name="b"></param>
         /// <param name="t"></param>
         /// <returns></returns>
-        public static float Lerp(float a, float b, float t) => a + (b - a) * t;
+        public static float Lerp(float a, float b, float t)
+        {
+            if (t < 0)
+                t = 0;
+            else if (t > 1)
+                t = 0;
+
+            return a + (b - a) * t;
+        }
 
         /// <summary>
         /// 선형 보간 (a + (b - a) * t)
@@ -365,7 +375,15 @@ namespace SDJK
         /// <param name="b"></param>
         /// <param name="t"></param>
         /// <returns></returns>
-        public static double Lerp(double a, double b, double t) => a + (b - a) * t;
+        public static double Lerp(double a, double b, double t)
+        {
+            if (t < 0)
+                t = 0;
+            else if (t > 1)
+                t = 0;
+
+            return a + (b - a) * t;
+        }
     }
 
     public class JVector2
@@ -422,6 +440,12 @@ namespace SDJK
         public JVector3(float f) => x = y = z = f;
 
         public static Vector3 JVector3ToVector3(JVector3 jVector3) => new Vector3(jVector3.x, jVector3.y, jVector3.z);
+
+        public static JVector3 Lerp(JVector3 a, JVector3 b, float t)
+        {
+            t = Mathf.Clamp01(t);
+            return new JVector3(a.x + (b.x - a.x) * t, a.y + (b.y - a.y) * t, a.z + (b.z - a.z) * t);
+        }
     }
 
     public class JColor32

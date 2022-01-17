@@ -251,6 +251,16 @@ namespace SDJK.PlayMode
             //이펙트 인덱스를 전부 0으로
             EffectManager.EffectAllIndexSet(0);
 
+            mapData.Effect.Volume = 0.4;
+
+            BPMCurrentBeat = 0;
+            BPMTimer = 0;
+
+            playerManager.HitCurrentBeatStop = true;
+        }
+
+        static void EffectAdd()
+        {
             if (mapData.Effect.Camera.CameraPosEffect.Count == 0)
                 mapData.Effect.Camera.CameraPosEffect.Add(new CameraPosEffect());
             if (mapData.Effect.Camera.UiPosEffect.Count == 0)
@@ -283,12 +293,18 @@ namespace SDJK.PlayMode
             if (mapData.Effect.JudgmentSizeEffect.Count == 0)
                 mapData.Effect.JudgmentSizeEffect.Add(new JudgmentSizeEffect());
 
-            mapData.Effect.Volume = 0.4;
-
-            BPMCurrentBeat = 0;
-            BPMTimer = 0;
-
-            playerManager.HitCurrentBeatStop = true;
+            if (mapData.Effect.ABarPosEffect.Count == 0)
+                mapData.Effect.ABarPosEffect.Add(new SDJK.Effect.BarPosEffect());
+            if (mapData.Effect.SBarPosEffect.Count == 0)
+                mapData.Effect.SBarPosEffect.Add(new SDJK.Effect.BarPosEffect());
+            if (mapData.Effect.DBarPosEffect.Count == 0)
+                mapData.Effect.DBarPosEffect.Add(new SDJK.Effect.BarPosEffect());
+            if (mapData.Effect.JBarPosEffect.Count == 0)
+                mapData.Effect.JBarPosEffect.Add(new SDJK.Effect.BarPosEffect());
+            if (mapData.Effect.KBarPosEffect.Count == 0)
+                mapData.Effect.KBarPosEffect.Add(new SDJK.Effect.BarPosEffect());
+            if (mapData.Effect.LBarPosEffect.Count == 0)
+                mapData.Effect.LBarPosEffect.Add(new SDJK.Effect.BarPosEffect());
         }
 
         void MapLoad()
@@ -365,6 +381,8 @@ namespace SDJK.PlayMode
                     BPMCurrentBeat = 0;
                     BPMTimer = 0;
                     time = 0;
+
+                    EffectAdd();
                 }
             }
             else
@@ -491,6 +509,8 @@ namespace SDJK.PlayMode
             }*/
 
             EditorManager.hitSound();
+
+            EffectAdd();
         }
 
         //맵 저장
@@ -600,7 +620,7 @@ namespace SDJK.PlayMode
                     audioSource.pitch = 0;
 
                 //컨트롤 + S
-                if (Input.GetKey(KeyCode.LeftControl) && Input.GetKey(KeyCode.S) && !EditorManager.AutoScroll && !(Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.DownArrow)))
+                if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.S) && !EditorManager.AutoScroll && !(Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.DownArrow)))
                 {
                     if (MapJsonPath != "")
                         MapSave(MapJsonPath);
@@ -1404,6 +1424,8 @@ namespace SDJK.PlayMode
         public double Offset;
         public string Difficulty = "";
 
+        public bool HitSoundSimultaneousPlayAllow = false;
+
         public string Cover = "";
         public string CoverNight = "";
     }
@@ -1444,6 +1466,19 @@ namespace SDJK.PlayMode
         public WindowManager.datumPoint WindowDatumPoint;
         public WindowManager.datumPoint ScreenDatumPoint;
         public double WindowPosLerp = 1;
+
+        public JVector3 ABarPos = new JVector3();
+        public double ABarPosLerp = 0;
+        public JVector3 SBarPos = new JVector3();
+        public double SBarPosLerp = 0;
+        public JVector3 DBarPos = new JVector3();
+        public double DBarPosLerp = 0;
+        public JVector3 JBarPos = new JVector3();
+        public double JBarPosLerp = 0;
+        public JVector3 KBarPos = new JVector3();
+        public double KBarPosLerp = 0;
+        public JVector3 LBarPos = new JVector3();
+        public double LBarPosLerp = 0;
     }
 }
 
@@ -1490,6 +1525,19 @@ namespace SDJK.Effect
         public WindowManager.datumPoint WindowDatumPoint = WindowManager.datumPoint.Center;
         public WindowManager.datumPoint ScreenDatumPoint = WindowManager.datumPoint.Center;
         public List<WindowPosEffect> WindowPosEffect = new List<WindowPosEffect>();
+
+        public JVector3 ABarPos = new JVector3();
+        public List<BarPosEffect> ABarPosEffect = new List<BarPosEffect>();
+        public JVector3 SBarPos = new JVector3();
+        public List<BarPosEffect> SBarPosEffect = new List<BarPosEffect>();
+        public JVector3 DBarPos = new JVector3();
+        public List<BarPosEffect> DBarPosEffect = new List<BarPosEffect>();
+        public JVector3 JBarPos = new JVector3();
+        public List<BarPosEffect> JBarPosEffect = new List<BarPosEffect>();
+        public JVector3 KBarPos = new JVector3();
+        public List<BarPosEffect> KBarPosEffect = new List<BarPosEffect>();
+        public JVector3 LBarPos = new JVector3();
+        public List<BarPosEffect> LBarPosEffect = new List<BarPosEffect>();
 
         public List<double> AllBeat = new List<double>();
     }
@@ -1551,13 +1599,13 @@ namespace SDJK.Effect
     public class CameraEffect
     {
         public double CameraZoom = 1;
-        public JVector3 CameraPos = new JVector3(0, 0, -14);
         public List<CameraZoomEffect> CameraZoomEffect = new List<CameraZoomEffect>();
+        public JVector3 CameraPos = new JVector3(0, 0, -14);
         public List<CameraPosEffect> CameraPosEffect = new List<CameraPosEffect>();
 
         public double UiZoom = 1;
-        public JVector3 UiPos = new JVector3();
         public List<UiZoomEffect> UiZoomEffect = new List<UiZoomEffect>();
+        public JVector3 UiPos = new JVector3();
         public List<UiPosEffect> UiPosEffect = new List<UiPosEffect>();
     }
 
@@ -1607,6 +1655,13 @@ namespace SDJK.Effect
         public JVector2 Pos = new JVector2();
         public WindowManager.datumPoint WindowDatumPoint = WindowManager.datumPoint.Center;
         public WindowManager.datumPoint ScreenDatumPoint = WindowManager.datumPoint.Center;
+        public double Lerp = 1;
+    }
+
+    public class BarPosEffect
+    {
+        public double Beat = 0;
+        public JVector3 Value = new JVector3();
         public double Lerp = 1;
     }
 }

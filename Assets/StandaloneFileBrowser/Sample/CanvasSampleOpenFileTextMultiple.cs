@@ -50,15 +50,18 @@ public class CanvasSampleOpenFileTextMultiple : MonoBehaviour, IPointerDownHandl
     }
 #endif
 
+#pragma warning disable CS0618 // í˜•ì‹ ë˜ëŠ” ë©¤ë²„ëŠ” ì‚¬ìš©ë˜ì§€ ì•ŠìŠµë‹ˆë‹¤.
     private IEnumerator OutputRoutine(string[] urlArr) {
         var outputText = "";
-        for (int i = 0; i < urlArr.Length; i++) {
-#pragma warning disable CS0618 // Çü½Ä ¶Ç´Â ¸â¹ö´Â »ç¿ëµÇÁö ¾Ê½À´Ï´Ù.
-            var loader = new WWW(urlArr[i]);
-#pragma warning restore CS0618 // Çü½Ä ¶Ç´Â ¸â¹ö´Â »ç¿ëµÇÁö ¾Ê½À´Ï´Ù.
-            yield return loader;
-            outputText += loader.text;
+        for (int i = 0; i < urlArr.Length; i++)
+        {
+            using (var loader = new WWW(urlArr[i]))
+            {
+                yield return loader;
+                outputText += loader.text;
+            }
         }
         output.text = outputText;
     }
+#pragma warning restore CS0618 // í˜•ì‹ ë˜ëŠ” ë©¤ë²„ëŠ” ì‚¬ìš©ë˜ì§€ ì•ŠìŠµë‹ˆë‹¤.
 }

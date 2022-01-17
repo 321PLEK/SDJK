@@ -24,7 +24,7 @@ namespace SDJK.PlayMode
             while (true)
             {
                 Refresh();
-                yield return new WaitForSecondsRealtime(GameManager.FixedDeltaTime);
+                yield return new WaitForFixedUpdate();
             }
         }
 
@@ -72,6 +72,7 @@ namespace SDJK.PlayMode
                     Vector3 cameraPos = MainCamera.Camera.transform.position;
 
                     item.transform.localPosition = new Vector3(pos.x, y, MainCamera.CameraPos.z + 14);
+                    item.barPosEffect.defaultPos.y = y;
                     item.HoldNote.localPosition = new Vector2(0, (float)(GameManager.Abs(PlayerManager.effect.BeatYPos) * item.HoldBeat));
 
                     if (!(item.HoldBeat >= -1 && item.HoldBeat < 0))
@@ -92,19 +93,24 @@ namespace SDJK.PlayMode
                             item.HoldNote.localScale = new Vector3(1, (float)(1.666666666666667 * GameManager.Abs(PlayerManager.effect.BeatYPos) * item.HoldBeat), 1);
                     }
 
-                    if (!GameManager.UpScroll
-                        ? !(Vector2.Distance(new Vector2(0, y + MainCamera.UiPos.y), new Vector2(0, cameraPos.y - MainCamera.CameraPos.y)) < 10f * GameManager.Abs(MainCamera.UiZoom))
-                        : !(Vector2.Distance(new Vector2(0, y + MainCamera.UiPos.y + 11), new Vector2(0, cameraPos.y - MainCamera.CameraPos.y)) < 10f * GameManager.Abs(MainCamera.UiZoom)))
+                    if (!GameManager.IncreasedNoteReadability)
                     {
-                        item.spriteRenderer.enabled = false;
-                        item.enabled = false;
+                        if (!GameManager.UpScroll
+                            ? !(Vector2.Distance(new Vector2(0, y + MainCamera.UiPos.y), new Vector2(0, cameraPos.y - MainCamera.CameraPos.y)) < 20f * GameManager.Abs(MainCamera.UiZoom))
+                            : !(Vector2.Distance(new Vector2(0, y + MainCamera.UiPos.y + 11), new Vector2(0, cameraPos.y - MainCamera.CameraPos.y)) < 20f * GameManager.Abs(MainCamera.UiZoom)))
+                        {
+                            item.spriteRenderer.enabled = false;
+                            item.holdNoteSpriteRenderer.enabled = false;
+                            item.enabled = false;
+                        }
+                        else
+                        {
+                            item.spriteRenderer.enabled = true;
+                            item.holdNoteSpriteRenderer.enabled = true;
+                            item.enabled = true;
+                        }
                     }
-                    else
-                    {
-                        item.spriteRenderer.enabled = true;
-                        item.enabled = true;
-                    }
-                    
+
                     if (item.Beat + item.HoldBeat >= PlayerManager.VisibleCurrentBeat && item.Beat <= PlayerManager.VisibleCurrentBeat && item.HoldBeat > 0)
                         item.enabled = true;
                 }

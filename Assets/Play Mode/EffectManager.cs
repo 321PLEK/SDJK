@@ -24,6 +24,12 @@ namespace SDJK.Effect
         public static int JudgmentSizeIndex = 0;
         public static int WindowSizeIndex = 0;
         public static int WindowPosIndex = 0;
+        public static int ABarPosIndex = 0;
+        public static int SBarPosIndex = 0;
+        public static int DBarPosIndex = 0;
+        public static int JBarPosIndex = 0;
+        public static int KBarPosIndex = 0;
+        public static int LBarPosIndex = 0;
 
         public static double HPAddValue = 100;
         public static bool HPRemove = true;
@@ -32,6 +38,12 @@ namespace SDJK.Effect
         public static double Pitch = 1;
         public static double BeatYPos = 3;
         public static double JudgmentSize = 0;
+        public static JVector3 ABarPos = new JVector3();
+        public static JVector3 SBarPos = new JVector3();
+        public static JVector3 DBarPos = new JVector3();
+        public static JVector3 JBarPos = new JVector3();
+        public static JVector3 KBarPos = new JVector3();
+        public static JVector3 LBarPos = new JVector3();
 
         void Update()
         {
@@ -181,6 +193,90 @@ namespace SDJK.Effect
                         if (PlayerManager.effect.WindowPosLerp == 0 || PlayerManager.effect.WindowPosLerp == 1)
                             SdjkSystem.WindowPos = JVector2.JVector2ToVector2(PlayerManager.effect.WindowPos);
                     }
+
+                    while (ABarPosIndex >= 0 && ABarPosIndex < PlayerManager.mapData.Effect.ABarPosEffect.Count && PlayerManager.VisibleCurrentBeat >= PlayerManager.mapData.Effect.ABarPosEffect[ABarPosIndex].Beat)
+                    {
+                        if (PlayerManager.mapData.Effect.ABarPosEffect.Count != 0)
+                        {
+                            ABarPos = PlayerManager.mapData.Effect.ABarPosEffect[ABarPosIndex].Value;
+                            PlayerManager.effect.ABarPosLerp = PlayerManager.mapData.Effect.ABarPosEffect[ABarPosIndex].Lerp;
+                        }
+
+                        ABarPosIndex++;
+
+                        if (PlayerManager.effect.ABarPosLerp == 0 || PlayerManager.effect.ABarPosLerp == 1)
+                            PlayerManager.effect.ABarPos = ABarPos;
+                    }
+
+                    while (SBarPosIndex >= 0 && SBarPosIndex < PlayerManager.mapData.Effect.SBarPosEffect.Count && PlayerManager.VisibleCurrentBeat >= PlayerManager.mapData.Effect.SBarPosEffect[SBarPosIndex].Beat)
+                    {
+                        if (PlayerManager.mapData.Effect.SBarPosEffect.Count != 0)
+                        {
+                            SBarPos = PlayerManager.mapData.Effect.SBarPosEffect[SBarPosIndex].Value;
+                            PlayerManager.effect.SBarPosLerp = PlayerManager.mapData.Effect.SBarPosEffect[SBarPosIndex].Lerp;
+                        }
+
+                        SBarPosIndex++;
+
+                        if (PlayerManager.effect.SBarPosLerp == 0 || PlayerManager.effect.SBarPosLerp == 1)
+                            PlayerManager.effect.SBarPos = SBarPos;
+                    }
+
+                    while (DBarPosIndex >= 0 && DBarPosIndex < PlayerManager.mapData.Effect.DBarPosEffect.Count && PlayerManager.VisibleCurrentBeat >= PlayerManager.mapData.Effect.DBarPosEffect[DBarPosIndex].Beat)
+                    {
+                        if (PlayerManager.mapData.Effect.DBarPosEffect.Count != 0)
+                        {
+                            DBarPos = PlayerManager.mapData.Effect.DBarPosEffect[DBarPosIndex].Value;
+                            PlayerManager.effect.DBarPosLerp = PlayerManager.mapData.Effect.DBarPosEffect[DBarPosIndex].Lerp;
+                        }
+
+                        DBarPosIndex++;
+
+                        if (PlayerManager.effect.DBarPosLerp == 0 || PlayerManager.effect.DBarPosLerp == 1)
+                            PlayerManager.effect.DBarPos = DBarPos;
+                    }
+
+                    while (JBarPosIndex >= 0 && JBarPosIndex < PlayerManager.mapData.Effect.JBarPosEffect.Count && PlayerManager.VisibleCurrentBeat >= PlayerManager.mapData.Effect.JBarPosEffect[JBarPosIndex].Beat)
+                    {
+                        if (PlayerManager.mapData.Effect.JBarPosEffect.Count != 0)
+                        {
+                            JBarPos = PlayerManager.mapData.Effect.JBarPosEffect[JBarPosIndex].Value;
+                            PlayerManager.effect.JBarPosLerp = PlayerManager.mapData.Effect.JBarPosEffect[JBarPosIndex].Lerp;
+                        }
+
+                        JBarPosIndex++;
+
+                        if (PlayerManager.effect.JBarPosLerp == 0 || PlayerManager.effect.JBarPosLerp == 1)
+                            PlayerManager.effect.JBarPos = JBarPos;
+                    }
+
+                    while (KBarPosIndex >= 0 && KBarPosIndex < PlayerManager.mapData.Effect.KBarPosEffect.Count && PlayerManager.VisibleCurrentBeat >= PlayerManager.mapData.Effect.KBarPosEffect[KBarPosIndex].Beat)
+                    {
+                        if (PlayerManager.mapData.Effect.KBarPosEffect.Count != 0)
+                        {
+                            KBarPos = PlayerManager.mapData.Effect.KBarPosEffect[KBarPosIndex].Value;
+                            PlayerManager.effect.KBarPosLerp = PlayerManager.mapData.Effect.KBarPosEffect[KBarPosIndex].Lerp;
+                        }
+
+                        KBarPosIndex++;
+
+                        if (PlayerManager.effect.KBarPosLerp == 0 || PlayerManager.effect.KBarPosLerp == 1)
+                            PlayerManager.effect.KBarPos = KBarPos;
+                    }
+
+                    while (LBarPosIndex >= 0 && LBarPosIndex < PlayerManager.mapData.Effect.LBarPosEffect.Count && PlayerManager.VisibleCurrentBeat >= PlayerManager.mapData.Effect.LBarPosEffect[LBarPosIndex].Beat)
+                    {
+                        if (PlayerManager.mapData.Effect.LBarPosEffect.Count != 0)
+                        {
+                            LBarPos = PlayerManager.mapData.Effect.LBarPosEffect[LBarPosIndex].Value;
+                            PlayerManager.effect.LBarPosLerp = PlayerManager.mapData.Effect.LBarPosEffect[LBarPosIndex].Lerp;
+                        }
+
+                        LBarPosIndex++;
+
+                        if (PlayerManager.effect.LBarPosLerp == 0 || PlayerManager.effect.LBarPosLerp == 1)
+                            PlayerManager.effect.LBarPos = LBarPos;
+                    }
                 }
                 else
                 {
@@ -321,6 +417,90 @@ namespace SDJK.Effect
                         if (PlayerManager.effect.WindowPosLerp == 0 || PlayerManager.effect.WindowPosLerp == 1)
                             SdjkSystem.WindowPos = JVector2.JVector2ToVector2(PlayerManager.effect.WindowPos);
                     }
+
+                    while (ABarPosIndex >= 0 && ABarPosIndex < PlayerManager.mapData.Effect.ABarPosEffect.Count && PlayerManager.VisibleCurrentBeat <= PlayerManager.mapData.Effect.ABarPosEffect[ABarPosIndex].Beat)
+                    {
+                        if (PlayerManager.mapData.Effect.ABarPosEffect.Count != 0)
+                        {
+                            ABarPos = PlayerManager.mapData.Effect.ABarPosEffect[ABarPosIndex].Value;
+                            PlayerManager.effect.ABarPosLerp = PlayerManager.mapData.Effect.ABarPosEffect[ABarPosIndex].Lerp;
+                        }
+
+                        ABarPosIndex--;
+
+                        if (PlayerManager.effect.ABarPosLerp == 0 || PlayerManager.effect.ABarPosLerp == 1)
+                            PlayerManager.effect.ABarPos = ABarPos;
+                    }
+
+                    while (SBarPosIndex >= 0 && SBarPosIndex < PlayerManager.mapData.Effect.SBarPosEffect.Count && PlayerManager.VisibleCurrentBeat <= PlayerManager.mapData.Effect.SBarPosEffect[SBarPosIndex].Beat)
+                    {
+                        if (PlayerManager.mapData.Effect.SBarPosEffect.Count != 0)
+                        {
+                            SBarPos = PlayerManager.mapData.Effect.SBarPosEffect[SBarPosIndex].Value;
+                            PlayerManager.effect.SBarPosLerp = PlayerManager.mapData.Effect.SBarPosEffect[SBarPosIndex].Lerp;
+                        }
+
+                        SBarPosIndex--;
+
+                        if (PlayerManager.effect.SBarPosLerp == 0 || PlayerManager.effect.SBarPosLerp == 1)
+                            PlayerManager.effect.SBarPos = SBarPos;
+                    }
+
+                    while (DBarPosIndex >= 0 && DBarPosIndex < PlayerManager.mapData.Effect.DBarPosEffect.Count && PlayerManager.VisibleCurrentBeat <= PlayerManager.mapData.Effect.DBarPosEffect[DBarPosIndex].Beat)
+                    {
+                        if (PlayerManager.mapData.Effect.DBarPosEffect.Count != 0)
+                        {
+                            DBarPos = PlayerManager.mapData.Effect.DBarPosEffect[DBarPosIndex].Value;
+                            PlayerManager.effect.DBarPosLerp = PlayerManager.mapData.Effect.DBarPosEffect[DBarPosIndex].Lerp;
+                        }
+
+                        DBarPosIndex--;
+
+                        if (PlayerManager.effect.DBarPosLerp == 0 || PlayerManager.effect.DBarPosLerp == 1)
+                            PlayerManager.effect.DBarPos = DBarPos;
+                    }
+
+                    while (JBarPosIndex >= 0 && JBarPosIndex < PlayerManager.mapData.Effect.JBarPosEffect.Count && PlayerManager.VisibleCurrentBeat <= PlayerManager.mapData.Effect.JBarPosEffect[JBarPosIndex].Beat)
+                    {
+                        if (PlayerManager.mapData.Effect.JBarPosEffect.Count != 0)
+                        {
+                            JBarPos = PlayerManager.mapData.Effect.JBarPosEffect[JBarPosIndex].Value;
+                            PlayerManager.effect.JBarPosLerp = PlayerManager.mapData.Effect.JBarPosEffect[JBarPosIndex].Lerp;
+                        }
+
+                        JBarPosIndex--;
+
+                        if (PlayerManager.effect.JBarPosLerp == 0 || PlayerManager.effect.JBarPosLerp == 1)
+                            PlayerManager.effect.JBarPos = JBarPos;
+                    }
+
+                    while (KBarPosIndex >= 0 && KBarPosIndex < PlayerManager.mapData.Effect.KBarPosEffect.Count && PlayerManager.VisibleCurrentBeat <= PlayerManager.mapData.Effect.KBarPosEffect[KBarPosIndex].Beat)
+                    {
+                        if (PlayerManager.mapData.Effect.KBarPosEffect.Count != 0)
+                        {
+                            KBarPos = PlayerManager.mapData.Effect.KBarPosEffect[KBarPosIndex].Value;
+                            PlayerManager.effect.KBarPosLerp = PlayerManager.mapData.Effect.KBarPosEffect[KBarPosIndex].Lerp;
+                        }
+
+                        KBarPosIndex--;
+
+                        if (PlayerManager.effect.KBarPosLerp == 0 || PlayerManager.effect.KBarPosLerp == 1)
+                            PlayerManager.effect.KBarPos = KBarPos;
+                    }
+
+                    while (LBarPosIndex >= 0 && LBarPosIndex < PlayerManager.mapData.Effect.LBarPosEffect.Count && PlayerManager.VisibleCurrentBeat <= PlayerManager.mapData.Effect.LBarPosEffect[LBarPosIndex].Beat)
+                    {
+                        if (PlayerManager.mapData.Effect.LBarPosEffect.Count != 0)
+                        {
+                            LBarPos = PlayerManager.mapData.Effect.LBarPosEffect[LBarPosIndex].Value;
+                            PlayerManager.effect.LBarPosLerp = PlayerManager.mapData.Effect.LBarPosEffect[LBarPosIndex].Lerp;
+                        }
+
+                        LBarPosIndex--;
+
+                        if (PlayerManager.effect.LBarPosLerp == 0 || PlayerManager.effect.LBarPosLerp == 1)
+                            PlayerManager.effect.LBarPos = LBarPos;
+                    }
                 }
 
                 EffectPlay();
@@ -379,13 +559,27 @@ namespace SDJK.Effect
             MaxHPValue = PlayerManager.mapData.Effect.MaxHPValue;
             JudgmentSize = PlayerManager.mapData.Effect.JudgmentSize;
             PlayerManager.effect.WindowSize = PlayerManager.mapData.Effect.WindowSize;
+            PlayerManager.effect.WindowSizeLerp = 1;
             PlayerManager.effect.WindowPos = PlayerManager.mapData.Effect.WindowPos;
+            PlayerManager.effect.WindowPosLerp = 1;
             PlayerManager.effect.WindowDatumPoint = PlayerManager.mapData.Effect.WindowDatumPoint;
             PlayerManager.effect.ScreenDatumPoint = PlayerManager.mapData.Effect.ScreenDatumPoint;
             SdjkSystem.tempWindowSize = 0;
             SdjkSystem.tempWindowPos = Vector2.zero;
             SdjkSystem.tempScreenDatumPoint = 0;
             SdjkSystem.tempWindowDatumPoint = 0;
+            ABarPos = PlayerManager.mapData.Effect.ABarPos;
+            SBarPos = PlayerManager.mapData.Effect.SBarPos;
+            DBarPos = PlayerManager.mapData.Effect.DBarPos;
+            JBarPos = PlayerManager.mapData.Effect.JBarPos;
+            KBarPos = PlayerManager.mapData.Effect.KBarPos;
+            LBarPos = PlayerManager.mapData.Effect.LBarPos;
+            PlayerManager.effect.ABarPosLerp = 1;
+            PlayerManager.effect.SBarPosLerp = 1;
+            PlayerManager.effect.DBarPosLerp = 1;
+            PlayerManager.effect.JBarPosLerp = 1;
+            PlayerManager.effect.KBarPosLerp = 1;
+            PlayerManager.effect.LBarPosLerp = 1;
 
 
 
@@ -410,6 +604,12 @@ namespace SDJK.Effect
             JudgmentSizeIndex = value;
             WindowSizeIndex = value;
             WindowPosIndex = value;
+            ABarPosIndex = value;
+            SBarPosIndex = value;
+            DBarPosIndex = value;
+            JBarPosIndex = value;
+            KBarPosIndex = value;
+            LBarPosIndex = value;
         }
 
         public static void EffectIndexReset()
@@ -417,7 +617,6 @@ namespace SDJK.Effect
             if (PlayerManager.mapData.Effect.AllBeat.Count == 0 || PlayerManager.VisibleCurrentBeat < PlayerManager.mapData.Effect.AllBeat[0])
             {
                 EffectReset();
-
                 return;
             }
 
@@ -503,6 +702,36 @@ namespace SDJK.Effect
                 PlayerManager.effect.WindowDatumPoint = PlayerManager.mapData.Effect.WindowDatumPoint;
                 PlayerManager.effect.ScreenDatumPoint = PlayerManager.mapData.Effect.ScreenDatumPoint;
             }
+            if (ABarPosIndex < 0)
+            {
+                ABarPosIndex = 0;
+                PlayerManager.effect.ABarPos = PlayerManager.mapData.Effect.ABarPos;
+            }
+            if (SBarPosIndex < 0)
+            {
+                SBarPosIndex = 0;
+                PlayerManager.effect.SBarPos = PlayerManager.mapData.Effect.SBarPos;
+            }
+            if (DBarPosIndex < 0)
+            {
+                DBarPosIndex = 0;
+                PlayerManager.effect.DBarPos = PlayerManager.mapData.Effect.DBarPos;
+            }
+            if (JBarPosIndex < 0)
+            {
+                JBarPosIndex = 0;
+                PlayerManager.effect.JBarPos = PlayerManager.mapData.Effect.JBarPos;
+            }
+            if (KBarPosIndex < 0)
+            {
+                KBarPosIndex = 0;
+                PlayerManager.effect.KBarPos = PlayerManager.mapData.Effect.KBarPos;
+            }
+            if (LBarPosIndex < 0)
+            {
+                LBarPosIndex = 0;
+                PlayerManager.effect.LBarPos = PlayerManager.mapData.Effect.LBarPos;
+            }
 
             if (CameraPosIndex >= PlayerManager.mapData.Effect.Camera.CameraPosEffect.Count)
                 CameraPosIndex = PlayerManager.mapData.Effect.Camera.CameraPosEffect.Count - 1;
@@ -532,6 +761,18 @@ namespace SDJK.Effect
                 WindowSizeIndex = PlayerManager.mapData.Effect.WindowSizeEffect.Count - 1;
             if (WindowPosIndex >= PlayerManager.mapData.Effect.WindowPosEffect.Count)
                 WindowPosIndex = PlayerManager.mapData.Effect.WindowPosEffect.Count - 1;
+            if (ABarPosIndex >= PlayerManager.mapData.Effect.ABarPosEffect.Count)
+                ABarPosIndex = PlayerManager.mapData.Effect.ABarPosEffect.Count - 1;
+            if (SBarPosIndex >= PlayerManager.mapData.Effect.SBarPosEffect.Count)
+                SBarPosIndex = PlayerManager.mapData.Effect.SBarPosEffect.Count - 1;
+            if (DBarPosIndex >= PlayerManager.mapData.Effect.DBarPosEffect.Count)
+                DBarPosIndex = PlayerManager.mapData.Effect.DBarPosEffect.Count - 1;
+            if (JBarPosIndex >= PlayerManager.mapData.Effect.JBarPosEffect.Count)
+                JBarPosIndex = PlayerManager.mapData.Effect.JBarPosEffect.Count - 1;
+            if (KBarPosIndex >= PlayerManager.mapData.Effect.KBarPosEffect.Count)
+                KBarPosIndex = PlayerManager.mapData.Effect.KBarPosEffect.Count - 1;
+            if (LBarPosIndex >= PlayerManager.mapData.Effect.LBarPosEffect.Count)
+                LBarPosIndex = PlayerManager.mapData.Effect.LBarPosEffect.Count - 1;
         }
 
         static void EffectPlay()
@@ -601,6 +842,36 @@ namespace SDJK.Effect
             SdjkSystem.WindowPos = JVector2.JVector2ToVector2(PlayerManager.effect.WindowPos);
             SdjkSystem.WindowDatumPoint = PlayerManager.effect.WindowDatumPoint;
             SdjkSystem.ScreenDatumPoint = PlayerManager.effect.ScreenDatumPoint;
+
+            if (PlayerManager.effect.ABarPosLerp != 0 && PlayerManager.effect.ABarPosLerp != 1)
+                PlayerManager.effect.ABarPos = JVector3.Lerp(PlayerManager.effect.ABarPos, ABarPos, (float)(PlayerManager.effect.ABarPosLerp * GameManager.FpsDeltaTime * GameManager.Abs(PlayerManager.playerManager.audioSource.pitch)));
+            else
+                PlayerManager.effect.ABarPos = ABarPos;
+
+            if (PlayerManager.effect.SBarPosLerp != 0 && PlayerManager.effect.SBarPosLerp != 1)
+                PlayerManager.effect.SBarPos = JVector3.Lerp(PlayerManager.effect.SBarPos, SBarPos, (float)(PlayerManager.effect.SBarPosLerp * GameManager.FpsDeltaTime * GameManager.Abs(PlayerManager.playerManager.audioSource.pitch)));
+            else
+                PlayerManager.effect.SBarPos = SBarPos;
+
+            if (PlayerManager.effect.DBarPosLerp != 0 && PlayerManager.effect.DBarPosLerp != 1)
+                PlayerManager.effect.DBarPos = JVector3.Lerp(PlayerManager.effect.DBarPos, DBarPos, (float)(PlayerManager.effect.DBarPosLerp * GameManager.FpsDeltaTime * GameManager.Abs(PlayerManager.playerManager.audioSource.pitch)));
+            else
+                PlayerManager.effect.DBarPos = DBarPos;
+
+            if (PlayerManager.effect.JBarPosLerp != 0 && PlayerManager.effect.JBarPosLerp != 1)
+                PlayerManager.effect.JBarPos = JVector3.Lerp(PlayerManager.effect.JBarPos, JBarPos, (float)(PlayerManager.effect.JBarPosLerp * GameManager.FpsDeltaTime * GameManager.Abs(PlayerManager.playerManager.audioSource.pitch)));
+            else
+                PlayerManager.effect.JBarPos = JBarPos;
+
+            if (PlayerManager.effect.KBarPosLerp != 0 && PlayerManager.effect.KBarPosLerp != 1)
+                PlayerManager.effect.KBarPos = JVector3.Lerp(PlayerManager.effect.KBarPos, KBarPos, (float)(PlayerManager.effect.KBarPosLerp * GameManager.FpsDeltaTime * GameManager.Abs(PlayerManager.playerManager.audioSource.pitch)));
+            else
+                PlayerManager.effect.KBarPos = KBarPos;
+
+            if (PlayerManager.effect.LBarPosLerp != 0 && PlayerManager.effect.LBarPosLerp != 1)
+                PlayerManager.effect.LBarPos = JVector3.Lerp(PlayerManager.effect.LBarPos, LBarPos, (float)(PlayerManager.effect.LBarPosLerp * GameManager.FpsDeltaTime * GameManager.Abs(PlayerManager.playerManager.audioSource.pitch)));
+            else
+                PlayerManager.effect.LBarPos = LBarPos;
         }
     }
 }

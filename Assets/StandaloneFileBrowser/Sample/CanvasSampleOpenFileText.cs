@@ -45,11 +45,14 @@ public class CanvasSampleOpenFileText : MonoBehaviour, IPointerDownHandler {
     }
 #endif
 
-    private IEnumerator OutputRoutine(string url) {
-#pragma warning disable CS0618 // Çü½Ä ¶Ç´Â ¸â¹ö´Â »ç¿ëµÇÁö ¾Ê½À´Ï´Ù.
-        var loader = new WWW(url);
-#pragma warning restore CS0618 // Çü½Ä ¶Ç´Â ¸â¹ö´Â »ç¿ëµÇÁö ¾Ê½À´Ï´Ù.
-        yield return loader;
-        output.text = loader.text;
+#pragma warning disable CS0618 // í˜•ì‹ ë˜ëŠ” ë©¤ë²„ëŠ” ì‚¬ìš©ë˜ì§€ ì•ŠìŠµë‹ˆë‹¤.
+    private IEnumerator OutputRoutine(string url)
+    {
+        using (var loader = new WWW(url))
+        {
+            yield return loader;
+            output.text = loader.text;
+        }
     }
+#pragma warning restore CS0618 // í˜•ì‹ ë˜ëŠ” ë©¤ë²„ëŠ” ì‚¬ìš©ë˜ì§€ ì•ŠìŠµë‹ˆë‹¤.
 }

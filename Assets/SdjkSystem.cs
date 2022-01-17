@@ -52,7 +52,7 @@ namespace SDJK
                         Screen.fullScreen = false;
 
 #if UNITY_STANDALONE_WIN
-                    if (PlayerManager.effect.WindowPosLerp < 1 && PlayerManager.effect.WindowPosLerp > 0)
+                    if (PlayerManager.effect.WindowPosLerp * PlayerManager.playerManager.audioSource.pitch < 1 && PlayerManager.effect.WindowPosLerp * PlayerManager.playerManager.audioSource.pitch > 0)
                         WindowManager.SetWindowPosition(WindowPos.x, WindowPos.y, (int)(1280 * WindowSize), (int)(720 * WindowSize), WindowDatumPoint, ScreenDatumPoint, true, (float)(PlayerManager.effect.WindowPosLerp * PlayerManager.playerManager.audioSource.pitch));
                     else
                         WindowManager.SetWindowPosition(WindowPos.x, WindowPos.y, (int)(1280 * WindowSize), (int)(720 * WindowSize), WindowDatumPoint, ScreenDatumPoint);

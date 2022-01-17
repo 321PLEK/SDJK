@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 718536594472810616}
   - component: {fileID: 4664672820069451492}
   - component: {fileID: 6707669929160423079}
+  - component: {fileID: 3185355660270621261}
   m_Layer: 5
   m_Name: Note Image
   m_TagString: Untagged
@@ -29,6 +30,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -5.535, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1214488836431107167}
   m_Father: {fileID: 0}
@@ -104,8 +106,10 @@ MonoBehaviour:
   HoldBeat: 0
   keyCode: 0
   HoldNote: {fileID: 1214488836431107167}
+  holdNoteSpriteRenderer: {fileID: 5887636039131622154}
   hide: 0
   spriteRenderer: {fileID: 718536594472810616}
+  barPosEffect: {fileID: 3185355660270621261}
 --- !u!114 &6707669929160423079
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -122,6 +126,25 @@ MonoBehaviour:
   SpriteName: 
   Color: {r: 0, g: 1, b: 0, a: 1}
   CustomPath: 0
+--- !u!114 &3185355660270621261
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 718536594472810622}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ac93c6362d9b76499bd8f88f4b5c52e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  A: 0
+  S: 0
+  D: 0
+  J: 0
+  K: 0
+  L: 0
+  defaultPos: {x: -5.535, y: 0, z: 0}
 --- !u!1 &5614996981712905561
 GameObject:
   m_ObjectHideFlags: 0
@@ -150,6 +173,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 0, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 718536594472810617}
   m_RootOrder: 0
