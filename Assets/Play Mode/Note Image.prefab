@@ -106,7 +106,6 @@ MonoBehaviour:
   HoldBeat: 0
   keyCode: 0
   HoldNote: {fileID: 1214488836431107167}
-  holdNoteSpriteRenderer: {fileID: 5887636039131622154}
   hide: 0
   spriteRenderer: {fileID: 718536594472810616}
   barPosEffect: {fileID: 3185355660270621261}

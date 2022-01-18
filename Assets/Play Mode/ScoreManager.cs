@@ -31,7 +31,7 @@ namespace SDJK.PlayMode.Score
 
         void Start()
         {
-            if (GameManager.EditorOptimization && PlayerManager.Editor || Application.platform == RuntimePlatform.Android)
+            if (GameManager.EditorOptimization && PlayerManager.Editor)
                 text.gameObject.SetActive(false);
             else
                 text.gameObject.SetActive(true);

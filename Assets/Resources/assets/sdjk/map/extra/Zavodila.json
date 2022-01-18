@@ -8020,7 +8020,12 @@
       ]
     },
     "BPM": 132.0,
-    "BPMEffect": [],
+    "BPMEffect": [
+	  {
+        "Beat": 0.0,
+        "Value": 132.0
+      }
+	],
     "BeatYPos": 9.0,
     "BeatYPosEffect": [
       {

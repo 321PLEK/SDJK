@@ -72,6 +72,9 @@ namespace SDJK.MainMenu
         public static bool Esc = true;
         public static float AFKTimer = 0;
 
+        public Image AKeyButton;
+        public Image PKeyButton;
+
         void Awake()
         {
             mainMenu = this;
@@ -197,6 +200,8 @@ namespace SDJK.MainMenu
                     GameManager.UpKey = true;
                 if (Input.GetKeyDown(KeyCode.RightArrow))
                     GameManager.DownKey = true;
+                if (Input.GetKeyDown(KeyCode.Escape))
+                    GameManager.EscKey = true;
             }
             else
             {
@@ -208,6 +213,8 @@ namespace SDJK.MainMenu
                     GameManager.LeftKey = true;
                 if (Input.GetKeyDown(KeyCode.RightArrow))
                     GameManager.RightKey = true;
+                if (Input.GetKeyDown(KeyCode.Escape))
+                    GameManager.EscKey = true;
             }
 
             if (Input.GetKeyDown(KeyCode.Return))
@@ -221,6 +228,21 @@ namespace SDJK.MainMenu
                 Esc = true;
 
             MainCamera.mainCamera.PostProcessVolume.weight = 0;
+
+            if (!PhoneControll.activeSelf && GameManager.TouchMode)
+                PhoneControll.SetActive(true);
+            else if (PhoneControll.activeSelf && !GameManager.TouchMode)
+                PhoneControll.SetActive(false);
+
+            if (GameManager.AKey)
+                AKeyButton.color = Color.grey;
+            else
+                AKeyButton.color = Color.white;
+
+            if (GameManager.PKey)
+                PKeyButton.color = Color.grey;
+            else
+                PKeyButton.color = Color.white;
 
             if ((GameManager.CurrentBeat < 0 && !LogoAniEnd) || Esc)
             {
@@ -264,7 +286,7 @@ namespace SDJK.MainMenu
                     Logo.anchoredPosition += new Vector2(0, 5);
                 }
 
-                if (Input.GetKeyDown(KeyCode.Space))
+                if (Input.GetKeyDown(KeyCode.Space) || GameManager.EnterKey)
                 {
                     LogoAniEnd = true;
                     Esc = false;
@@ -293,14 +315,11 @@ namespace SDJK.MainMenu
             }
             else
             {
-                if (Input.GetKeyDown(KeyCode.Escape))
+                if (GameManager.EscKey)
                     Esc = true;
 
                 LogoAniEnd = true;
 
-                if (!PhoneControll.activeSelf && Application.platform == RuntimePlatform.Android)
-                    PhoneControll.SetActive(true);
-                
                 /*if (!b)
                 {
                     string json = ResourcesManager.Search<string>(ResourcesManager.GetStringNameSpace(GameManager.Level.ToString(), out string Name), ResourcesManager.MapPath + Name);
@@ -1010,6 +1029,7 @@ namespace SDJK.MainMenu
         public void EnterKey() => GameManager.EnterKey = true;
         public void AKey() => GameManager.AKey = !GameManager.AKey;
         public void PKey() => GameManager.PKey = !GameManager.PKey;
+        public void EscKey() => GameManager.EscKey = true;
 
         void LateUpdate()
         {
@@ -1018,6 +1038,7 @@ namespace SDJK.MainMenu
             GameManager.LeftKey = false;
             GameManager.RightKey = false;
             GameManager.EnterKey = false;
+            GameManager.EscKey = false;
         }
 
         public void ResourcePackFolderOpenButton() => System.Diagnostics.Process.Start("explorer.exe", Application.persistentDataPath.Replace("/", "\\") + "\\Resource Pack");

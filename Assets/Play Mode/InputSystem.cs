@@ -58,6 +58,13 @@ namespace SDJK.PlayMode
             if (ObjectName.Equals("L") && !PlayerManager.LUse)
                 gameObject.SetActive(false);
 
+            if (GameManager.UpScroll)
+            {
+                image2.rectTransform.pivot = new Vector2(0.5f, 1);
+                image2.rectTransform.anchorMin = new Vector2(0.5f, 1);
+                image2.rectTransform.anchorMax = new Vector2(0.5f, 1);
+            }
+
             if (Background)
             {
                 enabled = false;
@@ -143,26 +150,35 @@ namespace SDJK.PlayMode
                 if (key.Length > 1)
                     text.text += key[1];
             }
-
-            if (GameManager.UpScroll)
-                image2.rectTransform.anchoredPosition = new Vector2(0, 13.5f);
         }
+
+        bool keyDown = false;
+        bool key = false;
+        bool keyUp = false;
 
         void Update()
         {
+            if (!GameManager.TouchMode)
+                key = false;
+
+            if (Input.GetKeyDown(keyCode))
+                keyDown = true;
+            if (Input.GetKeyUp(keyCode))
+                keyUp = true;
+
             if (!(GameManager.EditorOptimization && PlayerManager.Editor))
             {
                 if (!GameManager.Optimization && (PlayerManager.effect.Pitch != 0 || PlayerManager.HP > 0.001f))
                 {
                     //눌렀을때, 색상 변경
-                    if ((!Input.GetKey(keyCode) || PlayerManager.AutoMode) && image.color.g < 1)
+                    if ((!(Input.GetKey(keyCode) || key) || PlayerManager.AutoMode) && image.color.g < 1 && !RedColor)
                     {
                         image.color += new Color(0.05f * GameManager.FpsDeltaTime, 0.05f * GameManager.FpsDeltaTime, 0.05f * GameManager.FpsDeltaTime);
                         image2.color += new Color(0.05f * GameManager.FpsDeltaTime, 0.05f * GameManager.FpsDeltaTime, 0.05f * GameManager.FpsDeltaTime);
                         text.color += new Color(0.05f * GameManager.FpsDeltaTime, 0.05f * GameManager.FpsDeltaTime, 0.05f * GameManager.FpsDeltaTime);
                     }
 
-                    if (Input.GetKey(keyCode) && !PlayerManager.AutoMode)
+                    if ((Input.GetKey(keyCode) || key) && !PlayerManager.AutoMode)
                     {
                         transform.SetAsLastSibling();
 
@@ -179,7 +195,8 @@ namespace SDJK.PlayMode
                             text.color = Color.red;
                         }
                     }
-                    else if (RedColor && Input.GetKeyUp(keyCode))
+                    
+                    if (RedColor && keyDown)
                         RedColor = false;
                 }
 
@@ -218,7 +235,7 @@ namespace SDJK.PlayMode
                     }
 
                     //판정
-                    if (Input.GetKeyDown(keyCode))
+                    if (keyDown)
                     {
                         //가장 가까운 타일의 딜레이를 체크
                         double delay = GameManager.CloseValue(Delay, PlayerManager.JudgmentCurrentBeat);
@@ -249,7 +266,7 @@ namespace SDJK.PlayMode
                     {
                         int temp = GameManager.CloseValueIndexBinarySearch(Delay, PlayerManager.JudgmentCurrentBeat);
 
-                        if (Delay.Count > i && Input.GetKeyDown(keyCode) && Delay[i] != PlayerManager.mapData.AllBeat[PlayerManager.mapData.AllBeat.Count - 1])
+                        if (Delay.Count > i && keyDown && Delay[i] != PlayerManager.mapData.AllBeat[PlayerManager.mapData.AllBeat.Count - 1])
                         {
                             //즉사 패턴
                             if (temp < HoldDelay.Count && HoldDelay[temp] < 0 && HoldDelay[temp] >= -1)
@@ -257,9 +274,6 @@ namespace SDJK.PlayMode
                                 if (!PlayerManager.Judgment(PlayerManager.JudgmentCurrentBeat - Delay[i], false))
                                 {
                                     PlayerManager.HP = 0;
-
-                                    if (!PlayerManager.PracticeMode)
-                                        PlayerManager.effect.Pitch = 0;
 
                                     image.color = Color.red;
                                     image2.color = Color.red;
@@ -289,7 +303,7 @@ namespace SDJK.PlayMode
                                 i++;
                             }
                         }
-                        else if (i - 1 - holdi >= 0 && i < Delay.Count && i < HoldDelay.Count && Input.GetKey(keyCode) && Delay[i] < PlayerManager.JudgmentCurrentBeat && Delay[i - 1 - holdi] <= PlayerManager.JudgmentCurrentBeat && Delay[i - 1 - holdi] + HoldDelay[i - 1 - holdi] >= PlayerManager.JudgmentCurrentBeat)
+                        else if (i - 1 - holdi >= 0 && i < Delay.Count && i < HoldDelay.Count && (key || Input.GetKey(keyCode)) && Delay[i] < PlayerManager.JudgmentCurrentBeat && Delay[i - 1 - holdi] <= PlayerManager.JudgmentCurrentBeat && Delay[i - 1 - holdi] + HoldDelay[i - 1 - holdi] >= PlayerManager.JudgmentCurrentBeat)
                         {
                             //홀드 노트 중간에 있는 노트 판정
                             if (Delay[i] != PlayerManager.mapData.AllBeat[PlayerManager.mapData.AllBeat.Count - 1])
@@ -304,7 +318,7 @@ namespace SDJK.PlayMode
                                 holdi++;
                             }
                         }
-                        else if (i - 1 - holdi >= 0 && i - 1 - holdi < HoldDelay.Count && Input.GetKeyUp(keyCode) && HoldDelay[i - 1 - holdi] > 0 && !HoldStop)
+                        else if (i - 1 - holdi >= 0 && i - 1 - holdi < HoldDelay.Count && keyUp && HoldDelay[i - 1 - holdi] > 0 && !HoldStop)
                         { 
                             //홀드 판정
                             if (HoldDelay[i - 1 - holdi] != PlayerManager.mapData.AllBeat[PlayerManager.mapData.AllBeat.Count - 1])
@@ -314,7 +328,7 @@ namespace SDJK.PlayMode
                                 holdi = 0;
                             }
                         }
-                        else if (Delay.Count <= i && Input.GetKeyDown(keyCode))
+                        else if (Delay.Count <= i && keyDown)
                         {
                             //마지막 박자일때
                             PlayerManager.Judgment(-0.76 * PlayerManager.effect.JudgmentSize, false);
@@ -334,7 +348,7 @@ namespace SDJK.PlayMode
 
                             i++;
                         }
-                        else if (Input.GetKeyDown(keyCode))
+                        else if (keyDown)
                             PlayerManager.Judgment(-0.76 * PlayerManager.effect.JudgmentSize, false);
 
                         while (i < Delay.Count && i >= 0 && Delay[i] < PlayerManager.JudgmentCurrentBeat - 0.75)
@@ -446,41 +460,24 @@ namespace SDJK.PlayMode
             }
         }
 
-        public void PhoneControllInput()
+        void LateUpdate()
         {
-            /*if (!PlayerManager.AutoMode)
-            {
-                if (Delay.Count > i)
-                {
-                    //판정
-                    if (Delay[i] != PlayerManager.mapData.AllBeat[PlayerManager.mapData.AllBeat.Count - 1] && !PlayerManager.Judgment(PlayerManager.JudgmentCurrentBeat - Delay[i]))
-                    {
-                        NoteHide();
-                        i++;
-                    }
-                }
-                else if (Delay.Count <= i)
-                {
-                    //마지막 박자일때
-                    PlayerManager.Judgment(-0.76 * PlayerManager.effect.JudgmentSize, false);
-                }
-                else
-                    PlayerManager.Judgment(-0.76 * PlayerManager.effect.JudgmentSize, false);
-            }*/
+            keyDown = false;
+            keyUp = false;
         }
 
-        public void PhoneControllInputColorChange()
+        public void KeyDown()
         {
-            if (!GameManager.Optimization)
-            {
-                //눌렀을때, 색상 변경
-                transform.SetAsLastSibling();
-                image.color = new Color(0.2f, 0.2f, 0.2f);
-                image2.color = new Color(0.2f, 0.2f, 0.2f);
-                text.color = new Color(0.2f, 0.2f, 0.2f);
-            }
+            keyDown = true;
+            key = true;
         }
-        
+
+        public void KeyUp()
+        {
+            keyUp = true;
+            key = false;
+        }
+
         static readonly Color color = new Color(0, 1, 0, 0);
             
         void NoteHide()

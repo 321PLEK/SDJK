@@ -41,8 +41,14 @@ namespace SDJK.Camera
         {
             Camera.orthographicSize = (float)(8 * UiZoom * CameraZoom);
 
+            int offset;
+            if (GameManager.UpScroll)
+                offset = -8;
+            else
+                offset = 8;
+
             if (posMode == PosMode.Player)
-                transform.position = new Vector3(CameraPos.x, (float)((PlayerManager.VisibleCurrentBeat * PlayerManager.effect.BeatYPos) + UiPosY + (GameManager.Abs(UiZoom) - 1) * 8 + CameraPos.y), CameraPos.z * Mathf.Abs(Camera.orthographicSize / 8)) + UiPos;
+                transform.position = new Vector3(CameraPos.x, (float)((PlayerManager.VisibleCurrentBeat * PlayerManager.effect.BeatYPos) + UiPosY + (GameManager.Abs(UiZoom) - 1) * offset + CameraPos.y), CameraPos.z * Mathf.Abs(Camera.orthographicSize / 8)) + UiPos;
             else if (posMode == PosMode.World)
                 transform.position = CameraPos;
 

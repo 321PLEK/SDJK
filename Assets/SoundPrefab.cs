@@ -4,6 +4,7 @@ using UnityEngine;
 using System.IO;
 using UnityEngine.Networking;
 using SDJK.MainMenu;
+using SDJK.PlayMode.UI.Background;
 
 namespace SDJK.Sound
 {
@@ -182,6 +183,7 @@ namespace SDJK.Sound
                     GameManager.BeatTimer = 0;
                     GameManager.CurrentBeat = 0;
                     MainMenu.MainMenu.NextBeat = 0;
+                    BackgroundVideo.instance.StartCoroutine(BackgroundVideo.instance.Rerender());
 
                     if (MainMenu.MainMenu.Esc)
                     {

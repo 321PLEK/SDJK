@@ -59,6 +59,7 @@ namespace SDJK
         public static bool EnterKey = false;
         public static bool AKey = false;
         public static bool PKey = false;
+        public static bool EscKey = false;
         
         [SerializeField] Font[] fonts;
 
@@ -83,6 +84,8 @@ namespace SDJK
         public static Dictionary<string, string> mapRank = new Dictionary<string, string>();
 
         public static bool IncreasedNoteReadability = false;
+
+        public static bool TouchMode = false;
 
         void Awake()
         {
@@ -175,6 +178,18 @@ namespace SDJK
             {
                 PlayerLevel++;
                 PlayerExp = 0;
+            }
+
+            if (Input.anyKeyDown)
+            {
+                if (Input.GetMouseButton(0))
+                    TouchMode = true;
+                else
+                {
+                    TouchMode = false;
+                    AKey = false;
+                    PKey = false;
+                }
             }
         }
 

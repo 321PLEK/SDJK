@@ -90,8 +90,6 @@ namespace SDJK.PlayMode
         
         static double BPMCurrentBeat = 0;
         static double BPMTimer = 0;
-        
-        public GameObject PhoneControll;
 
         double VisibleCurrentBeatLerp = 0;
 
@@ -100,6 +98,8 @@ namespace SDJK.PlayMode
         public RectTransform ComboPos;
 
         public bool HitCurrentBeatStop = true;
+
+        public GameObject Touch;
 
         //public MidiPlayer MidiPlayer;
 
@@ -132,9 +132,6 @@ namespace SDJK.PlayMode
             //콤보 색상 변경 (흰색, 회색)
             if (!GameManager.Optimization)
                 StartCoroutine(ComboColorAni());
-            
-            if (!PhoneControll.activeSelf && Application.platform == RuntimePlatform.Android)
-                PhoneControll.SetActive(true);
 
             if (GameManager.UpScroll)
             {
@@ -573,6 +570,14 @@ namespace SDJK.PlayMode
 
         void Update()
         {
+            if (!Editor && GameManager.TouchMode && !Touch.activeSelf)
+                Touch.SetActive(true);
+            else if (!GameManager.TouchMode && Touch.activeSelf)
+                Touch.SetActive(false);
+
+            if (Input.GetKeyDown(KeyCode.Escape))
+                GameManager.EscKey = true;
+
             if (HP > 0 && HP < 0.001f)
                 HP = 0;
 
@@ -585,7 +590,7 @@ namespace SDJK.PlayMode
             {
                 if (!isEditorMapPlay)
                 {
-                    if (Input.GetKeyDown(KeyCode.Escape) && (HP > 0.001f || Editor || PracticeMode))
+                    if (GameManager.EscKey && (HP > 0.001f || Editor || PracticeMode))
                     {
                         if (!AutoMode && !PracticeMode)
                         {
@@ -600,7 +605,7 @@ namespace SDJK.PlayMode
                         Quit();
                     }
                 }
-                else if (Input.GetKeyDown(KeyCode.Escape) && (HP > 0.001f || Editor || PracticeMode))
+                else if (GameManager.EscKey && (HP > 0.001f || Editor || PracticeMode))
                     QuitEditPlay();
 
                 if (audioSource.isPlaying)
@@ -782,28 +787,11 @@ namespace SDJK.PlayMode
                     MainCamera.mainCamera.PostProcessVolume.weight = 0;
                 }
             }
-
-            if (Application.platform == RuntimePlatform.Android && !AutoMode)
-            {
-                Touch tempTouchs;
-                if (Input.touchCount > 0)
-                {
-                    for (int i = 0; i < Input.touchCount; i++)
-                    {
-                        tempTouchs = Input.GetTouch (i);
-                        RaycastHit2D raycastHit2D = Physics2D.Raycast(MainCamera.Camera.ScreenToWorldPoint((Vector3)tempTouchs.position - Vector3.forward * MainCamera.Camera.transform.position.z), Vector2.up, 0.01f, LayerMask.GetMask("UI"));
-                        if (raycastHit2D.collider != null)
-                        {
-                            InputSystem inputSystem = raycastHit2D.collider.GetComponent<InputSystem>();
-                            if (tempTouchs.phase == TouchPhase.Began)
-                                inputSystem.PhoneControllInput();
-                            
-                            inputSystem.PhoneControllInputColorChange();
-                        }
-                    }
-                }
-            }
         }
+
+        void LateUpdate() => GameManager.EscKey = false;
+
+        public void EscKey() => GameManager.EscKey = true;
 
         public static void BPMChange(double BPM, double Delay)
         {
@@ -1078,10 +1066,16 @@ namespace SDJK.PlayMode
             //최대 스코어 설정
             ScoreManager.MaxScore += 100;
 
+            double offset;
+            if (GameManager.UpScroll)
+                offset = -5.5;
+            else
+                offset = 5.5;
+
             //노트 설정
             if (keyCode == KeyCode.A)
             {
-                note.transform.localPosition = new Vector2(-5.535f, (float)(Beat * effect.BeatYPos - 5.5));
+                note.transform.localPosition = new Vector2(-5.535f, (float)(Beat * effect.BeatYPos - offset));
 
                 if (index >= 0)
                 {
@@ -1097,7 +1091,7 @@ namespace SDJK.PlayMode
             }
             else if (keyCode == KeyCode.S)
             {
-                note.transform.localPosition = new Vector2(-3.321f, (float)(Beat * effect.BeatYPos - 5.5));
+                note.transform.localPosition = new Vector2(-3.321f, (float)(Beat * effect.BeatYPos - offset));
 
                 if (index >= 0)
                 {
@@ -1113,7 +1107,7 @@ namespace SDJK.PlayMode
             }
             else if (keyCode == KeyCode.D)
             {
-                note.transform.localPosition = new Vector2(-1.107f, (float)(Beat * effect.BeatYPos - 5.5));
+                note.transform.localPosition = new Vector2(-1.107f, (float)(Beat * effect.BeatYPos - offset));
 
                 if (index >= 0)
                 {
@@ -1129,7 +1123,7 @@ namespace SDJK.PlayMode
             }
             else if (keyCode == KeyCode.J)
             {
-                note.transform.localPosition = new Vector2(1.107f, (float)(Beat * effect.BeatYPos - 5.5));
+                note.transform.localPosition = new Vector2(1.107f, (float)(Beat * effect.BeatYPos - offset));
 
                 if (index >= 0)
                 {
@@ -1145,7 +1139,7 @@ namespace SDJK.PlayMode
             }
             else if (keyCode == KeyCode.K)
             {
-                note.transform.localPosition = new Vector2(3.321f, (float)(Beat * effect.BeatYPos - 5.5));
+                note.transform.localPosition = new Vector2(3.321f, (float)(Beat * effect.BeatYPos - offset));
 
                 if (index >= 0)
                 {
@@ -1161,7 +1155,7 @@ namespace SDJK.PlayMode
             }
             else if (keyCode == KeyCode.L)
             {
-                note.transform.localPosition = new Vector2(5.535f, (float)(Beat * effect.BeatYPos - 5.5));
+                note.transform.localPosition = new Vector2(5.535f, (float)(Beat * effect.BeatYPos - offset));
 
                 if (index >= 0)
                 {

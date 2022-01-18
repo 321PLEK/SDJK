@@ -33,10 +33,7 @@ namespace SDJK.PlayMode
             if (tempBeatYPos != PlayerManager.effect.BeatYPos || tempCameraZPos != MainCamera.CameraPos.z)
                 Refresh();
 
-            if (!GameManager.UpScroll)
-                transform.SetPositionAndRotation(MainCamera.UiPos, Quaternion.Euler(MainCamera.UiRotation));
-            else
-                transform.SetPositionAndRotation(MainCamera.UiPos + Vector3.up * 11, Quaternion.Euler(MainCamera.UiRotation));
+            transform.SetPositionAndRotation(MainCamera.UiPos, Quaternion.Euler(MainCamera.UiRotation));
         }
 
         public static void ListRefresh()
@@ -68,7 +65,12 @@ namespace SDJK.PlayMode
 
                     //노트 자동 숨기기
                     Vector3 pos = item.transform.position;
-                    float y = (float)((item.Beat * PlayerManager.effect.BeatYPos) - 5.5f);
+                    double offset;
+                    if (GameManager.UpScroll)
+                        offset = -5.5;
+                    else
+                        offset = 5.5;
+                    float y = (float)((item.Beat * PlayerManager.effect.BeatYPos) - offset);
                     Vector3 cameraPos = MainCamera.Camera.transform.position;
 
                     item.transform.localPosition = new Vector3(pos.x, y, MainCamera.CameraPos.z + 14);

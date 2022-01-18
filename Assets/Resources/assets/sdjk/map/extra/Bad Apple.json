@@ -2946,7 +2946,12 @@
       ]
     },
     "BPM": 138.0,
-    "BPMEffect": [],
+    "BPMEffect": [
+	  {
+        "Beat": 0.0,
+        "Value": 138.0
+      }
+	],
     "BeatYPos": 9.0,
     "BeatYPosEffect": [
       {

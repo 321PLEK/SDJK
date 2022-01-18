@@ -13,11 +13,15 @@ namespace SDJK.PlayMode.UI.Background
 {
     public class BackgroundVideo : MonoBehaviour
     {
+        public static BackgroundVideo instance;
+
         public VideoPlayer videoPlayer;
         public bool MainMenu = false;
 
         void Start()
         {
+            instance = this;
+
             if (GameManager.EditorOptimization && PlayerManager.Editor && !MainMenu)
                 videoPlayer.gameObject.SetActive(false);
                 
@@ -57,12 +61,12 @@ namespace SDJK.PlayMode.UI.Background
                 {
                     if (File.Exists(ResourcesManager.ResourcePackPath[i] + ResourceNameNight.Replace("%NameSpace%", NameSpaceNight) + ".mp4"))
                     {
-                        videoPlayer.url = ResourcesManager.ResourcePackPath[i] + ResourceNameNight.Replace("%NameSpace%", NameSpaceNight) + ".mp4";
+                        videoPlayer.url = "file://" + ResourcesManager.ResourcePackPath[i] + ResourceNameNight.Replace("%NameSpace%", NameSpaceNight) + ".mp4";
                         temp = true;
                     }
                     else if (File.Exists(ResourcesManager.ResourcePackPath[i] + ResourceName.Replace("%NameSpace%", NameSpace) + ".mp4"))
                     {
-                        videoPlayer.url = ResourcesManager.ResourcePackPath[i] + ResourceName.Replace("%NameSpace%", NameSpace) + ".mp4";
+                        videoPlayer.url = "file://" + ResourcesManager.ResourcePackPath[i] + ResourceName.Replace("%NameSpace%", NameSpace) + ".mp4";
                         temp = true;
                     }
                 }
@@ -70,7 +74,7 @@ namespace SDJK.PlayMode.UI.Background
                 {
                     if (File.Exists(ResourcesManager.ResourcePackPath[i] + ResourceName.Replace("%NameSpace%", NameSpace) + ".mp4"))
                     {
-                        videoPlayer.url = ResourcesManager.ResourcePackPath[i] + ResourceName.Replace("%NameSpace%", NameSpace) + ".mp4";
+                        videoPlayer.url = "file://" + ResourcesManager.ResourcePackPath[i] + ResourceName.Replace("%NameSpace%", NameSpace) + ".mp4";
                         temp = true;
                     }
                 }
@@ -87,7 +91,7 @@ namespace SDJK.PlayMode.UI.Background
 
                         if (File.Exists(ResourceNameMapPath + ".mp4"))
                         {
-                            videoPlayer.url = ResourceNameMapPath + ".mp4";
+                            videoPlayer.url = "file://" + ResourceNameMapPath + ".mp4";
                             temp = true;
                         }
                         else
@@ -96,7 +100,7 @@ namespace SDJK.PlayMode.UI.Background
 
                             if (File.Exists(ResourceNameMapPath + ".mp4"))
                             {
-                                videoPlayer.url = ResourceNameMapPath + ".mp4";
+                                videoPlayer.url = "file://" + ResourceNameMapPath + ".mp4";
                                 temp = true;
                             }
                         }
@@ -107,7 +111,7 @@ namespace SDJK.PlayMode.UI.Background
 
                         if (File.Exists(ResourceNameMapPath + ".mp4"))
                         {
-                            videoPlayer.url = ResourceNameMapPath + ".mp4";
+                            videoPlayer.url = "file://" + ResourceNameMapPath + ".mp4";
                             temp = true;
                         }
                     }
@@ -121,12 +125,12 @@ namespace SDJK.PlayMode.UI.Background
                     //원본 리소스를 가져오기
                     if (File.Exists(Application.streamingAssetsPath + "/" + ResourceNameNight.Replace("%NameSpace%", NameSpaceNight) + ".mp4"))
                     {
-                        videoPlayer.url = Application.streamingAssetsPath + "/" + ResourceNameNight.Replace("%NameSpace%", NameSpaceNight) + ".mp4";
+                        videoPlayer.url = "file://" + Application.streamingAssetsPath + "/" + ResourceNameNight.Replace("%NameSpace%", NameSpaceNight) + ".mp4";
                         temp = true;
                     }
                     else if (File.Exists(Application.streamingAssetsPath + "/" + ResourceName.Replace("%NameSpace%", NameSpace) + ".mp4"))
                     {
-                        videoPlayer.url = Application.streamingAssetsPath + "/" + ResourceName.Replace("%NameSpace%", NameSpace) + ".mp4";
+                        videoPlayer.url = "file://" + Application.streamingAssetsPath + "/" + ResourceName.Replace("%NameSpace%", NameSpace) + ".mp4";
                         temp = true;
                     }
                 }
@@ -135,7 +139,7 @@ namespace SDJK.PlayMode.UI.Background
                     //원본 리소스를 가져오기
                     if (File.Exists(Application.streamingAssetsPath + "/" + ResourceName.Replace("%NameSpace%", NameSpace) + ".mp4"))
                     {
-                        videoPlayer.url = Application.streamingAssetsPath + "/" + ResourceName.Replace("%NameSpace%", NameSpace) + ".mp4";
+                        videoPlayer.url = "file://" + Application.streamingAssetsPath + "/" + ResourceName.Replace("%NameSpace%", NameSpace) + ".mp4";
                         temp = true;
                     }
                 }
