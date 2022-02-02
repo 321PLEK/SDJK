@@ -40,6 +40,8 @@
 	"setting.ui_pos_change": "UI Pos Change",
 	"setting.allow_indirect_miss": "Allow Indirect Miss",
 	"setting.increased_note_readability": "Increased Note Readability",
+	"setting.background_enable": "Background/Video Activation",
+	"setting.touch_button_size": "Controller button size",
 	
 	"account.picture": "Picture",
 	"account.change_profile_picture": "Change your profile picture",

@@ -18,8 +18,9 @@ namespace SDJK.PlayMode.UI.Background
 
         public void Rerender()
         {
-            if (!videoPlayer.isPlaying)
+            if (!videoPlayer.isPlaying && GameManager.BackgroundEnable)
             {
+                image.enabled = true;
                 image.color = Color.white;
 
                 string NameSpace = ResourcesManager.GetStringNameSpace(PlayerManager.mapData.Background, out string ResourceName);
@@ -167,7 +168,10 @@ namespace SDJK.PlayMode.UI.Background
                     image.color = Color.clear;
             }
             else
+            {
                 image.color = Color.clear;
+                image.enabled = false;
+            }
         }
     }
 }

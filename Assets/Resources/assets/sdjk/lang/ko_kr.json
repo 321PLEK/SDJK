@@ -40,6 +40,8 @@
 	"setting.ui_pos_change": "UI 위치 변경",
 	"setting.allow_indirect_miss": "간접 미스 허용",
 	"setting.increased_note_readability": "노트 가독성 향상",
+	"setting.background_enable": "배경/영상 활성화",
+	"setting.touch_button_size": "폰 컨트롤러 버튼 크기",
 	
 	"account.picture": "사진",
 	"account.change_profile_picture": "프로필 사진 변경",

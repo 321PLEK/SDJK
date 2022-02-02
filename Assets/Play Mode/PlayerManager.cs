@@ -99,7 +99,7 @@ namespace SDJK.PlayMode
 
         public bool HitCurrentBeatStop = true;
 
-        public GameObject Touch;
+        public Canvas Touch;
 
         //public MidiPlayer MidiPlayer;
 
@@ -143,6 +143,8 @@ namespace SDJK.PlayMode
             }
             else
                 ComboPos.anchoredPosition = GameManager.ComboPos;
+
+            Touch.scaleFactor = GameManager.TouchButtonSize * (Screen.width / 552.4f) * 0.5f;
         }
 
         IEnumerator ComboColorAni()
@@ -570,10 +572,10 @@ namespace SDJK.PlayMode
 
         void Update()
         {
-            if (!Editor && GameManager.TouchMode && !Touch.activeSelf)
-                Touch.SetActive(true);
-            else if (!GameManager.TouchMode && Touch.activeSelf)
-                Touch.SetActive(false);
+            if (!Editor && GameManager.TouchMode && !Touch.gameObject.activeSelf)
+                Touch.gameObject.SetActive(true);
+            else if (!GameManager.TouchMode && Touch.gameObject.activeSelf)
+                Touch.gameObject.SetActive(false);
 
             if (Input.GetKeyDown(KeyCode.Escape))
                 GameManager.EscKey = true;

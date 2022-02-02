@@ -42,6 +42,8 @@ namespace SDJK.MainMenu
 
         public Slider VolumeSlider;
         public Text VolumeText;
+        public Slider TouchButtonSizeSlider;
+
         public InputField OffsetInputField;
         public InputField FPSLimitInputField;
         public InputField NickNameInputField;
@@ -106,6 +108,8 @@ namespace SDJK.MainMenu
             UpScrollText = _UpScrollText;
             AllowIndirectMissText = _AllowIndirectMissText;
             IncreasedNoteReadabilityText = _IncreasedNoteReadabilityText;
+            BackgroundEnableText = _BackgroundEnableText;
+            TouchButtonSizeText = _TouchButtonSizeText;
             LangReload();
 
             if (ButtonSelect.Equals(0) || ButtonSelect.Equals(1) || ButtonSelect.Equals(2))
@@ -574,6 +578,8 @@ namespace SDJK.MainMenu
                 //Setting UI Change
                 VolumeSlider.value = GameManager.MainVolume * 100;
                 VolumeText.text = VolumeLang + " " + Mathf.RoundToInt(GameManager.MainVolume * 100) + "%";
+
+                TouchButtonSizeSlider.value = GameManager.TouchButtonSize * 100;
             }
         }
 
@@ -734,6 +740,8 @@ namespace SDJK.MainMenu
         public static string Playing = "Playing: ";
         public static string AllowIndirectMiss = "Allow Indirect Miss";
         public static string IncreasedNoteReadability = "Increased Note Readability";
+        public static string BackgroundEnable = "Background/Video Activation";
+        public static string TouchButtonSize = "Phone controller button size";
 
         public static void AllRerender()
         {
@@ -779,6 +787,8 @@ namespace SDJK.MainMenu
             Playing = LangManager.LangLoad(LangManager.Lang, "main_menu.playing");
             AllowIndirectMiss = LangManager.LangLoad(LangManager.Lang, "setting.allow_indirect_miss");
             IncreasedNoteReadability = LangManager.LangLoad(LangManager.Lang, "setting.increased_note_readability");
+            BackgroundEnable = LangManager.LangLoad(LangManager.Lang, "setting.background_enable");
+            TouchButtonSize = LangManager.LangLoad(LangManager.Lang, "setting.touch_button_size");
 
             if (GameManager.Optimization)
                 OptimizationButtonText.text = Optimization + ": " + On;
@@ -814,6 +824,13 @@ namespace SDJK.MainMenu
                 IncreasedNoteReadabilityText.text = IncreasedNoteReadability + ": " + On;
             else
                 IncreasedNoteReadabilityText.text = IncreasedNoteReadability + ": " + Off;
+
+            if (GameManager.BackgroundEnable)
+                BackgroundEnableText.text = BackgroundEnable + ": " + On;
+            else
+                BackgroundEnableText.text = BackgroundEnable + ": " + Off;
+
+            TouchButtonSizeText.text = TouchButtonSize + " " + (int)(GameManager.TouchButtonSize * 100) + "%";
         }
 
         public void SetVolume() => GameManager.MainVolume = VolumeSlider.value * 0.01f;
@@ -838,6 +855,12 @@ namespace SDJK.MainMenu
 
         public static Text IncreasedNoteReadabilityText;
         public Text _IncreasedNoteReadabilityText;
+
+        public static Text BackgroundEnableText;
+        public Text _BackgroundEnableText;
+
+        public static Text TouchButtonSizeText;
+        public Text _TouchButtonSizeText;
 
         public void OptimizationToggle()
         {
@@ -947,6 +970,22 @@ namespace SDJK.MainMenu
                 IncreasedNoteReadabilityText.text = IncreasedNoteReadability + ": " + On;
             else
                 IncreasedNoteReadabilityText.text = IncreasedNoteReadability + ": " + Off;
+        }
+
+        public void BackgroundEnableToggle()
+        {
+            GameManager.BackgroundEnable = !GameManager.BackgroundEnable;
+
+            if (GameManager.BackgroundEnable)
+                BackgroundEnableText.text = BackgroundEnable + ": " + On;
+            else
+                BackgroundEnableText.text = BackgroundEnable + ": " + Off;
+        }
+
+        public void SetTouchButtonSize()
+        {
+            GameManager.TouchButtonSize = TouchButtonSizeSlider.value * 0.01f;
+            TouchButtonSizeText.text = TouchButtonSize + " " + (int)(GameManager.TouchButtonSize * 100) + "%";
         }
 
         public void ProfilePictureChange()

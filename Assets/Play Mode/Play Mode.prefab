@@ -465,7 +465,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 689898802660401735}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.72499985, y: 0.72499985, z: 0}
   m_ConstrainProportionsScale: 0
@@ -1590,7 +1590,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2822530130268445233}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.72499985, y: 0.72499985, z: 0}
   m_ConstrainProportionsScale: 0
@@ -1882,7 +1882,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3947200336134025509}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.72499985, y: 0.72499985, z: 0}
   m_ConstrainProportionsScale: 0
@@ -1990,7 +1990,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5436173584380782015}
   - component: {fileID: 7427093110916700336}
-  - component: {fileID: 4583333631799005942}
   - component: {fileID: 7436078028401942687}
   m_Layer: 5
   m_Name: Touch
@@ -2048,29 +2047,6 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 2000
   m_TargetDisplay: 0
---- !u!114 &4583333631799005942
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4210577840040020478}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_UiScaleMode: 1
-  m_ReferencePixelsPerUnit: 100
-  m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 552.4, y: 312.3}
-  m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
-  m_PhysicalUnit: 3
-  m_FallbackScreenDPI: 96
-  m_DefaultSpriteDPI: 96
-  m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
 --- !u!114 &7436078028401942687
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2254,7 +2230,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4728970402532156754}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.72499985, y: 0.72499985, z: 0}
   m_ConstrainProportionsScale: 0
@@ -2452,7 +2428,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5422035415164287828}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.72499985, y: 0.72499985, z: 0}
   m_ConstrainProportionsScale: 0
@@ -3062,7 +3038,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6646249062110685643}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.72499985, y: 0.72499985, z: 0}
   m_ConstrainProportionsScale: 0
@@ -15565,10 +15541,9 @@ MonoBehaviour:
   L: {fileID: 8812016001004636968}
   BackgroundImage: {fileID: 6616442545759515937}
   BackgroundVideo: {fileID: 4388716417015353074}
-  PhoneControll: {fileID: 0}
   ComboPos: {fileID: 4808066366412316276}
   HitCurrentBeatStop: 1
-  Touch: {fileID: 4210577840040020478}
+  Touch: {fileID: 7427093110916700336}
 --- !u!82 &8812016000681500305
 AudioSource:
   m_ObjectHideFlags: 0
@@ -16645,7 +16620,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9022565845901467347}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.72499985, y: 0.72499985, z: 0}
   m_ConstrainProportionsScale: 0

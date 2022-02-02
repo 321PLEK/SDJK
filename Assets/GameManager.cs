@@ -85,6 +85,10 @@ namespace SDJK
 
         public static bool IncreasedNoteReadability = false;
 
+        public static float TouchButtonSize = 1;
+
+        public static bool BackgroundEnable = true;
+
         public static bool TouchMode = false;
 
         void Awake()

@@ -106,6 +106,10 @@ namespace SDJK.SaveLoad
 
             settingData.IncreasedNoteReadability = GameManager.IncreasedNoteReadability;
 
+            settingData.TouchButtonSize = GameManager.TouchButtonSize;
+
+            settingData.BackgroundEnable = GameManager.BackgroundEnable;
+
             playerData.ProfilePicturePath = GameManager.ProfilePicturePath;
             playerData.NickName = GameManager.NickName;
             playerData.MapRecord = GameManager.mapRecord;
@@ -145,6 +149,10 @@ namespace SDJK.SaveLoad
             GameManager.AllowIndirectMiss = settingData.AllowIndirectMiss;
 
             GameManager.IncreasedNoteReadability = settingData.IncreasedNoteReadability;
+
+            GameManager.TouchButtonSize = settingData.TouchButtonSize;
+
+            GameManager.BackgroundEnable = settingData.BackgroundEnable;
 
             GameManager.ProfilePicturePath = playerData.ProfilePicturePath;
             GameManager.NickName = playerData.NickName;
@@ -199,6 +207,10 @@ namespace SDJK.SaveLoad
         public JVector2 ComboPos = new JVector2();
 
         public bool IncreasedNoteReadability = false;
+
+        public float TouchButtonSize = 1;
+
+        public bool BackgroundEnable = true;
     }
 
     [System.Serializable]
